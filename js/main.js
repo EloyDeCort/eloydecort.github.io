@@ -59,21 +59,14 @@
 	$(".owl-portfolio").owlCarousel({
         navigation: false,
 		pagination: true,
-		autoHeight: true,
-		items: 1,
+		autoHeight:true,
 		navigationText: false,
-
-		merge:true,
-		responsive:{
-			678:{
-				mergeFit:true
-			},
-			1000:{
-				mergeFit:false
-			}
-		}
+		itemsCustom : [
+	        [0, 1],
+	        [700, 1],
+	        [960, 1]
+		 ],
     });
-
 
 	/*----------------------------------------------------- */
 	/* Alert Boxes

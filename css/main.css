@@ -1932,8 +1932,13 @@ header .logo a {
 .popup-modal .media {
 	position: relative;
 }
+
+.popup-modal .owl-item {
+	position: relative;
+}
+
 .popup-modal img {
-	vertical-align: bottom;
+	vertical-align: center;
 	text-align: center;
 }
 
