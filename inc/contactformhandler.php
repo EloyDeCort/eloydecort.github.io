@@ -2,7 +2,7 @@
 
 // Replace this with your own email address
 $siteOwnersEmail = 'eloy.decort@gmail.com';
-
+echo "test";
 
 if($_POST) {
 

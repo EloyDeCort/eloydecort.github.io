@@ -227,7 +227,7 @@
 	------------------------------------------------------ */
 
 	/* local validation */
-	$('#contactForm').validate({
+	$("#contactForm").validate({
 
 		/* submit via ajax */
 		submitHandler: function(form) {
@@ -237,7 +237,7 @@
 			$.ajax({      	
 
 		      type: "POST",
-		      url: "inc/sendEmail.php",
+		      url: "inc/contactformhandler.php",
 		      data: $(form).serialize(),
 		      beforeSend: function() { 
 
