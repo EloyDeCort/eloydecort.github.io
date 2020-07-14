@@ -61,7 +61,17 @@
 		pagination: true,
 		autoHeight: true,
 		items: 1,
-        navigationText: false
+		navigationText: false,
+
+		merge:true,
+		responsive:{
+			678:{
+				mergeFit:true
+			},
+			1000:{
+				mergeFit:false
+			}
+		}
     });
 
 
