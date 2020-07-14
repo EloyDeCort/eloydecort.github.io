@@ -272,6 +272,107 @@
 	});
 
 
+	/*----------------------------------------------------- */
+  	/* Chart
+   ------------------------------------------------------- */ 
+
+   var ctx = document.getElementById('myChart').getContext('2d');
+   var myChart = new Chart(ctx, {
+	   type: 'bar',
+	   data: {
+		   labels: ['C++', 'C#', 'Unreal Engine 4', 'Unity', 'HTML', 'Orange'],
+		   datasets: [{
+			   label: 'Expertise',
+			   data: [1,2,2,2],
+			   backgroundColor: [
+				   'rgba(255, 99, 132, 0.2)',
+				   'rgba(54, 162, 235, 0.2)',
+				   'rgba(255, 206, 86, 0.2)',
+				   'rgba(75, 192, 192, 0.2)',
+				   'rgba(153, 102, 255, 0.2)',
+				   'rgba(255, 159, 64, 0.2)'
+			   ],
+			   borderColor: [
+				   'rgba(255, 99, 132, 1)',
+				   'rgba(54, 162, 235, 1)',
+				   'rgba(255, 206, 86, 1)',
+				   'rgba(75, 192, 192, 1)',
+				   'rgba(153, 102, 255, 1)',
+				   'rgba(255, 159, 64, 1)'
+			   ],
+			   borderWidth: 2
+		   }]
+	   },
+	   options: {
+		
+		tooltips: {
+            callbacks: {
+				label: function(tooltipItem, data) {
+                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+					var val = Math.round(tooltipItem.yLabel * 100) / 100;
+
+					if(label)
+					{
+						label += ": "
+						
+						switch(val)
+						{
+							case 0:
+								label += 'No Knowledge';
+							break;
+							case 1:
+								label += 'Basic Knowledge';
+							break;
+							case 2:
+								label += 'Medium Knowledge';
+							break;
+							case 3:
+								label += 'High Knowledge';
+							break;
+					}
+					}
+					return label;
+				}
+            }
+        },
+
+
+        scales: {
+            yAxes: [{
+				
+				ticks: {
+					min: 0,
+					max: 3,
+					stepSize: 1.0,	
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, values) {
+						switch(value)
+						{
+							case 0:
+								return 'Beginner';
+							break;
+							case 1:
+								return 'Basic Knowledge';
+							break;
+							case 2:
+								return 'Medium Knowledge';
+							break;
+							case 3:
+								return 'High Knowledge';
+							break;
+						}
+						return 'no';
+                    }
+                }
+            }]
+        }
+    }
+   });
+
+
+	
+
  	/*----------------------------------------------------- */
   	/* Back to top
    ------------------------------------------------------- */ 

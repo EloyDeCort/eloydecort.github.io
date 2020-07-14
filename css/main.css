@@ -1546,7 +1546,7 @@ header .logo a {
 	padding: 0 0 1.5rem 0;
 	margin-bottom: .5rem;
 }
-.about-content .info-list li strong {
+.about-content  li strong {
 	font-family: "poppins-bold", sans-serif;
 	color: #a1a1a1;
 	text-transform: uppercase;
@@ -1574,6 +1574,16 @@ header .logo a {
 .button-section [class*="col-"] .button:first-child {
 	margin-right: 4rem;
 }
+
+.chart-container {
+	position: relative;
+	margin: auto;
+	height: 80vh;
+	width: 80vw;
+  }
+  canvas {
+	border: 1px dotted red;
+  }
 
 /**
  * responsive:

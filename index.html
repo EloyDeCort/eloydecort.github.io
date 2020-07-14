@@ -21,10 +21,12 @@
    <link rel="stylesheet" href="css/main.css">
    <link rel="stylesheet" href="css/vendor.css">     
    <link rel="stylesheet" href="css/prism.css">     
+   <link rel="stylesheet" href="css/Chart.min.css">     
    <!-- script
-   ================================================== -->   
+	================================================== -->   
 	<script src="js/modernizr.js"></script>
 	<script src="js/pace.min.js"></script>
+	<script src="js/Chart.min.js"></script>
 
    <!-- favicons
 	================================================== -->
@@ -152,18 +154,6 @@
    				</li>
 
 			</ul> <!-- /info-list -->
-			   
-			   <h3>Audio Competences:</h3>
-				<ul class="skill-bars">
-				   <li>
-				   	<div class="progress percent80"><span>80%</span></div>
-				   	<strong>Studio One</strong>
-				   </li>
-				   <li>
-				   	<div class="progress percent70"><span>70%</span></div>
-				   	<strong>FL Studio</strong>
-				   </li>
-				</ul> <!-- /skill-bars -->	
 
    		</div>
 
@@ -172,41 +162,37 @@
    			<h3>Skills</h3>
    			<p>Studying at Digital Arts And Entertainment has florished a multitude of skills. This, in combination with prior experiences and self-studied skills, create my palette of interest.</p>
 
-			   <h3>MAIN Competences:</h3>
-				<ul class="skill-bars">
-				   <li>
-				   	<div class="progress percent80"><span>80%</span></div>
-				   	<strong>C++</strong>
-				   </li>
-				   <li>
-					<div class="progress percent75"><span>75%</span></div>
-					<strong>Unreal Engine 4</strong>
-				</li>
-				<li>
-				<div class="progress percent65"><span>65%</span></div>
-				<strong>C#</strong>
-				</li>
-				<li>
-				<div class="progress percent65"><span>65%</span></div>
-				<strong>Unity</strong>
-				</li>
-				</ul> <!-- /skill-bars -->		
+			   <h3>Main Competences:</h3>
+			   <ul class="disc">
+				<li><strong>C++</strong></li>
+				<li><strong>C#</strong></li>	
+				<li><strong>Unreal Engine</strong></li>	
+				<li><strong>Unity</strong></li>	
+				</ul>	
 
-				<h3>Sub Competences:</h3>
-				<ul class="skill-bars">
-					<li>
-					<div class="progress percent60"><span>60%</span></div>
-					<strong>3DSMax</strong>
-					</li>
-				   <li>
-				   	<div class="progress percent50"><span>50%</span></div>
-				   	<strong>HTML/CSS/JS</strong>
-				   </li>
-				</ul> <!-- /skill-bars -->		
+				<h3>Sub Competences<br>(basic knowledge):</h3>
+				<ul class="disc">
+					<li><strong>3DSMax</strong></li>
+					<li><strong>HTML/CSS</strong></li>	
+					<li><strong>Javascript</strong></li>
+				</ul>	
 
+				<h3>Audio Competences:</h3>
+				<ul class="disc">
+					<li><strong>Studio One</strong></li>
+					<li><strong>FL Studio</strong></li>	
+				</ul>	
+
+			
    		</div>
 
-   	</div>
+	   </div>
+	   
+
+	   <div class="chart-container">
+		<canvas id="myChart"></canvas>
+		</div>
+	
 
    	<div class="row button-section">
    		<div class="col-twelve">
@@ -463,7 +449,8 @@ bool ABeatHandler::CheckInRhythm()
 							<div>
 								<h2>In-Rhythm Check</h2>
 								<p>
-									Following code does an easy check to see if the current time is on the rhythm. This is done by adding & substracting the value of a crotchet (Quarter note) 
+									Following code does an easy check to see if the current time is on the rhythm. This is done by adding & substracting the value of a crotchet (Quarter note).
+									
 								</p>
 							  <pre><code class="language-cpp">
 bool ABeatHandler::CheckInRhythm()
@@ -878,6 +865,7 @@ int main()
    <script src="js/plugins.js"></script>
    <script src="js/main.js"></script>
    <script src="js/prism.js"></script>
+
 </body>
 
 </html>
