@@ -226,18 +226,18 @@
 	/*	contact form
 	------------------------------------------------------ */
 
+
 	/* local validation */
 	$("#contactForm").validate({
 
 		/* submit via ajax */
 		submitHandler: function(form) {
-
 			var sLoader = $('#submit-loader');
 
 			$.ajax({      	
 
 		      type: "POST",
-		      url: "inc/contactformhandler.php",
+		      url: "/inc/contactformhandler.php/",
 		      data: $(form).serialize(),
 		      beforeSend: function() { 
 
@@ -269,8 +269,8 @@
 
 		      }
 
-	      });     		
-  		}
+			});     		
+		},
 
 	});
 
