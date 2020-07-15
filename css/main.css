@@ -1576,14 +1576,12 @@ header .logo a {
 }
 
 .chart-container {
-	position: relative;
-	margin: auto;
-	height: 80vh;
-	width: 80vw;
+
+	height: 40vh;
+	max-height: 500px;
+	margin-bottom: 3rem;
   }
-  canvas {
-	border: 1px dotted red;
-  }
+
 
 /**
  * responsive:

@@ -296,41 +296,40 @@
   	/* Chart
    ------------------------------------------------------- */ 
 
-   var ctx = document.getElementById('myChart').getContext('2d');
-   var myChart = new Chart(ctx, {
-	   type: 'bar',
-	   data: {
-		   labels: ['C++', 'C#', 'Unreal Engine 4', 'Unity', 'HTML', 'Orange'],
-		   datasets: [{
-			   label: 'Expertise',
-			   data: [1,2,2,2],
-			   backgroundColor: [
-				   'rgba(255, 99, 132, 0.2)',
-				   'rgba(54, 162, 235, 0.2)',
-				   'rgba(255, 206, 86, 0.2)',
-				   'rgba(75, 192, 192, 0.2)',
-				   'rgba(153, 102, 255, 0.2)',
-				   'rgba(255, 159, 64, 0.2)'
-			   ],
-			   borderColor: [
-				   'rgba(255, 99, 132, 1)',
-				   'rgba(54, 162, 235, 1)',
-				   'rgba(255, 206, 86, 1)',
-				   'rgba(75, 192, 192, 1)',
-				   'rgba(153, 102, 255, 1)',
-				   'rgba(255, 159, 64, 1)'
-			   ],
-			   borderWidth: 2
-		   }]
-	   },
-	   options: {
-		
+  
+   var data = {
+	labels: ['C++', 'C#', 'Unreal Engine 4', 'Unity', 'HTML/CSS/JS', 'Orange'],
+	datasets: [{
+		label: 'Expertise',
+		data: [2.5,1.2,2.2,1.5,1],
+		backgroundColor: [
+			'rgba(255, 99, 132, 0.2)',
+			'rgba(54, 162, 235, 0.2)',
+			'rgba(255, 206, 86, 0.2)',
+			'rgba(75, 192, 192, 0.2)',
+			'rgba(153, 102, 255, 0.2)',
+			'rgba(255, 159, 64, 0.2)'
+		],
+		borderColor: [
+			'rgba(255, 99, 132, 1)',
+			'rgba(54, 162, 235, 1)',
+			'rgba(255, 206, 86, 1)',
+			'rgba(75, 192, 192, 1)',
+			'rgba(153, 102, 255, 1)',
+			'rgba(255, 159, 64, 1)'
+		],
+		borderWidth: 2
+	}]
+  };
+
+  var options = {
+	maintainAspectRatio: false,
 		tooltips: {
             callbacks: {
 				label: function(tooltipItem, data) {
                     var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
-					var val = Math.round(tooltipItem.yLabel * 100) / 100;
+					var val = Math.floor(tooltipItem.yLabel);
 
 					if(label)
 					{
@@ -360,7 +359,7 @@
 
         scales: {
             yAxes: [{
-				
+				stacked:true,
 				ticks: {
 					min: 0,
 					max: 3,
@@ -386,11 +385,15 @@
                     }
                 }
             }]
-        }
-    }
-   });
+	}
+  };
 
 
+  Chart.Bar('myChart', {
+	options: options,
+	data: data
+  });
+  
 	
 
  	/*----------------------------------------------------- */
