@@ -66,7 +66,23 @@
 	        [700, 1],
 	        [960, 1]
 		 ],
+	});
+	
+	$(".owl-code").owlCarousel({
+        navigation: false,
+		pagination: true,
+		autoHeight:true,
+		navigationText: false,
+		touchDrag: false,
+
+
+		itemsCustom : [
+	        [0, 1],
+	        [700, 1],
+	        [960, 1]
+		 ],
     });
+
 
 	/*----------------------------------------------------- */
 	/* Alert Boxes

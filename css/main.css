@@ -228,15 +228,15 @@ var, kbd, samp, code, pre {
 pre {
 	padding: 2.4rem 3rem 3rem;
 	background: #F1F1F1;
+	
 }
 code {
 	font-size: 1.4rem;
-	margin: 0 .2rem;
-	padding: .3rem 1.6rem;
-	white-space: nowrap;
+	/* margin: 0 .2rem;
+	padding: .3rem 1.6rem; */
 	background: #F1F1F1;
-	border: 1px solid #E1E1E1;
-	border-radius: 3px;
+	/* border: 1px solid #E1E1E1;
+	border-radius: 3px; */
 }
 pre > code {
 	display: block;
