@@ -242,6 +242,7 @@ pre > code {
 	display: block;
 	white-space: pre;
 	line-height: 2;
+	max-height: 500px;
 	/* padding: 0;
 	margin: 0; */
 }

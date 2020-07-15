@@ -357,7 +357,7 @@
 	                     		<h3 class="folio-title">Kribby AfterBlast</h3>	     					    
 		     					    	<span class="folio-types">
 											C++<br>
-											DirectX<br>
+											DirectX 11<br>
 											Custom Engine (Overlord)
 		     					      </span>		     		
 		     					   </div> 	                      	
@@ -374,7 +374,7 @@
 	                     	<div class="folio-item-cell">
 	                     		<h3 class="folio-title">Soul Reliant</h3>	     					    
 		     					    	<span class="folio-types">
-											C++<br>
+											Blueprints<br>
 											Unreal Engine<br>
 											Prototype
 		     					      </span>		     		
@@ -437,24 +437,63 @@
 						<h3>CODE SAMPLES</h3>
 						<div class="owl-wrapper">
 						<div class="owl-carousel owl-code">
+
+							<div>
+								<h2>Grid Generation</h2>
+								<p>To generate a grid, I keep 2 maps. In the beginning these are identical, but as more grid spaces are filled we remove grid spaces from the OpenCellMap.
+									Each cell has a spawnpoint which is used to spawn the traps on that specific location.
+							</p>
+							  <pre><code class="language-cpp">void AGrid::GenerateGrid()
+{
+	//Generate indices in X and Y position on the grid
+
+	//Clean-Up arrays
+	m_CellMap.Empty();
+	m_OpenCellMap.Empty();
+
+	//Fill Array with cells, each cell will have a 2D index as well.
+	for(int x{}; x < m_Columns; ++x)
+	{
+		for(int y{}; y < m_Rows; ++y)
+		{
+			FCell cell{};
+			cell.spawnPoint = GetWorldPosFromIndex(FVector2D{float(x),float(y)});
+			m_CellMap.Add(FVector2D{float(x),float(y)}, cell);
+		}
+	}	
+
+	m_OpenCellMap = m_CellMap;
+
+	m_pCollisionBox->SetBoxExtent(FVector{(m_TileSize*m_Rows)/2.f,(m_TileSize*m_Columns)/2.f, 20.f});
+	m_pCollisionBox->SetRelativeLocation(FVector{0.f,0.f,10.f});
+}
+							</code></pre>
+							</div>
+
 							<div>
 								<h2>BPM Handling</h2>
 								<p>The following code was used to maken an accurate tick system that ensures no FPS dependancy thus resulting in accurate timing measurement.
-								<br>The BPM can easily be changed in UE4.
+								<br>The BPM can easily be changed in UE4. The crochet is calculated with 
 							</p>
-							  <pre><code class="language-cpp">
-bool ABeatHandler::CheckInRhythm()
-{
-	//Check the current input time
-	m_InputTime = float((UGameplayStatics::GetAudioTimeSeconds(this->GetWorld()) - m_AudioStartTime));
+							  <pre><code class="language-cpp">//___INIT___
+//Keeping the current time.
+m_AudioStartTime = UGameplayStatics::GetAudioTimeSeconds(this->GetWorld());
+//Setting the crotchet (Quarter Note)
+m_Crotchet = 60/m_Bpm;
 
-	//Check if within a certain offset from the beat -> ----[-----!BEAT!-----]----
-	if(m_InputTime > (m_LastBeat + m_Crotchet) - m_InputOffset && m_InputTime < (m_LastBeat + m_Crotchet) + m_InputOffset )
-	{
-		return true;
+//___UPDATE___
+if(m_IsMusicPlaying)
+{
+	//Check position of song
+	m_SongPos = float((UGameplayStatics::GetAudioTimeSeconds(this->GetWorld()) - m_AudioStartTime));
+	//If the position of the song is bigger than whatever the lastbeat amount was + a quarter note, we can assume there's a beat.
+	//This ensures us that there is no usage of frame dependancy --> No/Minimal latency.
+	if(m_SongPos > m_LastBeat + m_Crotchet)
+	{	
+		//Adding a quarter note to the lastbeat value to keep track of beats
+		m_LastBeat += m_Crotchet;	
 	}
 
-	return false;
 }
 							</code></pre>
 							</div>
@@ -466,8 +505,7 @@ bool ABeatHandler::CheckInRhythm()
 									
 								</p>
 							
-							  <pre><code class="language-cpp">
-bool ABeatHandler::CheckInRhythm()
+							  <pre><code class="language-cpp">bool ABeatHandler::CheckInRhythm()
 {
 	//Check the current input time
 	m_InputTime = float((UGameplayStatics::GetAudioTimeSeconds(this->GetWorld()) - m_AudioStartTime));
@@ -513,54 +551,348 @@ bool ABeatHandler::CheckInRhythm()
 				
 					   <div class="description-box">
 					      <h4>Kribby AfterBlast</h4>		      
-						  <p>DEADBEAT was a group project made on <span>Digital Arts And Entertainment</span>.
-							  <br>I was responsible for following topics:
+						  <p>Kribby AfterBlast is a project made to simulate some of the main mechanics of Nintendo's <span>Kirby's Blowout Blast</span>.
+							 <br>The provided engine was based on <span>DirectX 11</span>. Some code was provided (usage of hlsl, ...), which was used as a foundation to build further on.
+							 <br>Researched topics:
 						  </p>
-						  
-						  <!-- list of things done for Kribby AfterBlast -->
+
 						  <ul>        
-							<li><p>BPM Handling (on-beat object reactivity, ...)</p></li>
-							<li><p>Grid System & Trap spawning</p></li>
-							<li><p>Trap Behaviour</p></li>
+							<li><p>Toon Shader</p></li>
+							<li><p>Post Processing</p></li>
+							<li><p>Skybox Rendering</p></li>
 						</ul> 
-						   
+
+
 						<h3>CODE SAMPLES</h3>
 						<div class="owl-carousel owl-code">
 							<div>
-								<h2>BPM Handling</h2>
-								<p>The following code was used to maken an accurate tick system that ensures no FPS dependancy thus resulting in accurate timing measurement.
-								<br>The BPM can easily be changed in UE4.
+								<h2>Toon Shader</h2>
+								<p>Since a post-process toon shader did not give me proper results, I decided to go with a Toon Material.
+								<br>To get the full effect of the Toon Shader and for simplicity sake, I used flat colors on all used props.
+								<br>Blinn-Phong was used to get a proper "light" effect of the Toon Shader.
+								I used <a href="https://roystan.net/articles/toon-shader.html" target="_blank"><span>this source</span></a> as basis for the Toon Shading.
 							</p>
-							  <pre><code class="language-cpp">
-int main()
+							  <pre><code class="language-cpp">float4x4 gMatrixViewInverse : VIEWINVERSE;
+float4x4 gView : VIEW;
+float4x4 gWorld : WORLD;
+float4x4 gWorldViewProj : WORLDVIEWPROJECTION; 
+float3 gLightDirection = float3(-0.577f, -0.577f, -0.577f);
+
+Texture2D gDiffuseMap;
+
+//Ambient color
+float4 gAmbientColor = (0.4, 0.4, 0.4, 1);
+
+//Specular value + glossiness
+float4 gSpecularColor = (0.6, 0.6, 0.6, 1);
+float gGlossiness = 0.1;
+
+//Rim Color, thresh hold & amount
+float4 gRimColor = (1, 1, 1, 1);
+float gRimAmount = 0.516;
+float gRimThreshold = 0.8f;
+
+
+SamplerState samLinear
 {
-	char c;
-	int isLowercaseVowel, isUppercaseVowel;
+	Filter = MIN_MAG_MIP_LINEAR;
+	AddressU = Wrap;// or Mirror or Clamp or Border
+	AddressV = Wrap;// or Mirror or Clamp or Border
+};
 
-	cout << "Enter an alphabet: ";
-	cin >> c;
+RasterizerState Solid
+{
+	FillMode = SOLID;
+	CullMode = FRONT;
+};
 
-	// evaluates to 1 (true) if c is a lowercase vowel
-	isLowercaseVowel = (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
+BlendState DisableBlending
+{
+	BlendEnable[0] = FALSE;
+};
 
-	// evaluates to 1 (true) if c is an uppercase vowel
-	isUppercaseVowel = (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U');
 
-	// evaluates to 1 (true) if either isLowercaseVowel or isUppercaseVowel is true
-	if (isLowercaseVowel || isUppercaseVowel)
-		cout << c << " is a vowel.";
-	else
-		cout << c << " is a consonant.";
+struct VS_INPUT{
+	float3 pos : POSITION;
+	float3 normal : NORMAL;
+	float2 texCoord : TEXCOORD;
+};
+struct VS_OUTPUT{
+	float4 pos : SV_POSITION;
+	float3 normal : NORMAL;
+	float2 texCoord : TEXCOORD;
+};
 
-	return 0;
+DepthStencilState EnableDepth
+{
+	DepthEnable = TRUE;
+	DepthWriteMask = ALL;
+};
+
+RasterizerState NoCulling
+{
+	CullMode = NONE;
+};
+
+//--------------------------------------------------------------------------------------
+// Vertex Shader
+//--------------------------------------------------------------------------------------
+VS_OUTPUT VS(VS_INPUT input){
+
+	VS_OUTPUT output;
+	// Step 1:	convert position into float4 and multiply with matWorldViewProj
+	output.pos = mul ( float4(input.pos,1.0f), gWorldViewProj );
+	// Step 2:	rotate the normal: NO TRANSLATION
+	//			this is achieved by clipping the 4x4 to a 3x3 matrix, 
+	//			thus removing the postion row of the matrix
+	output.normal = normalize(mul(input.normal, (float3x3)gWorld));
+	output.texCoord = input.texCoord;
+	return output;
 }
-							</code></pre>
+
+//--------------------------------------------------------------------------------------
+// Pixel Shader
+// The implementation of this Toon shader is heavily based on the following article https://roystan.net/articles/toon-shader.html
+// Some adjustments were made to compensate with the simplicity of the scene.
+//--------------------------------------------------------------------------------------
+float4 PS(VS_OUTPUT input) : SV_TARGET
+{
+	//The shader makes use of a very simple blinn-phong material
+
+	//Get the normal
+	float3 normal = normalize(input.normal);
+	//Most likely using view inverse will yield more accurate results
+	//However, during experimenting, using the non inversed version will result in more fake texture depth.
+	//Which is preffered considering the camera angle,...
+	float3 viewDir = { gView[2][0], gView[2][1], gView[2][2] };
+	
+	//calculate the illumination from the directional light
+	float NdotL = dot(gLightDirection, normal);
+	
+	//Specular reflection calculation
+	float3 halfVector = normalize(gLightDirection + viewDir);
+	float NdotH = dot(normal, halfVector);
+	float specularIntensity = pow(NdotH * 0.1f, gGlossiness * gGlossiness);
+	float specularIntensitySmooth = smoothstep(0.005, 0.01, specularIntensity);
+	float4 specular = specularIntensitySmooth * gSpecularColor;
+	
+	//simple light to turn things down in brightness
+	float4 light = { 0.5f, 0.5f, 0.5f, 0.5f };
+	
+	// Calculate rim light
+	float rimDot = 1 - dot(viewDir, normal);
+	float rimIntensity = rimDot * pow(NdotL, gRimThreshold);
+	rimIntensity = smoothstep(gRimAmount - 0.01, gRimAmount + 0.01, rimIntensity);
+	float4 rim = rimIntensity * gRimColor;
+
+	//Sample our texture
+	float4 diffuseColor = gDiffuseMap.Sample( samLinear,input.texCoord );
+
+	//set the alpha value to 1
+	diffuseColor.a = 1.f;
+	//full calculation
+	return (gAmbientColor + specular + rim) * diffuseColor * light ;
+}
+
+//--------------------------------------------------------------------------------------
+// Technique
+//--------------------------------------------------------------------------------------
+technique11 Default
+{
+	pass P0
+	{
+		SetRasterizerState(NoCulling);
+		SetDepthStencilState(EnableDepth, 0);
+		SetBlendState(DisableBlending, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
+		SetVertexShader( CompileShader( vs_4_0, VS() ) );
+		SetGeometryShader( NULL );
+		SetPixelShader( CompileShader( ps_4_0, PS() ) );
+	}
+}</code></pre>
+							</div>
+
+							<div>
+								<h2>Post Processing: Grain & Pixelation</h2>
+								<p>The following example is both the pixel shader for the grain and the pixel shader used for a pixelation effect.
+							</p>
+							  <pre><code class="language-cpp">float grainfix(float2 st)
+{
+	return frac(sin(dot(st.xy, float2(17.0f, 180.f))) * 2500.f);
+}
+								
+//PIXEL SHADER - GRAIN EFFECT
+//------------
+float4 PS(PS_INPUT input) : SV_Target
+{
+	float2 uv = input.TexCoord.xy;
+	
+	//make noise based on the UV's
+	float grain = grainfix(uv);
+	float3 grainPlate = float3(grain, grain, grain);
+
+	float4 color = gTexture.Sample(samPoint, uv);
+	
+	float3 final = lerp(color.rgb, grainPlate, 0.1f);
+	
+	return float4(final, 1.f);
+}
+
+//PIXEL SHADER - PIXELATION EFFECT
+//------------
+float4 PS(PS_INPUT input) : SV_Target
+{
+    //get dimensions
+    float width = 0.f;
+    float height = 0.f;
+    gTexture.GetDimensions(width, height);
+    
+    float4 color;
+  
+        float dx = gPixelW * (1. / width);
+        float dy = gPixelH * (1. / height);
+        float2 coord = float2(dx * floor(input.TexCoord.x / dx), dy * floor(input.TexCoord.y / dy));
+         //get sample
+        color = gTexture.Sample(samPoint, coord);
+  
+    return float4(color.rgb, 1.f);
+}</code></pre>
+							</div>
+
+							<div>
+								<h2>Post Processing: Color Grading</h2>
+								<p>This <a href="https://defold.com/tutorials/grading/" target="_blank"><span>source</span></a> was used as reference.
+							</p>
+							  <pre><code class="language-cpp">//=============================================================================
+//// Shader uses position and texture
+//=============================================================================
+SamplerState samPoint
+{
+	Filter = MIN_MAG_MIP_POINT;
+	AddressU = Mirror;
+	AddressV = Mirror;
+};
+Texture2D gTexture;
+Texture2D gLUT;
+
+	#define MAXCOLOR 15.0
+	#define COLORS 16.0
+
+float gContribution = 1.f;
+
+/// Create Depth Stencil State (ENABLE DEPTH WRITING)
+DepthStencilState depthStencilState
+{
+	DepthEnable = TRUE;
+	DepthWriteMask = ALL;
+
+};
+/// Create Rasterizer State (Backface culling) 
+RasterizerState backCulling
+{
+	CullMode = BACK;
+};
+
+BlendState DisableBlending
+{
+	BlendEnable[0] = FALSE;
+};
+
+
+float4x4 gMatrixViewInverse : VIEWINVERSE;
+float4x4 gView : VIEW;
+
+//IN/OUT STRUCTS
+//--------------
+struct VS_INPUT
+{
+	float3 Position : POSITION;
+	float2 TexCoord : TEXCOORD0;
+
+};
+
+struct PS_INPUT
+{
+	float4 Position : SV_POSITION;
+	float2 TexCoord : TEXCOORD1;
+};
+
+
+//VERTEX SHADER
+//-------------
+PS_INPUT VS(VS_INPUT input)
+{
+	PS_INPUT output = (PS_INPUT) 0;
+	// Set the Position
+	output.Position = float4(input.Position, 1.0f);
+	// Set the TexCoord
+	output.TexCoord = input.TexCoord;
+	
+	return output;
+}
+
+
+//PIXEL SHADER
+//Helpfull source that was used: https://defold.com/tutorials/grading/
+//------------
+float4 PS(PS_INPUT input) : SV_Target
+{
+	//get dimensions
+	float width = 0.f;
+	float height = 0.f;
+	gTexture.GetDimensions(width, height);
+
+	//get sample
+	float4 color = gTexture.Sample(samPoint, input.TexCoord.xy);
+	float cell = floor(color.b * MAXCOLOR); 
+	
+	float cellL = floor(cell); 
+	float cellH = ceil(cell);
+	
+	float halfX = 0.5 / width;
+	float halfY = 0.5 / height;
+	
+	float rOffset = halfY + color.r / COLORS * (MAXCOLOR / COLORS);
+	float gOffset = halfY + color.g * (MAXCOLOR / COLORS);
+	
+	
+	float2 lutPosL = float2(cellL / COLORS + rOffset, gOffset);
+	float2 lutPosH = float2(cellH / COLORS + rOffset, gOffset);
+
+	float4 gradedColorL = gLUT.Sample(samPoint, lutPosL);
+	float4 gradedColorH = gLUT.Sample(samPoint, lutPosH);
+	
+	
+	float4 gradedColor = lerp(gradedColorL, gradedColorH, frac(cell));
+	
+	float4 finalColor = lerp(color, gradedColor, gContribution);
+	
+	
+	
+	return float4(finalColor);
+}
+
+
+//TECHNIQUE
+//---------
+technique11 ColorGrading
+{
+	pass P0
+	{
+		// Set states...
+		SetRasterizerState(backCulling);
+		SetDepthStencilState(depthStencilState, 0);
+		SetBlendState(DisableBlending, float4(0.0f, 0.0f, 0.0f, 0.0f), 0xFFFFFFFF);
+		SetVertexShader(CompileShader(vs_4_0, VS()));
+		SetGeometryShader(NULL);
+		SetPixelShader(CompileShader(ps_4_0, PS()));
+	}
+}</code></pre>
 							</div>
 
 						</div>
 
 					      <div class="categories">
-							  C++ / DirectX / Custom Engine (Overlord)
+							  C++ / DirectX 11 / Custom Engine (Overlord)
 						  </div>			               
 					   </div>
 
@@ -574,7 +906,7 @@ int main()
 
 				   <div id="modal-03" class="popup-modal slider mfp-hide">	
 					<div class="owl-carousel owl-portfolio">
-						<!-- Video of DEADBEAT -->
+						<!-- Video of Soul Reliant -->
 							<div class="fluid-video-wrapper">
 								<div class="fluid-width-video-wrapper" style="padding-top: 54.0%;"><iframe width="1280" height="720" src="https://www.youtube.com/embed/rB5NbcXCO8Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div> 
 							</div>
@@ -593,54 +925,15 @@ int main()
 				
 					   <div class="description-box">
 					      <h4>Soul Reliant</h4>		      
-						  <p>DEADBEAT was a group project made on <span>Digital Arts And Entertainment</span>.
-							  <br>I was responsible for following topics:
+						  <p>Soul Reliant is a souls-like (Action Adventure) prototype project based on 2 keywords: <span>Population & Depend</span>. You can swap between 2 characters, which both have their unique "abilities".
+							<br>The combat was based on souls-like combat: with rolls and sword-combos.
+							<br><br>The bigger character must help the smaller character to climb on high walls, the smaller character can go under things the bigger can't.
+							<br>The goal is to defeat all enemies in a certain area, then proceed to the next area.
+							<br><br><span>Controller Compatible.</span>
 						  </p>
-						  
-						  <!-- list of things done for DEADBEAT -->
-						  <ul>        
-							<li><p>BPM Handling (on-beat object reactivity, ...)</p></li>
-							<li><p>Grid System & Trap spawning</p></li>
-							<li><p>Trap Behaviour</p></li>
-						</ul> 
 						   
-						<h3>CODE SAMPLES</h3>
-						<div class="owl-carousel owl-code">
-							<div>
-								<h2>BPM Handling</h2>
-								<p>The following code was used to maken an accurate tick system that ensures no FPS dependancy thus resulting in accurate timing measurement.
-								<br>The BPM can easily be changed in UE4.
-							</p>
-							  <pre><code class="language-cpp">
-int main()
-{
-	char c;
-	int isLowercaseVowel, isUppercaseVowel;
-
-	cout << "Enter an alphabet: ";
-	cin >> c;
-
-	// evaluates to 1 (true) if c is a lowercase vowel
-	isLowercaseVowel = (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
-
-	// evaluates to 1 (true) if c is an uppercase vowel
-	isUppercaseVowel = (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U');
-
-	// evaluates to 1 (true) if either isLowercaseVowel or isUppercaseVowel is true
-	if (isLowercaseVowel || isUppercaseVowel)
-		cout << c << " is a vowel.";
-	else
-		cout << c << " is a consonant.";
-
-	return 0;
-}
-							</code></pre>
-							</div>
-
-						</div>
-
 					      <div class="categories">
-							  C++ / Unreal Engine / Prototype
+							  Blueprints / Unreal Engine / Prototype
 						  </div>			               
 					   </div>
 
@@ -670,46 +963,241 @@ int main()
 				
 					   <div class="description-box">
 					      <h4>Beyond Vendavour</h4>		      
-						  <p>DEADBEAT was a group project made on <span>Digital Arts And Entertainment</span>.
-							  <br>I was responsible for following topics:
+						  <p>Beyond Vendavour is a platformer prototype project based on 2 keywords: <span>Veil & Constraint</span>.
+							<br>You play as a character that can open a veil and use this to reduce it's downwards velocity.
+							<br>You can do in air-boosts, praying at an altar will put a save state, "Karma Drive" is used as stamina.
+							<br><br>Main platformer mechanics such as	 jumping, wall jumping, wall sliding,... is all implemented in this prototype.
+							<br>The goal is to gather all crystals and get to the end of each level.
+							<br><br><span>Controller Compatible.</span>
 						  </p>
-						  
-						  <!-- list of things done for DEADBEAT -->
-						  <ul>        
-							<li><p>BPM Handling (on-beat object reactivity, ...)</p></li>
-							<li><p>Grid System & Trap spawning</p></li>
-							<li><p>Trap Behaviour</p></li>
-						</ul> 
 						   
 						<h3>CODE SAMPLES</h3>
 						<div class="owl-carousel owl-code">
 							<div>
-								<h2>BPM Handling</h2>
-								<p>The following code was used to maken an accurate tick system that ensures no FPS dependancy thus resulting in accurate timing measurement.
-								<br>The BPM can easily be changed in UE4.
+								<h2>Updraft Platforms (+ Haptic Feedback)</h2>
+								<p>Following code was used to handle player updraft (setting a player bool) and creating a certain haptic feedback based on the distance to the source of the updraft.
 							</p>
-							  <pre><code class="language-cs">
-int main()
+							  <pre><code class="language-cs">private void OnTriggerStay(Collider other)
 {
-	char c;
-	int isLowercaseVowel, isUppercaseVowel;
+	if (other.gameObject == _player)
+	{
+		_playerScript.OnPlatform = true;
+		_playerScript.PlatformBottom = _bottom.position;
 
-	cout << "Enter an alphabet: ";
-	cin >> c;
+		//calculating haptics based on the "Percentage" the player is from the platform.
+		float hapticAmount = Mathf.Lerp(0f, 0.5f,(_collider.size.y - _bottom.localPosition.y)/(_player.transform.position.y - _bottom.position.y - _bottom.localPosition.y));
+		if (Gamepad.current != null)
+		{
+			Gamepad.current.SetMotorSpeeds(hapticAmount, hapticAmount);
+		}
+	}
+}
+							</code></pre>
+							</div>
 
-	// evaluates to 1 (true) if c is a lowercase vowel
-	isLowercaseVowel = (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
+							<div>
+								<h2>Jump + Wall Jump + Veil Dash</h2>
+								<p>Following code was used to perform Jumps, wall jumps and veil dashes (in air dashes when veil is opened).
+							</p>
+							  <pre><code class="language-cs">private void DoJump()
+{
+	if (!_gameManager.GamePaused)
+	{
+		//if player collides with wall, has drive left, and if its a different wall than the wall jumped on before (before floor collision) wall jump
+		if (_wallCollision && _karmaDrive.CurrentDrive >= 10f && Vector3.Distance(_wallNormal, _prevWallNormal) > 0.001f)
+		{
+			if (_prevWallNormal != Vector3.zero)
+			{
+				//Check if the wall normal is different from the previous one.
+				if (_wallNormal == -(_prevWallNormal))
+				{
+					_audioManager.Play("WallJump");
+					_velocity += _wallNormal * _wallJumpSpeed;
+					_velocity.y = _wallJumpHeight;
+					_wallCollision = false;
+					_jumpsLeft = 0;
+					_karmaDrive.CurrentDrive -= 10f;
+					//Store the previous wall normal to make sure a player can't wall hop.
+					_prevWallNormal = _wallNormal;
+				}
+			}
+			else
+			{
+				//If there's no previous wall normal , allow any normal wall jump.
+				_audioManager.Play("WallJump");
+				_velocity += _wallNormal * _wallJumpSpeed;
+				_velocity.y = _wallJumpHeight;
+				_wallCollision = false;
+				_jumpsLeft = 0;
+				_karmaDrive.CurrentDrive -= 10f;
+				_prevWallNormal = _wallNormal;
+			}
+		}
+		// If player has jumps left apply velocity.
+		else if (_jumpsLeft > 0 && !_praying)
+		{
+			_audioManager.Play("Jump");
+			_velocity.y = _jumpHeight;
+			_jumpsLeft -= 1;
+			_grounded = false;
+		}
+		//veil Dash
+		else if (!_grounded && _veilActivated && _karmaDrive.CurrentDrive >= _veilDashCost)
+		{
+			_velocity += _charController.transform.forward * _veilDashSpeed;
+			_karmaDrive.CurrentDrive -= _veilDashCost;
+			_audioManager.Play("Dash");
 
-	// evaluates to 1 (true) if c is an uppercase vowel
-	isUppercaseVowel = (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U');
+			//if there is a gamepad connected.
+			if (Gamepad.current != null)
+			{
+				//haptic
+				Gamepad.current.SetMotorSpeeds(0.3f, 0.3f);
+				_hapticEnabled = true;
+			}
 
-	// evaluates to 1 (true) if either isLowercaseVowel or isUppercaseVowel is true
-	if (isLowercaseVowel || isUppercaseVowel)
-		cout << c << " is a vowel.";
-	else
-		cout << c << " is a consonant.";
+		}
+	}
+}
+							</code></pre>
+							</div>
 
-	return 0;
+
+							<div>
+								<h2>Camera with collisions</h2>
+								<p>Following code was used to handle camera rotation and letting the camera collide with surroundings to ensure the player never sees through walls.
+							</p>
+							  <pre><code class="language-cs">public class ThirdPersonCamera : MonoBehaviour
+{
+	private PlayerInputActions _cameraAction;
+
+	[Header("Requirements")]
+	[SerializeField]
+	private Transform _target = null;
+	[SerializeField]
+	private Vector3 _offset = new Vector3(0f, 0f, 0f);
+
+	private float _heading = 0;
+	private float _tilt = 15;
+	private float _playerHeight = 1;
+	private float _rotationSens = 50f;
+
+	private float _zoomSpeed = 20f;
+
+	[SerializeField]
+	private float _minZoom = 5f;
+	[SerializeField]
+	private float _maxZoom = 15f;
+
+	private float _currentZoom = 10f;
+	private Vector3 _targetOffset = Vector3.zero;
+
+	//collision
+	[SerializeField]
+	private bool _collisionDebug = false;
+	private float _collisionOffset = 0.35f;
+	private float _adjustedDistance = 0f;
+	[SerializeField]
+	private LayerMask _collisionMask = 0;
+	private Ray camRay;
+	private RaycastHit camRayHit;
+
+	private Transform _obstruction = null;
+	private GameObject[] walls = null;
+	private GameObject[] grounds = null;    
+	void Awake()
+	{
+		walls = GameObject.FindGameObjectsWithTag("Wall");
+		grounds = GameObject.FindGameObjectsWithTag("Ground");
+		_obstruction = _target;
+		//Locking cursor in the screen and making it invisible
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+
+		_cameraAction = new PlayerInputActions();
+		_cameraAction.CameraControls.CameraMovement.performed += AdjustRotationSpeed;
+	}
+	private void AdjustRotationSpeed(InputAction.CallbackContext context)
+	{
+		//Check if user is turning with controller, adjust speed based on this.
+		//(there are better ways than this but currently a rough implementation
+		//Debug.Log(context.control.name);
+
+		if(context.control.device != InputSystem.GetDevice("Mouse"))
+		{
+				_rotationSens = 200f;
+		}
+		else
+		{
+				_rotationSens = 25f;
+		}
+	}
+	private void OnEnable()
+	{
+		_cameraAction.CameraControls.CameraMovement.Enable();
+		_cameraAction.CameraControls.CameraZoom.Enable();
+	}
+
+	private void OnDisable()
+	{
+		_cameraAction.CameraControls.CameraMovement.Disable();
+		_cameraAction.CameraControls.CameraZoom.Disable();
+	}
+
+	//called after the update, necassary for camera since player could've moved in the other updates.
+	void LateUpdate()
+	{
+		if(_target != null && !FindObjectOfType<GameManager>().GameEnded)
+		{
+			CameraMovement();
+		}
+	}
+	void CameraMovement()
+	{
+		_targetOffset = _target.position + Vector3.up * _playerHeight;
+
+		//Clamp mouse scroll wheel values
+		float zoomValue = Mathf.Clamp(_cameraAction.CameraControls.CameraZoom.ReadValue<float>(), -5f, 5f); ;
+
+		_currentZoom -= zoomValue * Time.deltaTime * _zoomSpeed;
+		_currentZoom = Mathf.Clamp(_currentZoom, _minZoom, _maxZoom);
+
+		//getting the yaw on y axis
+		_heading += _cameraAction.CameraControls.CameraMovement.ReadValue<Vector2>().x * Time.deltaTime * _rotationSens;
+
+		//getting the pitch based on X axis mouse
+		_tilt -= _cameraAction.CameraControls.CameraMovement.ReadValue<Vector2>().y * Time.deltaTime * _rotationSens;
+		_tilt = Mathf.Clamp(_tilt, -80f, 80f);
+		//transform the camera rotation to match these 2 variables.
+		transform.rotation = Quaternion.Euler(_tilt, _heading, 0);
+		CameraCollision();
+
+		Vector3 desiredPos = _targetOffset - transform.forward * _adjustedDistance;
+
+		transform.position = desiredPos;
+	}
+
+	void CameraCollision()
+	{
+		float camDistance = _currentZoom + _collisionOffset;
+
+		camRay.origin = _targetOffset;
+		camRay.direction = Vector3.Normalize(transform.position - _targetOffset);
+
+		if(Physics.Raycast(camRay, out camRayHit, camDistance, _collisionMask))
+		{
+			_adjustedDistance = Vector3.Distance(camRay.origin, camRayHit.point) - _collisionOffset;
+		}
+		else
+		{
+			_adjustedDistance = _currentZoom;
+		}
+
+		if(_collisionDebug)
+		{
+			Debug.DrawLine(camRay.origin, camRay.origin + camRay.direction * _adjustedDistance, Color.red);
+		}
+	}
 }
 							</code></pre>
 							</div>
@@ -717,7 +1205,7 @@ int main()
 						</div>
 
 					      <div class="categories">
-							  C++ / Unity / Prototype
+							  C# / Unity / Prototype
 						  </div>			               
 					   </div>
 

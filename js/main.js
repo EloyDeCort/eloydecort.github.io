@@ -298,10 +298,10 @@
 
   
    var data = {
-	labels: ['C++', 'C#', 'Unreal Engine 4', 'Unity', 'HTML/CSS/JS', 'Orange'],
+	labels: ['C++', 'C#', 'Unreal Engine 4', 'Unity', 'HTML/CSS/JS', 'Studio One'],
 	datasets: [{
 		label: 'Expertise',
-		data: [2.5,1.2,2.2,1.5,1],
+		data: [2.5,1.2,2.2,1.5,1, 2.2],
 		backgroundColor: [
 			'rgba(255, 99, 132, 0.2)',
 			'rgba(54, 162, 235, 0.2)',
@@ -323,6 +323,12 @@
   };
 
   var options = {
+	legend: {
+		display: false,
+		labels: {
+			fontColor: 'rgb(255, 99, 132)'
+		}
+	},
 	maintainAspectRatio: false,
 		tooltips: {
             callbacks: {
@@ -360,7 +366,13 @@
         scales: {
             yAxes: [{
 				stacked:true,
+				gridLines: {
+					display: true,
+					color: "rgba(255,99,132,0.2)"
+				  },
 				ticks: {
+					fontColor: '#ca0060',
+					fontSize: 14,
 					min: 0,
 					max: 3,
 					stepSize: 1.0,	
@@ -384,7 +396,14 @@
 						return 'no';
                     }
                 }
-            }]
+			}],
+			xAxes: [{
+				
+				ticks: {
+					fontColor: '#a1a1a1',
+					fontSize: 14,
+				}
+			}],
 	}
   };
 
