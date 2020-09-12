@@ -82,7 +82,7 @@ body {
  * -------------------------------------------------------------------
  */
 a, a:visited {
-	color: #000000;
+	color:  #FFFFFF;
 	-moz-transition: all 0.3s ease-in-out;
 	-o-transition: all 0.3s ease-in-out;
 	-webkit-transition: all 0.3s ease-in-out;
@@ -1014,6 +1014,10 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 .skill-bars li .percent95  { width: 95%; }
 .skill-bars li .percent100 { width: 100%; }
 
+#folio-wrapper
+{
+	text-align: center;
+}
 
 /** 
  * ===================================================================
@@ -1038,7 +1042,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 .section-intro h1 {
 	font-family: "poppins-semibold", serif;
 	font-size: 3.6rem;
-	color:  #888888;
+	color:  #b1b1b1;
 	line-height: 1.25;
 	margin-bottom: 1.2rem;
 }
@@ -1105,7 +1109,7 @@ header .row {
 }
 header .top-bar {
 	display: block;
-	background: #000000;
+	background: #0c0c0c;
 	min-width: 220px;
 	min-height: 66px;
 	position: absolute;
@@ -1508,6 +1512,10 @@ header .logo a {
 	margin-bottom: 3rem;
 }
 
+.languages {
+	margin-bottom: -2.0rem;
+}
+
 .intro-info {
 	margin-top: 4.2rem;
 	margin-right: -30px;
@@ -1525,6 +1533,10 @@ header .logo a {
 	padding-left: 13rem;
 }
 
+.intro-info span {
+	letter-spacing: .25rem;
+}
+
 .about-content {
 	position: relative;
 	text-align: left;
@@ -1537,6 +1549,19 @@ header .logo a {
 	color: #ca0060;
 	text-transform: uppercase;
 	letter-spacing: .25rem;
+}
+
+.about-content ul.disc {
+	margin-bottom: 1.8rem;
+}
+
+.about-content .sub-title {
+	font-family: "poppins-bold", sans-serif;
+	font-size: 1.5rem;
+	color:  #ca0060;
+	text-transform: uppercase;
+	letter-spacing: .25rem;
+	margin-bottom: 0.2rem;
 }
 .about-content .info-list {
 	list-style: none;
@@ -1809,6 +1834,122 @@ header .logo a {
 	}
 }
 
+/** 
+ * ===================================================================
+ * 13,5. sideprojects - (_layout.scss)
+ *
+ * ------------------------------------------------------------------- 
+ */
+ #sideprojects {
+	background: #252525;
+	padding-top: 12rem;
+	padding-bottom: 12rem;
+}
+
+
+#sideprojects .folio-item {
+	padding: 0;
+	position: relative;
+	overflow: hidden;
+}
+#sideprojects .folio-item img {
+	vertical-align: middle;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+#sideprojects .overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+
+#sideprojects .folio-item-table {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+#sideprojects .folio-item-cell {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	position: relative;
+	left: -100%;
+}
+
+#sideprojects .folio-title {
+	color: #FFFFFF;
+	font-size: 3.3rem;
+	padding: 0 3rem;
+	margin-bottom: 0;
+}
+
+#sideprojects .folio-text {
+	font-family: "lora-regular", serif;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 2rem;
+	padding: 0 1rem;
+	margin-bottom: 0;
+}
+
+#sideprojects .folio-types {
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+	font-family: "poppins-regular", sans-serif;
+	font-size: 1.2rem;
+	letter-spacing: .1rem;
+	color: rgba(255, 255, 255, 0.6);
+}
+#sideprojects .folio-item:hover .overlay {
+	background: rgba(0, 0, 0, 0.8);
+}
+#sideprojects .folio-item:hover .folio-item-cell {
+	left: 0;
+}
+#sideprojects .folio-item:hover img {
+	-webkit-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	transform: scale(1.05);
+}
+
+/**
+ * responsive:
+ * sideprojects
+ * ------------------------------------------------------------------- 
+ */
+@media only screen and (max-width:1024px) {
+	#sideprojects .folio-title {
+		font-size: 3.1rem;
+	}
+}
+@media only screen and (max-width:768px) {
+	#sideprojects .folio-title {
+		font-size: 2.5rem;
+	}
+}
+@media only screen and (max-width:400px) {
+	#sideprojects .folio-title {
+		font-size: 2.2rem;
+	}
+}
+
 
 /** 
  * ===================================================================
@@ -1821,7 +1962,6 @@ header .logo a {
 	padding-top: 12rem;
 	padding-bottom: 12rem;
 }
-
 
 #portfolio .folio-item {
 	padding: 0;
@@ -1875,6 +2015,15 @@ header .logo a {
 	padding: 0 3rem;
 	margin-bottom: 0;
 }
+
+#portfolio .folio-text {
+	font-family: "lora-regular", serif;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 2rem;
+	padding: 0 1rem;
+	margin-bottom: 0;
+}
+
 #portfolio .folio-types {
 	margin: 0;
 	padding: 0;
@@ -1894,6 +2043,11 @@ header .logo a {
 	-webkit-transform: scale(1.05);
 	-ms-transform: scale(1.05);
 	transform: scale(1.05);
+}
+
+#portfolio .small
+{	
+	font-size: 2.6rem;
 }
 
 /**
@@ -2182,7 +2336,7 @@ header .logo a {
 }
 
 #services .section-intro h1 {
-	color: white;
+	color: #b1b1b1;
 }
 #services .section-intro h5 {
 	color: #FF0077;
@@ -2320,7 +2474,7 @@ header .logo a {
 	padding-bottom: 7.2rem;
 }
 #contact .section-intro h1 {
-	color: white;
+	color: #b1b1b1;
 }
 #contact .section-intro h5 {
 	color: #FF0077;
