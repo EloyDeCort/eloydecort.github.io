@@ -1026,7 +1026,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
  * ------------------------------------------------------------------- 
  */
 .grey-section {
-	background: #252525;
+	background: #151515;
 }
 .grey-section p.lead {
 	color: rgba(255, 255, 255, 0.7);
@@ -1121,20 +1121,45 @@ header .logo {
 	margin-left: 20px;
 	margin-right: 30px;
 	margin-top: 23px;
+	margin-bottom: -23px;
 	position: relative;
 }
 header .logo a {
-	display: block;
-	margin: 0;
-	padding: 0;
-	border: none;
-	font: 0/0 a;
-	text-shadow: none;
-	color: transparent;
-	width: 150px;
-	height: 18px;
-	background: url("../images/logo.png") no-repeat center;
-	background-size: 150px 18px;
+	color: #FFFFFF;
+	font-family: "poppins-medium", sans-serif;
+	font-size: 2.4rem;
+	line-height: 1.071;
+	max-width: 900px;
+	margin-top: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+header .smallText
+{
+	color: #FFFFFF;
+	font-family: "poppins-medium", sans-serif;
+	font-size: 1.4rem;
+	margin-left: 20px;
+	max-width: 900px;
+	margin-top: -23px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+header .roles {
+	float: left;
+	margin-left: -80px;
+	margin-right: -30px;
+	margin-top: -23px;
+	position: relative;
+}
+
+header .small
+{
+
+	font-size: 1.1rem;
+	
 }
 
 /**
@@ -1504,7 +1529,7 @@ header .logo a {
  * ------------------------------------------------------------------- 
  */
 #about {
-	background: #151515;
+	background: #252525;
 	padding-top: 12rem;
 	padding-bottom: 15rem;
 }
