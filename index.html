@@ -1411,9 +1411,7 @@ void APlayerRegisterer::SendLogin()
 {
 	//Create resolve info
 	const FResolveInfo* pResolveInfo{ISocketSubsystem::Get()->GetHostByName("irc.chat.twitch.tv")};
-	//Wait for the resolve to complete
-	while(!pResolveInfo->IsComplete());
-
+	
 	//Check if we got a resolving issue
 	if(pResolveInfo->GetErrorCode() != 0)
 	{
