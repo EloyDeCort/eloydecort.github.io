@@ -1333,7 +1333,7 @@ header .small
  * ------------------------------------------------------------------- 
  */
 #intro {
-	background: #151515 url(../images/WebsiteBanner.png) no-repeat center bottom;
+	background: #151515 url(../images/Banner.png) no-repeat center bottom;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
