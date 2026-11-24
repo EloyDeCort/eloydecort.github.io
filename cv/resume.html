@@ -27,9 +27,12 @@
     --muted:    #8E9BA9;
     --muted-2:  #808D9A;
 
-    --jade:     #45D9A8;
-    --jade-dim: #2E9C7C;
-    --gold:     #DDB27D;
+    --accent:     #F2CC78;
+    --accent-dim: #B8934A;
+    --accent-2:   #FFEFD2;
+    --steel:      #DCE3EA;
+    --steel-dim:  #93A0AD;
+    --f-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
 
     --rule:     rgba(255, 255, 255, 0.16);
     --rule-2:   rgba(255, 255, 255, 0.09);
@@ -69,6 +72,7 @@
   .sheet {
     grid-column: 2;
     grid-row: 1;
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 4.4mm;
@@ -84,7 +88,7 @@
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--jade);
+    color: var(--steel);
   }
   .sec::after {
     content: "";
@@ -118,7 +122,7 @@
     letter-spacing: -0.02em;
     color: var(--text);
   }
-  .stats .plus { color: var(--jade); }
+  .stats .plus { color: var(--accent); }
   .stats div > span {
     display: block;
     margin-top: 1.2mm;
@@ -150,7 +154,7 @@
     font-weight: 600;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-    color: var(--jade);
+    color: var(--accent);
     white-space: nowrap;
   }
   .job-sub {
@@ -159,7 +163,7 @@
     color: var(--muted);
   }
   .job-sub .sep { color: var(--muted-2); padding: 0 1.2mm; }
-  .job-sub .arr { color: var(--jade-dim); padding: 0 0.6mm; }
+  .job-sub .arr { color: var(--accent-dim); padding: 0 0.6mm; }
 
   .bullets { margin-top: 2mm; }
   .bullets li {
@@ -176,7 +180,7 @@
     width: 2.2mm;
     height: 0.7pt;
     margin-right: 1.4mm;
-    background: var(--jade);
+    background: var(--accent);
     opacity: 0.85;
     vertical-align: 0.22em;
   }
@@ -201,7 +205,7 @@
     font-weight: 500;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--accent-2);
     white-space: nowrap;
   }
   .work-sub {
@@ -240,7 +244,7 @@
     padding: 4.2mm 5mm 4.2mm 4.5mm;
     background: var(--panel);
     border: 0.5pt solid var(--rule-2);
-    border-left: 1.4pt solid var(--jade);
+    border-left: 1.4pt solid var(--accent);
     border-radius: 0 1.6mm 1.6mm 0;
   }
   .avail-k {
@@ -248,7 +252,7 @@
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--jade);
+    color: var(--accent);
     margin-bottom: 0.8mm;
   }
   .avail-text {
@@ -276,7 +280,7 @@
     letter-spacing: 0.04em;
     color: var(--muted-2);
   }
-  .sheet-foot a { color: var(--jade); text-decoration: none; }
+  .sheet-foot a { color: var(--accent); text-decoration: none; }
 
   /* ---------------------------------------------------------------------
      Sidebar
@@ -287,10 +291,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 8.6mm;
+    gap: 8mm;
     padding: 13mm 8.5mm 9mm;
     background:
-      radial-gradient(120% 60% at 0% 0%, rgba(69, 217, 168, 0.16), transparent 60%),
+      radial-gradient(120% 60% at 0% 0%, rgba(242, 204, 120, 0.16), transparent 60%),
       var(--ink);
     border-right: 0.75pt solid var(--rule);
     color: var(--muted);
@@ -311,7 +315,7 @@
     line-height: 1.5;
     letter-spacing: 0.17em;
     text-transform: uppercase;
-    color: var(--jade);
+    color: var(--accent);
   }
   .role span { display: block; color: var(--muted); letter-spacing: 0.14em; }
 
@@ -350,7 +354,7 @@
     font-weight: 600;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-    color: var(--jade-dim);
+    color: var(--accent-dim);
     margin-bottom: 0.5mm;
   }
   .skills .group p {
@@ -389,8 +393,17 @@
     width: 1.4mm;
     height: 0.6pt;
     margin-right: 1.6mm;
-    background: var(--jade-dim);
+    background: var(--accent-dim);
     vertical-align: 0.22em;
+  }
+
+  .studio .titles .rel {
+    margin-left: 1mm;
+    font-family: var(--f-mono);
+    font-size: 5.7pt;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
 
   .rail-foot {
@@ -402,16 +415,89 @@
     letter-spacing: 0.02em;
     color: var(--muted);
   }
-  .rail-foot strong { color: var(--jade); font-weight: 600; }
+  .rail-foot strong { color: var(--accent); font-weight: 600; }
 
-  .rail-foot .wave {
+  .rail-foot .emblem {
     display: block;
-    width: 100%;
-    height: 6mm;
-    margin-bottom: 2.5mm;
-    color: rgba(69, 217, 168, 0.38);
+    width: 26mm;
+    height: 26mm;
+    color: rgba(242, 204, 120, 0.42);
   }
-  .rail-foot .wave svg { width: 100%; height: 100%; }
+  .rail-foot .emblem svg { width: 100%; height: 100%; }
+
+  /* ---------------------------------------------------------------------
+     Technical marks: contour field, hatch block, edge registration crosses
+     --------------------------------------------------------------------- */
+  .rail { isolation: isolate; }
+
+  .rail-contour {
+    position: absolute;
+    left: 50%;
+    bottom: 26mm;
+    z-index: -1;
+    width: 66mm;
+    height: 66mm;
+    margin-left: -33mm;
+    color: rgba(255, 255, 255, 0.10);
+    pointer-events: none;
+  }
+  .rail-contour svg { width: 100%; height: 100%; }
+
+  .hatch {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 12mm;
+    height: 12mm;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.30) 0 0.4pt,
+      transparent 0.4pt 1.9mm
+    );
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .reg-marks {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  /* ---------------------------------------------------------------------
+     Technical layer — drawing frame and monospaced data. Presentation only.
+     --------------------------------------------------------------------- */
+  .plat,
+  .edu-year,
+  .job-date,
+  .contact .k,
+  .rail h2 {
+    font-family: var(--f-mono);
+    font-feature-settings: "tnum" 1;
+    letter-spacing: 0.04em;
+  }
+  .rail h2 { letter-spacing: 0.14em; }
+  .contact .k { letter-spacing: 0.1em; }
+
+  /* corner registration marks, like a technical drawing sheet */
+  .page::after {
+    content: "";
+    position: absolute;
+    inset: 5mm;
+    pointer-events: none;
+    --c: rgba(255, 255, 255, 0.34);
+    background:
+      linear-gradient(var(--c), var(--c)) 0 0 / 9mm 0.6pt no-repeat,
+      linear-gradient(var(--c), var(--c)) 0 0 / 0.6pt 9mm no-repeat,
+      linear-gradient(var(--c), var(--c)) 100% 0 / 9mm 0.6pt no-repeat,
+      linear-gradient(var(--c), var(--c)) 100% 0 / 0.6pt 9mm no-repeat,
+      linear-gradient(var(--c), var(--c)) 0 100% / 9mm 0.6pt no-repeat,
+      linear-gradient(var(--c), var(--c)) 0 100% / 0.6pt 9mm no-repeat,
+      linear-gradient(var(--c), var(--c)) 100% 100% / 9mm 0.6pt no-repeat,
+      linear-gradient(var(--c), var(--c)) 100% 100% / 0.6pt 9mm no-repeat;
+  }
 </style>
 </head>
 
@@ -433,7 +519,7 @@
 
       <div class="stats">
         <div><b>5<span class="plus">+</span></b><span>Years in game audio</span></div>
-        <div><b>2</b><span>Released titles</span></div>
+        <div><b>4</b><span>Released titles</span></div>
         <div><b>2</b><span>Proprietary engines</span></div>
       </div>
     </section>
@@ -606,21 +692,48 @@
         <li>Drova2</li>
         <li>Bloodfell</li>
         <li>Soul Spires: Initium</li>
-        <li>Rogue Slime</li>
-        <li>Carbox</li>
+        <li>Rogue Slime <span class="rel">released</span></li>
+        <li>Carbox <span class="rel">released</span></li>
       </ul>
     </div>
 
+    <div class="rail-contour" aria-hidden="true">
+      <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
+        <defs>
+          <path id="cvtopo" d="M196 26 C 258 12 322 58 356 116 C 392 176 384 252 338 308 C 292 364 210 380 146 348 C 80 316 26 260 30 188 C 34 116 98 44 196 26 Z"/>
+        </defs>
+        <use href="#cvtopo" opacity=".50"/>
+        <use href="#cvtopo" opacity=".65" transform="translate(200 200) scale(0.84) translate(-200 -200)"/>
+        <use href="#cvtopo" opacity=".80" transform="translate(200 200) scale(0.68) translate(-200 -200)"/>
+        <use href="#cvtopo" opacity=".60" transform="translate(200 200) scale(0.52) translate(-200 -200)"/>
+        <use href="#cvtopo" opacity=".45" transform="translate(200 200) scale(0.36) translate(-200 -200)"/>
+      </svg>
+    </div>
+
+    <span class="hatch" aria-hidden="true"></span>
+
     <div class="rail-foot">
-      <span class="wave" aria-hidden="true">
-        <svg viewBox="0 0 120 24" preserveAspectRatio="none">
-          <path d="M0 12 H26 L30 12 33 5 36 19 39 12 H62 L66 12 69 7 72 17 75 12 H98 L102 12 105 9 108 15 111 12 H120"
-                fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+      <span class="emblem" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-linecap="round">
+          <circle cx="200" cy="200" r="196" stroke-width="1.4" stroke-dasharray="2 9"/>
+          <circle cx="200" cy="200" r="150" stroke-width="1.2" opacity=".6"/>
+          <circle cx="200" cy="200" r="96"  stroke-width="1.2" stroke-dasharray="1 5" opacity=".8"/>
+          <circle cx="200" cy="200" r="40"  stroke-width="1.2" opacity=".4"/>
+          <line x1="200" y1="4" x2="200" y2="396" stroke-width="1" opacity=".28"/>
+          <line x1="4" y1="200" x2="396" y2="200" stroke-width="1" opacity=".28"/>
+          <path d="M200 50 A150 150 0 0 1 350 200" stroke-width="2.6" opacity=".85"/>
         </svg>
       </span>
     </div>
 
   </aside>
+
+  <svg class="reg-marks" aria-hidden="true" viewBox="0 0 210 297" fill="none" stroke="rgba(255,255,255,0.36)" stroke-width="0.32" stroke-linecap="round">
+    <path d="M103.2 3h3.6M105 1.2v3.6"/>
+    <path d="M103.2 294h3.6M105 292.2v3.6"/>
+    <path d="M1.2 148.5h3.6M3 146.7v3.6"/>
+    <path d="M205.2 148.5h3.6M207 146.7v3.6"/>
+  </svg>
 </div>
 </body>
 </html>

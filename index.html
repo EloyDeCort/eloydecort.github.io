@@ -130,6 +130,18 @@
     </svg>
   </div>
 
+  <div class="disc disc-hero" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-linecap="round">
+      <circle cx="200" cy="200" r="196" stroke-width="1" stroke-dasharray="2 9"/>
+      <circle cx="200" cy="200" r="150" stroke-width="1" opacity=".6"/>
+      <circle cx="200" cy="200" r="96"  stroke-width="1" stroke-dasharray="1 5" opacity=".8"/>
+      <circle cx="200" cy="200" r="42"  stroke-width="1" opacity=".35"/>
+      <line x1="200" y1="4" x2="200" y2="396" stroke-width="1" opacity=".3"/>
+      <line x1="4" y1="200" x2="396" y2="200" stroke-width="1" opacity=".3"/>
+      <path d="M200 50 A150 150 0 0 1 350 200" stroke-width="2" opacity=".8"/>
+    </svg>
+  </div>
+
   <div class="wrap hero-inner">
 
     <p class="hero-badge">
@@ -186,7 +198,7 @@
       <span class="stat-label"><span class="l-en">Years in game audio</span><span class="l-zh">年游戏音频经验</span></span>
     </div>
     <div class="stat">
-      <span class="stat-num"><b data-count="2">2</b></span>
+      <span class="stat-num"><b data-count="4">4</b></span>
       <span class="stat-label"><span class="l-en">Released titles</span><span class="l-zh">已发行作品</span></span>
     </div>
     <div class="stat">
@@ -224,6 +236,21 @@
      WORK
      ================================================================== -->
 <section class="section" id="work">
+
+  <div class="motif motif-contour" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round">
+      <defs>
+        <path id="topo" d="M196 26 C 258 12 322 58 356 116 C 392 176 384 252 338 308 C 292 364 210 380 146 348 C 80 316 26 260 30 188 C 34 116 98 44 196 26 Z"/>
+      </defs>
+      <use href="#topo" opacity=".50"/>
+      <use href="#topo" opacity=".65" transform="translate(200 200) scale(0.84) translate(-200 -200)"/>
+      <use href="#topo" opacity=".80" transform="translate(200 200) scale(0.68) translate(-200 -200)"/>
+      <use href="#topo" opacity=".65" transform="translate(200 200) scale(0.52) translate(-200 -200)"/>
+      <use href="#topo" opacity=".50" transform="translate(200 200) scale(0.36) translate(-200 -200)"/>
+      <use href="#topo" opacity=".38" transform="translate(200 200) scale(0.20) translate(-200 -200)"/>
+    </svg>
+  </div>
+
   <div class="wrap">
 
     <div class="sec-head">
@@ -232,8 +259,8 @@
         <span class="l-en">Selected work</span><span class="l-zh">精选作品</span>
       </p>
       <h2 class="sec-title reveal">
-        <span class="l-en">Two released games.<br>Two proprietary engines.</span>
-        <span class="l-zh">两款发行作品，<br>两套自研引擎。</span>
+        <span class="l-en">Two studio releases.<br>Two proprietary engines.</span>
+        <span class="l-zh">两款工作室发行作品，<br>两套自研引擎。</span>
       </h2>
       <p class="sec-lede reveal">
         <span class="l-en">Audio implementation, engine tooling and debugging on shipped titles.</span>
@@ -394,7 +421,9 @@
       </div>
       <div class="dracortia-side">
         <ul class="title-chips" aria-label="Dracortia titles">
-          <li>Drova2</li><li>Bloodfell</li><li>Soul Spires: Initium</li><li>Rogue Slime</li><li>Carbox</li>
+          <li>Drova2</li><li>Bloodfell</li><li>Soul Spires: Initium</li>
+          <li>Rogue Slime <span class="rel"><span class="l-en">Released</span><span class="l-zh">已发行</span></span></li>
+          <li>Carbox <span class="rel"><span class="l-en">Released</span><span class="l-zh">已发行</span></span></li>
         </ul>
         <a class="btn btn-ghost btn-sm" href="https://dracortia.com" target="_blank" rel="noopener">
           <span class="l-en">dracortia.com</span><span class="l-zh">访问 dracortia.com</span>
@@ -467,6 +496,19 @@
      ABOUT
      ================================================================== -->
 <section class="section section-alt" id="about">
+
+  <div class="disc-clip" aria-hidden="true">
+    <div class="disc disc-about">
+      <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-linecap="round">
+        <path d="M20 380 A360 360 0 0 1 380 20" stroke-width="1.1" opacity=".45"/>
+        <path d="M62 380 A318 318 0 0 1 380 62" stroke-width="1.1" opacity=".6"/>
+        <path d="M104 380 A276 276 0 0 1 380 104" stroke-width="2" opacity=".85"/>
+        <path d="M146 380 A234 234 0 0 1 380 146" stroke-width="1.1" stroke-dasharray="2 9" opacity=".5"/>
+        <path d="M20 380 A360 360 0 0 1 380 20" stroke-width="1.1" stroke-dasharray="2 11" opacity=".3"/>
+      </svg>
+    </div>
+  </div>
+
   <div class="wrap">
 
     <div class="sec-head">
@@ -573,6 +615,18 @@
      EXPERIENCE
      ================================================================== -->
 <section class="section" id="experience">
+
+  <div class="motif motif-plus" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="1">
+      <defs>
+        <pattern id="plusgrid" width="100" height="100" patternUnits="userSpaceOnUse">
+          <path d="M50 36v28M36 50h28" stroke-linecap="round"/>
+        </pattern>
+      </defs>
+      <rect width="400" height="400" fill="url(#plusgrid)"/>
+    </svg>
+  </div>
+
   <div class="wrap">
 
     <div class="sec-head">
@@ -685,6 +739,22 @@
      SKILLS
      ================================================================== -->
 <section class="section section-alt" id="skills">
+
+  <div class="disc disc-skills" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-linecap="round">
+      <circle cx="200" cy="200" r="196" stroke-width="1.1" stroke-dasharray="2 9"/>
+      <circle cx="200" cy="200" r="172" stroke-width="1" opacity=".55"/>
+      <circle cx="200" cy="200" r="158" stroke-width="1" stroke-dasharray="1 5" opacity=".8"/>
+      <circle cx="200" cy="200" r="98"  stroke-width="1" opacity=".45"/>
+      <circle cx="200" cy="200" r="62"  stroke-width="1" stroke-dasharray="4 6" opacity=".7"/>
+      <circle cx="200" cy="200" r="30"  stroke-width="1" opacity=".35"/>
+      <line x1="200" y1="4" x2="200" y2="396" stroke-width="1" opacity=".3"/>
+      <line x1="4" y1="200" x2="396" y2="200" stroke-width="1" opacity=".3"/>
+      <path d="M200 28 A172 172 0 0 1 372 200" stroke-width="2.4" opacity=".85"/>
+      <path d="M28 200 A172 172 0 0 1 200 28" stroke-width="1" opacity=".4"/>
+    </svg>
+  </div>
+
   <div class="wrap">
 
     <div class="sec-head">
@@ -732,6 +802,17 @@
      CONTACT
      ================================================================== -->
 <section class="section contact" id="contact">
+
+  <div class="disc disc-contact" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-linecap="round">
+      <circle cx="200" cy="200" r="196" stroke-width="1" stroke-dasharray="2 9"/>
+      <circle cx="200" cy="200" r="176" stroke-width="1" opacity=".5"/>
+      <circle cx="200" cy="200" r="128" stroke-width="1" stroke-dasharray="1 6" opacity=".7"/>
+      <circle cx="200" cy="200" r="70"  stroke-width="1" opacity=".4"/>
+      <path d="M200 24 A176 176 0 0 1 376 200" stroke-width="2.2" opacity=".8"/>
+    </svg>
+  </div>
+
   <div class="wrap">
 
     <div class="sec-head">
