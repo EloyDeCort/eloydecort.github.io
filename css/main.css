@@ -1993,7 +1993,14 @@ html[data-lang="zh"] .modal-subtitle { letter-spacing: 0.1em; }
   }
 
   .nav-toggle { display: block; z-index: 100; }
-  .header-actions { margin-left: auto; }
+  .header-actions { margin-left: auto; position: relative; z-index: 96; }
+
+  /* a filtered header traps fixed children — drop the blur while the menu is open */
+  body.is-locked .site-header {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(6, 8, 11, 0.97);
+  }
 
   .hero { padding-top: 13rem; }
   .stats-inner { grid-template-columns: repeat(2, 1fr); }
