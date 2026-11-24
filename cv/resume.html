@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Eloy De Cort — Senior Technical Audio Engineer &amp; Audio Programmer</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="CV — Eloy De Cort, Senior Technical Audio Engineer and Audio Programmer.">
+<style>
+  /* =====================================================================
+     Eloy De Cort — CV
+     A4 / one page / dark. Same type system, palette and rhythm as the site.
+     Print: A4, margins None, background graphics on.
+     ===================================================================== */
+  @font-face { font-family:"Poppins"; src:url("../fonts/poppins/poppins-light-webfont.woff2") format("woff2"); font-weight:300; font-style:normal; }
+  @font-face { font-family:"Poppins"; src:url("../fonts/poppins/poppins-regular-webfont.woff2") format("woff2"); font-weight:400; font-style:normal; }
+  @font-face { font-family:"Poppins"; src:url("../fonts/poppins/poppins-medium-webfont.woff2") format("woff2"); font-weight:500; font-style:normal; }
+  @font-face { font-family:"Poppins"; src:url("../fonts/poppins/poppins-semibold-webfont.woff2") format("woff2"); font-weight:600; font-style:normal; }
+  @font-face { font-family:"Poppins"; src:url("../fonts/poppins/poppins-bold-webfont.woff2") format("woff2"); font-weight:700; font-style:normal; }
+
+  :root {
+    --ink:      #04060A;
+    --ink-page: #141A26;
+    --panel:    #1B2331;
+
+    --text:     #EEF2F7;
+    --body:     #B3BECA;
+    --muted:    #8E9BA9;
+    --muted-2:  #808D9A;
+
+    --jade:     #45D9A8;
+    --jade-dim: #2E9C7C;
+    --gold:     #DDB27D;
+
+    --rule:     rgba(255, 255, 255, 0.16);
+    --rule-2:   rgba(255, 255, 255, 0.09);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  ul, ol { list-style: none; }
+
+  @page { size: A4; margin: 0; }
+
+  html { font-size: 10px; }
+
+  body {
+    background: #05070A;
+    color: var(--body);
+    font-family: "Poppins", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .page {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    display: grid;
+    grid-template-columns: 69mm 1fr;
+    background: var(--ink-page);
+    overflow: hidden;
+  }
+
+  /* ---------------------------------------------------------------------
+     Main column
+     --------------------------------------------------------------------- */
+  .sheet {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4.4mm;
+    padding: 13mm 12mm 8mm 11mm;
+  }
+
+  .sec {
+    display: flex;
+    align-items: center;
+    gap: 2.2mm;
+    margin-bottom: 3mm;
+    font-size: 6.9pt;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--jade);
+  }
+  .sec::after {
+    content: "";
+    flex: 1;
+    height: 0.5pt;
+    background: var(--rule);
+  }
+
+  .lede {
+    font-size: 8.15pt;
+    line-height: 1.62;
+    color: var(--body);
+  }
+  .lede strong { color: var(--text); font-weight: 500; }
+
+  /* at-a-glance strip ---------------------------------------------------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4mm;
+    margin-top: 3mm;
+    padding: 2.6mm 0 2.8mm;
+    border-top: 0.5pt solid var(--rule);
+    border-bottom: 0.5pt solid var(--rule);
+  }
+  .stats b {
+    display: block;
+    font-size: 13pt;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .stats .plus { color: var(--jade); }
+  .stats div > span {
+    display: block;
+    margin-top: 1.2mm;
+    font-size: 6.2pt;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+  }
+
+  /* experience ---------------------------------------------------------- */
+  .job + .job { margin-top: 4.0mm; }
+
+  .job-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 3mm;
+  }
+  .job h3 {
+    font-size: 10pt;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  .job-date {
+    font-size: 6.9pt;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--jade);
+    white-space: nowrap;
+  }
+  .job-sub {
+    margin-top: 0.6mm;
+    font-size: 7.4pt;
+    color: var(--muted);
+  }
+  .job-sub .sep { color: var(--muted-2); padding: 0 1.2mm; }
+  .job-sub .arr { color: var(--jade-dim); padding: 0 0.6mm; }
+
+  .bullets { margin-top: 2mm; }
+  .bullets li {
+    padding-left: 3.6mm;
+    text-indent: -3.6mm;
+    font-size: 7.85pt;
+    line-height: 1.52;
+    color: var(--body);
+  }
+  .bullets li + li { margin-top: 0.75mm; }
+  .bullets li::before {
+    content: "";
+    display: inline-block;
+    width: 2.2mm;
+    height: 0.7pt;
+    margin-right: 1.4mm;
+    background: var(--jade);
+    opacity: 0.85;
+    vertical-align: 0.22em;
+  }
+  .bullets li b { color: var(--text); font-weight: 500; }
+
+  /* selected work ------------------------------------------------------- */
+  .work + .work { margin-top: 4.6mm; }
+  .work-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 3mm;
+  }
+  .work h3 {
+    font-size: 8.6pt;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.005em;
+  }
+  .plat {
+    font-size: 6.3pt;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .work-sub {
+    margin-top: 0.7mm;
+    font-size: 7.2pt;
+    color: var(--muted-2);
+  }
+  .work-sub .sep { padding: 0 1.1mm; }
+  .work-desc {
+    margin-top: 1.2mm;
+    font-size: 7.7pt;
+    line-height: 1.5;
+    color: var(--body);
+  }
+
+  /* education ----------------------------------------------------------- */
+  .edu { display: grid; grid-template-columns: 17mm 1fr; gap: 0 3mm; }
+  .edu + .edu { margin-top: 1.9mm; }
+  .edu-year {
+    font-size: 7pt;
+    font-weight: 500;
+    color: var(--muted-2);
+    letter-spacing: 0.02em;
+    padding-top: 0.3mm;
+  }
+  .edu h3 { font-size: 8.1pt; font-weight: 600; color: var(--text); }
+  .edu p { font-size: 7.4pt; color: var(--muted); margin-top: 0.3mm; }
+
+  /* closing callout ------------------------------------------------------ */
+  .avail {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6mm;
+    padding: 4.2mm 5mm 4.2mm 4.5mm;
+    background: var(--panel);
+    border: 0.5pt solid var(--rule-2);
+    border-left: 1.4pt solid var(--jade);
+    border-radius: 0 1.6mm 1.6mm 0;
+  }
+  .avail-k {
+    font-size: 6.4pt;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--jade);
+    margin-bottom: 0.8mm;
+  }
+  .avail-text {
+    font-size: 7.7pt;
+    line-height: 1.5;
+    color: var(--body);
+    max-width: 92mm;
+  }
+  .avail-text b { color: var(--text); font-weight: 500; }
+  .avail-mail {
+    font-size: 7.6pt;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    letter-spacing: -0.005em;
+  }
+
+  .sheet-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 4mm;
+    padding-top: 4.5mm;
+    border-top: 0.5pt solid var(--rule);
+    font-size: 6.8pt;
+    letter-spacing: 0.04em;
+    color: var(--muted-2);
+  }
+  .sheet-foot a { color: var(--jade); text-decoration: none; }
+
+  /* ---------------------------------------------------------------------
+     Sidebar
+     --------------------------------------------------------------------- */
+  .rail {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8.6mm;
+    padding: 13mm 8.5mm 9mm;
+    background:
+      radial-gradient(120% 60% at 0% 0%, rgba(69, 217, 168, 0.16), transparent 60%),
+      var(--ink);
+    border-right: 0.75pt solid var(--rule);
+    color: var(--muted);
+  }
+
+  .name {
+    font-size: 26pt;
+    font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+  }
+
+  .role {
+    margin-top: 3.4mm;
+    font-size: 6.6pt;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--jade);
+  }
+  .role span { display: block; color: var(--muted); letter-spacing: 0.14em; }
+
+  .rail h2 {
+    font-size: 6.1pt;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    padding-bottom: 1.8mm;
+    margin-bottom: 2.4mm;
+    border-bottom: 0.5pt solid var(--rule);
+  }
+
+  .contact li {
+    font-size: 7pt;
+    line-height: 1.45;
+    color: var(--text);
+    word-break: break-word;
+  }
+  .contact li + li { margin-top: 1.5mm; }
+  .contact .k {
+    display: block;
+    font-size: 5.9pt;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin-bottom: 0.2mm;
+  }
+  .contact a { color: var(--text); text-decoration: none; }
+
+  .skills .group + .group { margin-top: 2.6mm; }
+  .skills .group-name {
+    font-size: 6.2pt;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--jade-dim);
+    margin-bottom: 0.5mm;
+  }
+  .skills .group p {
+    font-size: 7pt;
+    line-height: 1.5;
+    color: var(--body);
+  }
+
+  .langs li {
+    display: flex;
+    justify-content: space-between;
+    gap: 2mm;
+    font-size: 7pt;
+    color: var(--text);
+    padding: 1.2mm 0;
+    border-bottom: 0.5pt solid var(--rule-2);
+  }
+  .langs li:last-child { border-bottom: 0; }
+  .langs .lvl { color: var(--muted-2); font-size: 6.4pt; }
+
+  .studio p { font-size: 7pt; line-height: 1.5; color: var(--body); }
+  .studio p b { color: var(--text); font-weight: 600; }
+  .studio .titles {
+    margin-top: 1.8mm;
+    font-size: 6.5pt;
+    line-height: 1.72;
+    color: var(--muted-2);
+  }
+  .studio .titles li {
+    padding-left: 3mm;
+    text-indent: -3mm;
+  }
+  .studio .titles li::before {
+    content: "";
+    display: inline-block;
+    width: 1.4mm;
+    height: 0.6pt;
+    margin-right: 1.6mm;
+    background: var(--jade-dim);
+    vertical-align: 0.22em;
+  }
+
+  .rail-foot {
+    margin-top: auto;
+    padding-top: 3.5mm;
+    border-top: 0.5pt solid var(--rule);
+    font-size: 6.4pt;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+  .rail-foot strong { color: var(--jade); font-weight: 600; }
+
+  .rail-foot .wave {
+    display: block;
+    width: 100%;
+    height: 6mm;
+    margin-bottom: 2.5mm;
+    color: rgba(69, 217, 168, 0.38);
+  }
+  .rail-foot .wave svg { width: 100%; height: 100%; }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <!-- main column first in the DOM so the PDF text layer reads in order -->
+  <main class="sheet">
+
+    <section>
+      <h2 class="sec">Profile</h2>
+      <p class="lede">
+        Five years across two studios and two proprietary engines: most recently owning every technical
+        audio task at <strong>Deck13</strong>, and before that building the audio engine, editor and tooling
+        behind <strong>Arma Reforger</strong> at <strong>Bohemia Interactive</strong>. My work sits on the
+        seam between sound design and engine code — adaptive systems, debugging tools, and the workflows
+        that keep an audio team fast.
+      </p>
+
+      <div class="stats">
+        <div><b>5<span class="plus">+</span></b><span>Years in game audio</span></div>
+        <div><b>2</b><span>Released titles</span></div>
+        <div><b>2</b><span>Proprietary engines</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">Experience</h2>
+
+      <article class="job">
+        <div class="job-head">
+          <h3>Senior Technical Audio Engineer</h3>
+          <span class="job-date">2023 — Present</span>
+        </div>
+        <p class="job-sub">
+          Deck13 Interactive<span class="sep">·</span>Germany<span class="sep">·</span>FLEDGE (proprietary) <span class="arr">→</span> Unreal Engine 5<span class="sep">·</span>promoted 2026
+        </p>
+        <ul class="bullets">
+          <li>Ownership of all technical audio: <b>FMOD</b> integration in C++ and Blueprints for adaptive, scalable systems.</li>
+          <li>Engine tools and debugging workflows used daily by audio and design.</li>
+          <li>Cross-departmental audio pipelines, from the proprietary FLEDGE engine to <b>Unreal Engine 5</b>.</li>
+          <li>Adaptive reverb, bone-based foley and breathing systems.</li>
+          <li>Current project: an unannounced title built in Unreal Engine 5.</li>
+        </ul>
+      </article>
+
+      <article class="job">
+        <div class="job-head">
+          <h3>Audio Programmer</h3>
+          <span class="job-date">2021 — 2023</span>
+        </div>
+        <p class="job-sub">
+          Bohemia Interactive<span class="sep">·</span>Czech Republic<span class="sep">·</span>Junior 2021–22<span class="sep">·</span>Arma Reforger &amp; Enfusion Engine
+        </p>
+        <ul class="bullets">
+          <li>Interior detection, music management and multiplayer synchronised radios.</li>
+          <li>Engine audio editor: requirement handling, design and implementation.</li>
+          <li>Multi-threading and console development (<b>Microsoft GDK</b>), profiling and optimisation.</li>
+          <li>Scripting capabilities through scalable C++.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section>
+      <h2 class="sec">Selected work</h2>
+
+      <article class="work">
+        <div class="work-head">
+          <h3>Atlas Fallen — Reign of Sand</h3>
+          <span class="plat">PC · PS5 · Xbox Series X|S</span>
+        </div>
+        <p class="work-sub">Deck13<span class="sep">·</span>FMOD · FLEDGE Engine · C++ · Node editor</p>
+        <p class="work-desc">Sound implementation and audio debugging for the Reign of Sand update; built the project's audio workflows alongside a second team member.</p>
+      </article>
+
+      <article class="work">
+        <div class="work-head">
+          <h3>Arma Reforger</h3>
+          <span class="plat">PC · Xbox Series X|S</span>
+        </div>
+        <p class="work-sub">Bohemia Interactive<span class="sep">·</span>C++ · Enfusion Engine · Multiplayer</p>
+        <p class="work-desc">Most gameplay-to-sound connections in a large open world, plus music management, multiplayer radio and in-game audio debugging tools.</p>
+      </article>
+
+      <article class="work">
+        <div class="work-head">
+          <h3>Enfusion Engine — audio editor</h3>
+          <span class="plat">Proprietary engine</span>
+        </div>
+        <p class="work-sub">Bohemia Interactive<span class="sep">·</span>C++ · Qt · Tooling</p>
+        <p class="work-desc">Owned the signals editor: a node-based system that evaluates in-game values and drives mathematical expressions directly on audio.</p>
+      </article>
+    </section>
+
+    <section>
+      <h2 class="sec">Education</h2>
+
+      <div class="edu">
+        <span class="edu-year">2018 — 2021</span>
+        <div>
+          <h3>Bachelor, Game Development</h3>
+          <p>Howest — Digital Arts and Entertainment</p>
+        </div>
+      </div>
+      <div class="edu">
+        <span class="edu-year">2014 — 2018</span>
+        <div>
+          <h3>Degree in Multimedia</h3>
+          <p>Stedelijk Lyceum Cadix</p>
+        </div>
+      </div>
+      <div class="edu">
+        <span class="edu-year">2007 — 2018</span>
+        <div>
+          <h3>Drums, Percussion &amp; Music Theory</h3>
+          <p>Academy of Merksem</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="avail">
+      <div>
+        <p class="avail-k">Availability</p>
+        <p class="avail-text">Open to <b>senior technical audio</b> and <b>audio programming</b> roles — on-site, hybrid or fully remote.</p>
+      </div>
+      <span class="avail-mail">eloy.decort@gmail.com</span>
+    </div>
+
+    <footer class="sheet-foot">
+      <span>Portfolio &amp; project breakdowns: <a href="https://eloydecort.github.io/">eloydecort.github.io</a></span>
+      <span>References available on request</span>
+    </footer>
+
+  </main>
+
+  <!-- sidebar -->
+  <aside class="rail">
+
+    <div>
+      <h1 class="name">Eloy<br>De Cort</h1>
+      <p class="role">Senior Technical<br>Audio Engineer<span>Audio Programmer</span></p>
+    </div>
+
+    <div>
+      <h2>Contact</h2>
+      <ul class="contact">
+        <li><span class="k">Email</span><a href="mailto:eloy.decort@gmail.com">eloy.decort@gmail.com</a></li>
+        <li><span class="k">Portfolio</span><a href="https://eloydecort.github.io/">eloydecort.github.io</a></li>
+        <li><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/eloydecort/">in/eloydecort</a></li>
+        <li><span class="k">GitHub</span><a href="https://github.com/EloyDeCort">EloyDeCort</a></li>
+        <li><span class="k">Based in</span>Wuppertal, Germany</li>
+      </ul>
+    </div>
+
+    <div class="skills">
+      <h2>Skills</h2>
+      <div class="group">
+        <p class="group-name">Technical audio</p>
+        <p>FMOD · Wwise · adaptive music · real-time DSP</p>
+      </div>
+      <div class="group">
+        <p class="group-name">Programming</p>
+        <p>C++ · C# · Python · JavaScript · HTML/CSS</p>
+      </div>
+      <div class="group">
+        <p class="group-name">Engines</p>
+        <p>Unreal Engine 5 · Unity · Enfusion · FLEDGE</p>
+      </div>
+      <div class="group">
+        <p class="group-name">GUI &amp; tooling</p>
+        <p>UE Slate · Qt (C++) · ImGui</p>
+      </div>
+      <div class="group">
+        <p class="group-name">Pipeline</p>
+        <p>Perforce · Git · SVN · Jenkins · TeamCity · Tracy · Microsoft GDK</p>
+      </div>
+    </div>
+
+    <div>
+      <h2>Languages</h2>
+      <ul class="langs">
+        <li>English <span class="lvl">Fluent</span></li>
+        <li>Dutch <span class="lvl">Native</span></li>
+        <li>French <span class="lvl">Elementary</span></li>
+      </ul>
+    </div>
+
+    <div class="studio">
+      <h2>Studio</h2>
+      <p>Founder of <b>Dracortia</b> — music and audio for indie games.</p>
+      <ul class="titles">
+        <li>Drova2</li>
+        <li>Bloodfell</li>
+        <li>Soul Spires: Initium</li>
+        <li>Rogue Slime</li>
+        <li>Carbox</li>
+      </ul>
+    </div>
+
+    <div class="rail-foot">
+      <span class="wave" aria-hidden="true">
+        <svg viewBox="0 0 120 24" preserveAspectRatio="none">
+          <path d="M0 12 H26 L30 12 33 5 36 19 39 12 H62 L66 12 69 7 72 17 75 12 H98 L102 12 105 9 108 15 111 12 H120"
+                fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+
+  </aside>
+</div>
+</body>
+</html>
