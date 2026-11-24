@@ -28,12 +28,26 @@
     return /^zh/i.test(nav) ? "zh" : "en";
   }
 
+  /* the CV follows the language: English PDF or 中文简历 */
+  var CV_FILES = {
+    en: "CV - Eloy De Cort - Senior Technical Audio Engineer.pdf",
+    zh: "cv-zh/CV - Eloy De Cort - 技术音频工程师.pdf"
+  };
+
+  function applyCv(lang) {
+    var links = document.querySelectorAll("a[data-cv]");
+    Array.prototype.forEach.call(links, function (a) {
+      a.setAttribute("href", CV_FILES[lang] || CV_FILES.en);
+    });
+  }
+
   function applyLang(lang, persist) {
     root.setAttribute("data-lang", lang);
     root.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
     if (persist) {
       try { window.localStorage.setItem(LANG_KEY, lang); } catch (e) {}
     }
+    applyCv(lang);
     var options = document.querySelectorAll("[data-lang-opt]");
     Array.prototype.forEach.call(options, function (opt) {
       var on = opt.getAttribute("data-lang-opt") === lang;
