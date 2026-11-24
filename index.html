@@ -120,13 +120,24 @@
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="hero-wave" aria-hidden="true">
-    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" role="presentation">
-      <path class="wave-base" pathLength="1000" vector-effect="non-scaling-stroke"
-            d="M0 60 H140 L160 60 170 34 180 86 190 60 H340 L358 60 368 18 378 102 388 60 H540 L556 60 566 40 576 80 586 60 H760 L778 60 788 26 798 94 808 60 H980 L998 60 1008 44 1018 76 1028 60 H1200"
-            fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
-      <path class="wave-hot" pathLength="1000" vector-effect="non-scaling-stroke"
-            d="M0 60 H140 L160 60 170 34 180 86 190 60 H340 L358 60 368 18 378 102 388 60 H540 L556 60 566 40 576 80 586 60 H760 L778 60 788 26 798 94 808 60 H980 L998 60 1008 44 1018 76 1028 60 H1200"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <svg viewBox="0 0 2400 160" preserveAspectRatio="none" role="presentation">
+      <defs>
+        <g id="waveBars"></g>
+        <linearGradient id="waveVert" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#B8934A" stop-opacity="0.10"/>
+          <stop offset="0.5" stop-color="#F2CC78" stop-opacity="0.9"/>
+          <stop offset="1" stop-color="#B8934A" stop-opacity="0.10"/>
+        </linearGradient>
+        <linearGradient id="waveSweep" gradientUnits="userSpaceOnUse" x1="-360" y1="0" x2="0" y2="0">
+          <stop offset="0" stop-color="#FFE6B4" stop-opacity="0"/>
+          <stop offset="0.55" stop-color="#FFF6DC" stop-opacity="1"/>
+          <stop offset="1" stop-color="#FFE6B4" stop-opacity="0"/>
+          <animate attributeName="x1" values="-360; 2400" dur="9s" repeatCount="indefinite"/>
+          <animate attributeName="x2" values="0; 2760" dur="9s" repeatCount="indefinite"/>
+        </linearGradient>
+      </defs>
+      <use href="#waveBars" fill="url(#waveVert)"/>
+      <use href="#waveBars" fill="url(#waveSweep)"/>
     </svg>
   </div>
 

@@ -407,6 +407,54 @@
   }
 
   /* ----------------------------------------------------------------------
+     Hero waveform — a dense audio signal spanning the full width
+     ---------------------------------------------------------------------- */
+  (function buildWave() {
+    var group = document.getElementById("waveBars");
+    if (!group) return;
+
+    var W = 2400, MID = 80, MAXH = 148, NB = 210;
+    var step = W / NB;
+    var bw = step * 0.46;
+    var seed = 20261124;
+    function rnd() {
+      seed = (seed * 1664525 + 1013904223) % 4294967296;
+      return seed / 4294967296;
+    }
+
+    var NS = "http://www.w3.org/2000/svg";
+    var frag = document.createDocumentFragment();
+
+    for (var i = 0; i < NB; i++) {
+      var x = i * step + (step - bw) / 2;
+
+      /* broad swells across the take, plus a little grain */
+      var env = 0.34 +
+                0.24 * Math.sin(x / 330 + 1.1) +
+                0.17 * Math.sin(x / 128 + 0.5) +
+                0.09 * Math.sin(x / 54);
+      env = Math.max(0.10, Math.min(1, env + (rnd() - 0.5) * 0.10));
+
+      /* transient shape of each bar */
+      var v = Math.abs(
+        0.62 * Math.sin(x * 0.41 + 1.3) +
+        0.38 * Math.sin(x * 1.17 + 0.4)
+      );
+      var h = Math.max(4, (0.16 + 0.84 * v) * env * MAXH);
+
+      var r = document.createElementNS(NS, "rect");
+      r.setAttribute("x", x.toFixed(1));
+      r.setAttribute("y", (MID - h / 2).toFixed(1));
+      r.setAttribute("width", bw.toFixed(2));
+      r.setAttribute("height", h.toFixed(1));
+      r.setAttribute("rx", (bw / 2).toFixed(2));
+      frag.appendChild(r);
+    }
+
+    group.appendChild(frag);
+  })();
+
+  /* ----------------------------------------------------------------------
      Footer year
      ---------------------------------------------------------------------- */
   Array.prototype.forEach.call(document.querySelectorAll("[data-year]"), function (el) {
