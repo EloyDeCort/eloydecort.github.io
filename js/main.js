@@ -10,6 +10,8 @@
   root.classList.remove("no-js");
   root.classList.add("js");
 
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   /* ----------------------------------------------------------------------
      Language
      ---------------------------------------------------------------------- */
@@ -60,14 +62,25 @@
      ---------------------------------------------------------------------- */
   var header = document.getElementById("siteHeader");
   var progress = document.getElementById("scrollProgress");
+  var heroContent = document.querySelector(".hero-inner");
   var stuck = false;
 
   function onScrollHeader() {
+    var y = window.scrollY;
+
     if (progress) {
       var max = document.documentElement.scrollHeight - window.innerHeight;
-      progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0).toFixed(2) + "%";
+      progress.style.width = (max > 0 ? (y / max) * 100 : 0).toFixed(2) + "%";
     }
-    var shouldStick = window.scrollY > 24;
+
+    /* hero content lifts away as you scroll past it */
+    if (heroContent && !reducedMotion) {
+      var ratio = Math.min(y / Math.max(window.innerHeight * 0.8, 1), 1);
+      heroContent.style.transform = "translate3d(0," + (ratio * 70).toFixed(1) + "px,0)";
+      heroContent.style.opacity = String(Math.max(0.08, 1 - ratio * 0.94));
+    }
+
+    var shouldStick = y > 24;
     if (shouldStick === stuck) return;
     stuck = shouldStick;
     header.classList.toggle("is-stuck", stuck);
@@ -173,9 +186,14 @@
     });
   }
 
+  /* Replacing the node is the only reliable way to stop playback and reset the
+     frame: pointing src at about:blank while the modal is display:none can be
+     deferred, which left audio playing and the player dead on the next open. */
   function unloadFrames(modal) {
     Array.prototype.forEach.call(modal.querySelectorAll("iframe[data-src]"), function (frame) {
-      frame.setAttribute("src", "about:blank");
+      var fresh = frame.cloneNode(false);
+      fresh.removeAttribute("src");
+      if (frame.parentNode) frame.parentNode.replaceChild(fresh, frame);
     });
   }
 
@@ -233,6 +251,9 @@
     var scroller = modal.querySelector(".modal-scroll");
     if (scroller) scroller.scrollTop = 0;
 
+    var strip = modal.querySelector(".modal-media");
+    if (strip) strip.scrollLeft = 0;
+
     bindMedia(modal);
 
     var closeBtn = modal.querySelector(".modal-close");
@@ -243,8 +264,9 @@
     if (!activeModal) return;
     var modal = activeModal;
     activeModal = null;
-    modal.hidden = true;
+    /* tear the players down while the modal is still visible */
     unloadFrames(modal);
+    modal.hidden = true;
     document.body.classList.remove("is-locked");
     if (lastFocused && typeof lastFocused.focus === "function") {
       lastFocused.focus({ preventScroll: true });
@@ -326,6 +348,63 @@
       }
     });
   });
+
+  /* ----------------------------------------------------------------------
+     Count-up stats
+     ---------------------------------------------------------------------- */
+  var counters = Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
+  var statsBand = document.querySelector(".stats-band");
+
+  function animateCount(el) {
+    var target = parseInt(el.getAttribute("data-count"), 10) || 0;
+    if (reducedMotion || target <= 0) {
+      el.textContent = String(target);
+      return;
+    }
+    var start = performance.now();
+    var duration = 1200;
+    function step(now) {
+      var t = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = String(Math.round(target * eased));
+      if (t < 1) window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
+  }
+
+  if (counters.length && statsBand && "IntersectionObserver" in window) {
+    var counted = false;
+    var countObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting || counted) return;
+          counted = true;
+          counters.forEach(animateCount);
+          countObserver.disconnect();
+        });
+      },
+      { threshold: 0.35 }
+    );
+    countObserver.observe(statsBand);
+  }
+
+  /* ----------------------------------------------------------------------
+     Cursor-tracked light sweep on project cards
+     ---------------------------------------------------------------------- */
+  if (window.matchMedia && window.matchMedia("(pointer: fine)").matches) {
+    Array.prototype.forEach.call(document.querySelectorAll(".card"), function (card) {
+      var media = card.querySelector(".card-media");
+      if (!media) return;
+      card.addEventListener("pointermove", function (e) {
+        var rect = media.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        var x = ((e.clientX - rect.left) / rect.width) * 100;
+        var y = ((e.clientY - rect.top) / rect.height) * 100;
+        media.style.setProperty("--mx", x.toFixed(1) + "%");
+        media.style.setProperty("--my", y.toFixed(1) + "%");
+      });
+    });
+  }
 
   /* ----------------------------------------------------------------------
      Footer year

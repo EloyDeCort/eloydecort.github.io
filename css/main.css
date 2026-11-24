@@ -53,7 +53,7 @@
 
   --fg:         #E9EDF3;
   --fg-2:       #A2AEBD;
-  --fg-3:       #6C7A8A;
+  --fg-3:       #7C8A99;
 
   --jade:       #46D9A8;
   --jade-bright:#6DEBC2;
@@ -495,6 +495,33 @@ html[data-lang="zh"] .lang-opt[data-lang-opt="zh"] {
 }
 .hero-wave svg { width: 100%; height: 100%; }
 
+/* the line draws itself, then a bright segment travels along it like a playhead */
+.hero-wave .wave-base {
+  opacity: 0.6;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: waveDraw 2.8s var(--ease) 0.35s forwards;
+}
+.hero-wave .wave-hot {
+  stroke: var(--jade);
+  stroke-dasharray: 55 945;
+  stroke-dashoffset: 1000;
+  opacity: 0.9;
+  animation: waveTravel 9s linear 2.6s infinite;
+}
+@keyframes waveDraw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes waveTravel {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* hero content lifts and fades as you scroll past it */
+.hero-inner {
+  will-change: transform, opacity;
+}
+
 .hero-inner { position: relative; }
 
 .hero-badge {
@@ -658,6 +685,7 @@ html[data-lang="zh"] .hero-role { letter-spacing: 0.14em; font-size: 1.5rem; }
   color: var(--fg);
   letter-spacing: -0.03em;
 }
+.stat-num b { font-weight: inherit; color: inherit; }
 .stat-plus { color: var(--jade); font-weight: 400; }
 
 .stat-label {
@@ -721,6 +749,20 @@ html[data-lang="zh"] .stat-label { letter-spacing: 0.04em; font-size: 1.3rem; }
   transition: border-color .45s var(--ease), transform .45s var(--ease),
               box-shadow .45s var(--ease);
 }
+/* level-meter sweep along the top edge */
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--jade-dim), var(--jade));
+  transition: width .7s var(--ease);
+}
+.card:hover::after,
+.card:focus-visible::after { width: 100%; }
 .card:hover {
   transform: translateY(-4px);
   border-color: rgba(70, 217, 168, 0.34);
@@ -736,6 +778,20 @@ html[data-lang="zh"] .stat-label { letter-spacing: 0.04em; font-size: 1.3rem; }
   background: #05070A;
 }
 .card-feature .card-media { aspect-ratio: 16 / 9; }
+
+/* cursor-tracked light sweep over the artwork */
+.card-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(38rem circle at var(--mx, 50%) var(--my, 40%),
+              rgba(255, 255, 255, 0.16), transparent 62%);
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+  pointer-events: none;
+}
+.card:hover .card-media::before { opacity: 1; }
 
 .card-media img {
   width: 100%;
@@ -817,6 +873,42 @@ html[data-lang="zh"] .card-more { letter-spacing: 0.06em; }
 .card-more svg { width: 1.5rem; height: 1.5rem; transition: transform .35s var(--ease); }
 .card:hover .card-more svg { transform: translateX(0.5rem); }
 
+/* video affordance on the artwork */
+.card-play {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: rgba(6, 8, 11, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  transition: background .3s var(--ease), border-color .3s var(--ease),
+              color .3s var(--ease), transform .3s var(--ease);
+}
+.card-play svg { width: 2.2rem; height: 2.2rem; }
+.card:hover .card-play {
+  background: rgba(70, 217, 168, 0.22);
+  border-color: var(--jade);
+  color: var(--jade);
+  transform: scale(1.07);
+}
+
+/* platform credit line */
+.card-platforms {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  color: var(--fg-3);
+}
+.card-platforms span { display: block; }
+
 /* chips ------------------------------------------------------------------- */
 .chips {
   display: flex;
@@ -888,6 +980,152 @@ html[data-lang="zh"] .card-more { letter-spacing: 0.06em; }
   font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: 0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   10b. Current work — Unreal Engine 5 (generative cover, no screenshots)
+   -------------------------------------------------------------------------- */
+.now {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 4.4rem;
+  align-items: center;
+  margin-top: 2.4rem;
+  padding: 3.8rem 4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(90% 130% at 100% 0%, rgba(70, 217, 168, 0.1), transparent 58%),
+    var(--panel);
+  overflow: hidden;
+}
+
+.now-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--jade);
+}
+html[data-lang="zh"] .now-kicker { letter-spacing: 0.08em; }
+
+.now-title {
+  font-size: clamp(2.8rem, 3.4vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.9rem;
+}
+
+.now-engine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.7rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  color: var(--fg-3);
+}
+
+.now-sub {
+  max-width: 54rem;
+  font-size: 1.55rem;
+  line-height: 1.85;
+  color: var(--fg-2);
+}
+
+.now-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 2.2rem;
+}
+.now-tags li {
+  padding: 0.5rem 1.1rem;
+  border: 1px solid rgba(70, 217, 168, 0.28);
+  border-radius: 999px;
+  background: rgba(70, 217, 168, 0.06);
+  font-size: 1.15rem;
+  color: var(--jade);
+  white-space: nowrap;
+}
+
+.now-note {
+  margin-top: 1.9rem;
+  font-size: 1.15rem;
+  color: var(--fg-3);
+  letter-spacing: 0.04em;
+}
+
+.now-visual {
+  position: relative;
+  padding: 1rem 0;
+}
+.now-visual::before {
+  content: "";
+  position: absolute;
+  inset: -12% -6%;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(62% 62% at 50% 50%, #000, transparent 76%);
+  mask-image: radial-gradient(62% 62% at 50% 50%, #000, transparent 76%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* small audio meter — the "in development" cover art */
+.viz {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 21rem;
+}
+.viz::before {
+  content: "";
+  position: absolute;
+  inset: 12% 4%;
+  background: radial-gradient(50% 50% at 50% 55%, rgba(70, 217, 168, 0.14), transparent 70%);
+  pointer-events: none;
+}
+
+.viz-eq {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  height: 13rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--line-mid);
+}
+
+.viz-eq i {
+  display: block;
+  width: 6px;
+  height: var(--h, 50%);
+  border-radius: 3px;
+  background: linear-gradient(to top, rgba(70, 217, 168, 0.22), var(--jade));
+  transform-origin: 50% 100%;
+  will-change: transform;
+  animation: eqPulse var(--d, 1.3s) var(--ease) var(--dl, 0s) infinite alternate;
+}
+
+/* the tallest bars run warm at the top, like the peak segment of a VU meter */
+.viz-eq i:nth-child(5),
+.viz-eq i:nth-child(11),
+.viz-eq i:nth-child(18) {
+  background: linear-gradient(to top, rgba(70, 217, 168, 0.22), var(--jade) 58%, var(--gold));
+}
+
+@keyframes eqPulse {
+  from { transform: scaleY(0.18); opacity: 0.45; }
+  to   { transform: scaleY(1); opacity: 1; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1295,6 +1533,13 @@ a.contact-item:hover {
 html[data-lang="zh"] .contact-k { letter-spacing: 0.08em; }
 .contact-v { font-size: 1.45rem; color: var(--fg); word-break: break-word; }
 
+.contact-note {
+  margin-top: 3.4rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  color: var(--fg-3);
+}
+
 /* --------------------------------------------------------------------------
    16. Footer
    -------------------------------------------------------------------------- */
@@ -1680,6 +1925,7 @@ html[data-lang="zh"] .modal-subtitle { letter-spacing: 0.1em; }
    -------------------------------------------------------------------------- */
 @media only screen and (max-width: 1100px) {
   :root { --gutter: 3rem; }
+  .brand-role { display: none; }
   .about-grid { grid-template-columns: 28rem minmax(0, 1fr); gap: 4rem; }
   .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1742,6 +1988,8 @@ html[data-lang="zh"] .modal-subtitle { letter-spacing: 0.1em; }
 
   .ach-grid, .edu-grid { grid-template-columns: 1fr; }
   .dracortia { grid-template-columns: 1fr; gap: 2.4rem; padding: 3rem; }
+  .now { grid-template-columns: 1fr; gap: 2.6rem; padding: 3rem; }
+  .now-visual { max-width: 44rem; width: 100%; margin: 0 auto; padding: 0; }
   .hero-scroll { display: none; }
 }
 
@@ -1766,6 +2014,11 @@ html[data-lang="zh"] .modal-subtitle { letter-spacing: 0.1em; }
   .hero-social { margin-top: 3.6rem; }
   .hero-cta .btn { flex: 1 1 auto; }
   .contact-actions .btn { width: 100%; }
+  .now-tags { margin-top: 1.8rem; }
+  .now-note { margin-top: 1.4rem; }
+  .viz { height: 15rem; }
+  .viz-eq { height: 9.5rem; gap: 5px; }
+  .viz-eq i { width: 4px; border-radius: 2px; }
   .modal { padding: 0; }
   .modal-panel { max-height: 100svh; height: 100svh; border-radius: 0; border: 0; }
   .modal-media { max-height: none; }
