@@ -1,441 +1,336 @@
-/** 
- * ===================================================================
- * main js
- *
- * ------------------------------------------------------------------- 
- */ 
+/* ==========================================================================
+   Eloy De Cort — site behaviour
+   Vanilla JS: language switch, sticky header, mobile nav, scroll spy,
+   reveal animations, project modals, copy-to-clipboard.
+   ========================================================================== */
+(function () {
+  "use strict";
 
-(function($) {
+  var root = document.documentElement;
+  root.classList.remove("no-js");
+  root.classList.add("js");
 
-	"use strict";
+  /* ----------------------------------------------------------------------
+     Language
+     ---------------------------------------------------------------------- */
+  var LANG_KEY = "edc-lang";
 
-	/*---------------------------------------------------- */
-	/* Preloader
-	------------------------------------------------------ */ 
-   $(window).load(function() {
+  function storedLang() {
+    try { return window.localStorage.getItem(LANG_KEY); } catch (e) { return null; }
+  }
 
-      // will first fade out the loading animation 
-    	$("#loader").fadeOut("slow", function(){
+  function preferredLang() {
+    var stored = storedLang();
+    if (stored === "en" || stored === "zh") return stored;
+    var nav = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+    return /^zh/i.test(nav) ? "zh" : "en";
+  }
 
-        // will fade out the whole DIV that covers the website.
-        $("#preloader").delay(300).fadeOut("slow");
+  function applyLang(lang, persist) {
+    root.setAttribute("data-lang", lang);
+    root.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+    if (persist) {
+      try { window.localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+    }
+    var options = document.querySelectorAll("[data-lang-opt]");
+    Array.prototype.forEach.call(options, function (opt) {
+      var on = opt.getAttribute("data-lang-opt") === lang;
+      opt.setAttribute("aria-current", on ? "true" : "false");
+    });
+    var toggle = document.getElementById("langSwitch");
+    if (toggle) {
+      toggle.setAttribute(
+        "aria-label",
+        lang === "zh" ? "Switch to English" : "切换到中文"
+      );
+    }
+  }
 
-      });       
+  applyLang(preferredLang(), false);
 
-  	})
+  var langSwitch = document.getElementById("langSwitch");
+  if (langSwitch) {
+    langSwitch.addEventListener("click", function () {
+      applyLang(root.getAttribute("data-lang") === "zh" ? "en" : "zh", true);
+    });
+  }
 
+  /* ----------------------------------------------------------------------
+     Sticky header
+     ---------------------------------------------------------------------- */
+  var header = document.getElementById("siteHeader");
+  var progress = document.getElementById("scrollProgress");
+  var stuck = false;
 
-  	/*---------------------------------------------------- */
-  	/* FitText Settings
-  	------------------------------------------------------ */
-  	setTimeout(function() {
+  function onScrollHeader() {
+    if (progress) {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0).toFixed(2) + "%";
+    }
+    var shouldStick = window.scrollY > 24;
+    if (shouldStick === stuck) return;
+    stuck = shouldStick;
+    header.classList.toggle("is-stuck", stuck);
+  }
+  window.addEventListener("scroll", onScrollHeader, { passive: true });
+  onScrollHeader();
 
-   	$('#intro h1').fitText(1, { minFontSize: '42px', maxFontSize: '84px' });
+  /* ----------------------------------------------------------------------
+     Mobile navigation
+     ---------------------------------------------------------------------- */
+  var nav = document.getElementById("primaryNav");
+  var navToggle = document.getElementById("navToggle");
 
-  	}, 100);
+  function setNav(open) {
+    if (!nav || !navToggle) return;
+    nav.classList.toggle("is-open", open);
+    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.body.classList.toggle("is-locked", open);
+  }
 
-
-	/*---------------------------------------------------- */
-	/* FitVids
-	------------------------------------------------------ */ 
-  	$(".fluid-video-wrapper").fitVids();
-
-
-	/*---------------------------------------------------- */
-	/* Owl Carousel
-	------------------------------------------------------ */ 
-	$("#owl-slider").owlCarousel({
-        navigation: false,
-        pagination: true,
-        itemsCustom : [
-	        [0, 1],
-	        [700, 2],
-	        [960, 3]
-		 ],
-		 autoHeight:true,
-        navigationText: false
-	});
-	
-	$(".owl-portfolio").owlCarousel({
-        navigation: false,
-		pagination: true,
-		autoHeight:true,
-		navigationText: false,
-		itemsCustom : [
-	        [0, 1],
-	        [700, 1],
-	        [960, 1]
-		 ],
-	});
-	
-	$(".owl-code").owlCarousel({
-        navigation: false,
-		pagination: true,
-		autoHeight:true,
-		navigationText: false,
-		touchDrag: false,
-
-
-		itemsCustom : [
-	        [0, 1],
-	        [700, 1],
-	        [960, 1]
-		 ],
+  if (navToggle && nav) {
+    navToggle.addEventListener("click", function () {
+      setNav(!nav.classList.contains("is-open"));
     });
 
-
-	/*----------------------------------------------------- */
-	/* Alert Boxes
-  	------------------------------------------------------- */
-	$('.alert-box').on('click', '.close', function() {
-	  $(this).parent().fadeOut(500);
-	});	
-
-
-	/*----------------------------------------------------- */
-	/* Stat Counter
-  	------------------------------------------------------- */
-   var statSection = $("#stats"),
-       stats = $(".stat-count");
-
-   statSection.waypoint({
-
-   	handler: function(direction) {
-
-      	if (direction === "down") {       		
-
-			   stats.each(function () {
-				   var $this = $(this);
-
-				   $({ Counter: 0 }).animate({ Counter: $this.text() }, {
-				   	duration: 4000,
-				   	easing: 'swing',
-				   	step: function (curValue) {
-				      	$this.text(Math.ceil(curValue));
-				    	}
-				  	});
-				});
-
-       	} 
-
-       	// trigger once only
-       	this.destroy();      	
-
-		},
-			
-		offset: "90%"
-	
-	});	
-
-
-	/*---------------------------------------------------- */
-	/*	Masonry
-	------------------------------------------------------ */
-	var containerProjects = $('#folio-wrapper');
-
-	containerProjects.imagesLoaded( function() {
-
-		containerProjects.masonry( {		  
-		  	itemSelector: '.folio-item',
-		  	resize: true 
-		});
-
-	});
-
-
-	/*----------------------------------------------------*/
-	/*	Modal Popup
-	------------------------------------------------------*/
-   $('.item-wrap a').magnificPopup({
-
-      type:'inline',
-      fixedContentPos: false,
-      removalDelay: 300,
-      showCloseBtn: true,
-	  mainClass: 'mfp-fade'
-
-   });
-
-   $(document).on('click', '.popup-modal-dismiss', function (e) {
-   	e.preventDefault();
-   	$.magnificPopup.close();
-   });
-
-	
-	/*-----------------------------------------------------*/
-  	/* Navigation Menu
-   ------------------------------------------------------ */  
-   var toggleButton = $('.menu-toggle'),
-       nav = $('.main-navigation');
-
-   // toggle button
-   toggleButton.on('click', function(e) {
-
-		e.preventDefault();
-		toggleButton.toggleClass('is-clicked');
-		nav.slideToggle();
-
-	});
-
-   // nav items
-  	nav.find('li a').on("click", function() {   
-
-   	// update the toggle button 		
-   	toggleButton.toggleClass('is-clicked'); 
-   	// fadeout the navigation panel
-   	nav.fadeOut();   		
-   	     
-  	});
-
-
-   /*---------------------------------------------------- */
-  	/* Highlight the current section in the navigation bar
-  	------------------------------------------------------ */
-	var sections = $("section"),
-	navigation_links = $("#main-nav-wrap li a");	
-
-	sections.waypoint( {
-
-       handler: function(direction) {
-
-		   var active_section;
-
-			active_section = $('section#' + this.element.id);
-
-			if (direction === "up") active_section = active_section.prev();
-
-			var active_link = $('#main-nav-wrap a[href="#' + active_section.attr("id") + '"]');			
-
-         navigation_links.parent().removeClass("current");
-			active_link.parent().addClass("current");
-
-		}, 
-
-		offset: '25%'
-	});
-
-
-	/*---------------------------------------------------- */
-  	/* Smooth Scrolling
-  	------------------------------------------------------ */
-  	$('.smoothscroll').on('click', function (e) {
-	 	
-	 	e.preventDefault();
-
-   	var target = this.hash,
-    	$target = $(target);
-
-    	$('html, body').stop().animate({
-       	'scrollTop': $target.offset().top
-      }, 800, 'swing', function () {
-      	window.location.hash = target;
-      });
-
-  	});  
-
-   /*---------------------------------------------------- */
-	/*  Placeholder Plugin Settings
-	------------------------------------------------------ */ 
-	$('input, textarea, select').placeholder()  
-
-  	/*---------------------------------------------------- */
-	/*	contact form
-	------------------------------------------------------ */
-
-	
-
-	/* local validation */
-	$("#contactForm").validate({
-
-		/* submit via ajax */
-		submitHandler: function(form) {
-			var sLoader = $('#submit-loader');
-
-			$.ajax({      	
-
-		      type: "POST",
-		      url: "/inc/contactformhandler.php",
-		      data: $(form).serialize(),
-		      beforeSend: function() { 
-
-		      	sLoader.fadeIn(); 
-
-		      },
-		      success: function(msg) {
-
-	            // Message was sent
-	            if (msg == 'OK') {
-	            	sLoader.fadeOut(); 
-	               $('#message-warning').hide();
-	               $('#contactForm').fadeOut();
-	               $('#message-success').fadeIn();   
-	            }
-	            // There was an error
-	            else {
-	            	sLoader.fadeOut(); 
-	               $('#message-warning').html(msg);
-		            $('#message-warning').fadeIn();
-	            }
-
-		      },
-		      error: function() {
-
-		      	sLoader.fadeOut(); 
-		      	$('#message-warning').html("Something went wrong. Please try again.");
-		         $('#message-warning').fadeIn();
-
-		      }
-
-			});     		
-		},
-
-	});
-
-
-	/*----------------------------------------------------- */
-  	/* Chart
-   ------------------------------------------------------- */ 
-
-  
-   var data = {
-	labels: ['C++', 'C#', 'Unreal Engine 4', 'Unity', 'HTML/CSS/JS', 'Studio One'],
-	datasets: [{
-		label: 'Expertise',
-		data: [2.5,1.2,2.2,1.5,1, 2.2],
-		backgroundColor: [
-			'rgba(255, 99, 132, 0.2)',
-			'rgba(54, 162, 235, 0.2)',
-			'rgba(255, 206, 86, 0.2)',
-			'rgba(75, 192, 192, 0.2)',
-			'rgba(153, 102, 255, 0.2)',
-			'rgba(255, 159, 64, 0.2)'
-		],
-		borderColor: [
-			'rgba(255, 99, 132, 1)',
-			'rgba(54, 162, 235, 1)',
-			'rgba(255, 206, 86, 1)',
-			'rgba(75, 192, 192, 1)',
-			'rgba(153, 102, 255, 1)',
-			'rgba(255, 159, 64, 1)'
-		],
-		borderWidth: 2
-	}]
-  };
-
-  var options = {
-	legend: {
-		display: false,
-		labels: {
-			fontColor: 'rgb(255, 99, 132)'
-		}
-	},
-	maintainAspectRatio: false,
-		tooltips: {
-            callbacks: {
-				label: function(tooltipItem, data) {
-                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-					var val = Math.floor(tooltipItem.yLabel);
-
-					if(label)
-					{
-						label += ": "
-						
-						switch(val)
-						{
-							case 0:
-								label += 'No Knowledge';
-							break;
-							case 1:
-								label += 'Basic Knowledge';
-							break;
-							case 2:
-								label += 'Medium Knowledge';
-							break;
-							case 3:
-								label += 'High Knowledge';
-							break;
-					}
-					}
-					return label;
-				}
-            }
-        },
-
-
-        scales: {
-            yAxes: [{
-				stacked:true,
-				gridLines: {
-					display: true,
-					color: "rgba(255,99,132,0.2)"
-				  },
-				ticks: {
-					fontColor: '#ca0060',
-					fontSize: 14,
-					min: 0,
-					max: 3,
-					stepSize: 1.0,	
-                    // Include a dollar sign in the ticks
-                    callback: function(value, index, values) {
-						switch(value)
-						{
-							case 0:
-								return 'Beginner';
-							break;
-							case 1:
-								return 'Basic Knowledge';
-							break;
-							case 2:
-								return 'Medium Knowledge';
-							break;
-							case 3:
-								return 'High Knowledge';
-							break;
-						}
-						return 'no';
-                    }
-                }
-			}],
-			xAxes: [{
-				
-				ticks: {
-					fontColor: '#a1a1a1',
-					fontSize: 14,
-				}
-			}],
-	}
-  };
-
-
-  Chart.Bar('myChart', {
-	options: options,
-	data: data
+    nav.addEventListener("click", function (e) {
+      var link = e.target.closest("a");
+      if (link && !link.hasAttribute("download")) setNav(false);
+    });
+  }
+
+  /* ----------------------------------------------------------------------
+     Scroll spy
+     ---------------------------------------------------------------------- */
+  var navLinks = Array.prototype.slice.call(
+    document.querySelectorAll("#primaryNav > a[href^='#']")
+  );
+  var spyTargets = navLinks
+    .map(function (link) {
+      var id = link.getAttribute("href").slice(1);
+      var el = document.getElementById(id);
+      return el ? { link: link, el: el } : null;
+    })
+    .filter(Boolean);
+
+  if ("IntersectionObserver" in window && spyTargets.length) {
+    var spy = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach(function (l) { l.classList.remove("is-active"); });
+          var match = spyTargets.filter(function (t) { return t.el === entry.target; })[0];
+          if (match) match.link.classList.add("is-active");
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+    spyTargets.forEach(function (t) { spy.observe(t.el); });
+  }
+
+  /* ----------------------------------------------------------------------
+     Reveal on scroll
+     ---------------------------------------------------------------------- */
+  var revealItems = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+
+  if ("IntersectionObserver" in window && revealItems.length) {
+    revealItems.forEach(function (el) {
+      var siblings = el.parentElement
+        ? Array.prototype.slice.call(el.parentElement.children)
+        : [];
+      var index = siblings.filter(function (s) { return s.classList.contains("reveal"); }).indexOf(el);
+      el.style.setProperty("--i", Math.max(0, Math.min(index, 5)));
+    });
+
+    var revealer = new IntersectionObserver(
+      function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+    );
+
+    revealItems.forEach(function (el) { revealer.observe(el); });
+  } else {
+    revealItems.forEach(function (el) { el.classList.add("is-in"); });
+  }
+
+  /* ----------------------------------------------------------------------
+     Project modals
+     ---------------------------------------------------------------------- */
+  var FOCUSABLE =
+    'a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
+  var activeModal = null;
+  var lastFocused = null;
+
+  function loadFrames(modal) {
+    Array.prototype.forEach.call(modal.querySelectorAll("iframe[data-src]"), function (frame) {
+      if (!frame.getAttribute("src")) frame.setAttribute("src", frame.getAttribute("data-src"));
+    });
+  }
+
+  function unloadFrames(modal) {
+    Array.prototype.forEach.call(modal.querySelectorAll("iframe[data-src]"), function (frame) {
+      frame.setAttribute("src", "about:blank");
+    });
+  }
+
+  /* media strip inside a modal ------------------------------------------- */
+  function mediaParts(modal) {
+    var wrap = modal.querySelector(".modal-media-wrap");
+    if (!wrap) return null;
+    return {
+      strip: wrap.querySelector(".modal-media"),
+      frames: wrap.querySelectorAll(".media-frame"),
+      prev: wrap.querySelector("[data-media-prev]"),
+      next: wrap.querySelector("[data-media-next]"),
+      count: wrap.querySelector("[data-media-count]")
+    };
+  }
+
+  function syncMedia(modal) {
+    var p = mediaParts(modal);
+    if (!p || !p.strip || !p.strip.clientWidth) return;
+    var total = p.frames.length;
+    if (total < 2) {
+      if (p.prev) p.prev.classList.add("is-hidden");
+      if (p.next) p.next.classList.add("is-hidden");
+      if (p.count) p.count.textContent = "";
+      return;
+    }
+    var index = Math.round(p.strip.scrollLeft / p.strip.clientWidth) + 1;
+    if (p.count) p.count.textContent = index + " / " + total;
+    if (p.prev) p.prev.classList.toggle("is-hidden", index <= 1);
+    if (p.next) p.next.classList.toggle("is-hidden", index >= total);
+  }
+
+  function bindMedia(modal) {
+    var p = mediaParts(modal);
+    if (!p || !p.strip) return;
+    if (!p.strip.getAttribute("data-bound")) {
+      p.strip.setAttribute("data-bound", "1");
+      p.strip.addEventListener("scroll", function () { syncMedia(modal); }, { passive: true });
+    }
+    syncMedia(modal);
+    window.setTimeout(function () {
+      if (activeModal === modal) syncMedia(modal);
+    }, 80);
+  }
+
+  function openModal(modal) {
+    if (!modal || activeModal) return;
+    lastFocused = document.activeElement;
+    activeModal = modal;
+    modal.hidden = false;
+    loadFrames(modal);
+    document.body.classList.add("is-locked");
+    setNav(false);
+
+    var scroller = modal.querySelector(".modal-scroll");
+    if (scroller) scroller.scrollTop = 0;
+
+    bindMedia(modal);
+
+    var closeBtn = modal.querySelector(".modal-close");
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
+  }
+
+  function closeModal() {
+    if (!activeModal) return;
+    var modal = activeModal;
+    activeModal = null;
+    modal.hidden = true;
+    unloadFrames(modal);
+    document.body.classList.remove("is-locked");
+    if (lastFocused && typeof lastFocused.focus === "function") {
+      lastFocused.focus({ preventScroll: true });
+    }
+    lastFocused = null;
+  }
+
+  document.addEventListener("click", function (e) {
+    var mediaBtn = e.target.closest("[data-media-prev], [data-media-next]");
+    if (mediaBtn && activeModal) {
+      var wrap = mediaBtn.closest(".modal-media-wrap");
+      var strip = wrap && wrap.querySelector(".modal-media");
+      if (strip) {
+        var dir = mediaBtn.hasAttribute("data-media-next") ? 1 : -1;
+        strip.scrollBy({ left: dir * strip.clientWidth, behavior: "smooth" });
+      }
+      return;
+    }
+
+    var opener = e.target.closest("[data-modal]");
+    if (opener) {
+      e.preventDefault();
+      openModal(document.getElementById(opener.getAttribute("data-modal")));
+      return;
+    }
+    if (e.target.closest("[data-close]")) {
+      e.preventDefault();
+      closeModal();
+    }
   });
-  
-	
 
- 	/*----------------------------------------------------- */
-  	/* Back to top
-   ------------------------------------------------------- */ 
-	var pxShow = 300; // height on which the button will show
-	var fadeInTime = 400; // how slow/fast you want the button to show
-	var fadeOutTime = 400; // how slow/fast you want the button to hide
-	var scrollSpeed = 300; // how slow/fast you want the button to scroll to top. can be a value, 'slow', 'normal' or 'fast'
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      if (activeModal) closeModal();
+      else if (nav && nav.classList.contains("is-open")) setNav(false);
+      return;
+    }
 
-   // Show or hide the sticky footer button
-	jQuery(window).scroll(function() {
+    if (e.key === "Tab" && activeModal) {
+      var items = Array.prototype.filter.call(
+        activeModal.querySelectorAll(FOCUSABLE),
+        function (el) { return el.offsetParent !== null; }
+      );
+      if (!items.length) return;
+      var first = items[0];
+      var last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
 
-		if (!( $("#header-search").hasClass('is-visible'))) {
+  /* ----------------------------------------------------------------------
+     Copy email
+     ---------------------------------------------------------------------- */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-copy]"), function (btn) {
+    var original = btn.innerHTML;
+    var timer = null;
 
-			if (jQuery(window).scrollTop() >= pxShow) {
-				jQuery("#go-top").fadeIn(fadeInTime);
-			} else {
-				jQuery("#go-top").fadeOut(fadeOutTime);
-			}
+    btn.addEventListener("click", function () {
+      var value = btn.getAttribute("data-copy");
 
-		}		
+      function done(ok) {
+        btn.innerHTML = ok
+          ? '<span class="l-en">Copied</span><span class="l-zh">已复制</span>'
+          : '<span class="l-en">Press Ctrl+C</span><span class="l-zh">请按 Ctrl+C</span>';
+        clearTimeout(timer);
+        timer = setTimeout(function () { btn.innerHTML = original; }, 2000);
+      }
 
-	});		
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(function () { done(true); }, function () { done(false); });
+      } else {
+        done(false);
+      }
+    });
+  });
 
-})(jQuery);
+  /* ----------------------------------------------------------------------
+     Footer year
+     ---------------------------------------------------------------------- */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-year]"), function (el) {
+    el.textContent = String(new Date().getFullYear());
+  });
+})();

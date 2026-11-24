@@ -1,1158 +1,1147 @@
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<html lang="en" data-lang="en" class="no-js">
 <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-172691331-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  gtag('config', 'UA-172691331-1');
+<title>Eloy De Cort — Senior Technical Audio Engineer &amp; Audio Programmer</title>
+<meta name="description" content="Eloy De Cort is a Senior Technical Audio Engineer and Audio Programmer based in Germany. Owner of all technical audio at Deck13 (Atlas Fallen), previously audio engine development at Bohemia Interactive (Arma Reforger, Enfusion Engine). 资深技术音频工程师 / 音频程序开发，现居德国，可赴中国工作。">
+<meta name="author" content="Eloy De Cort">
+<meta name="keywords" content="Eloy De Cort, Technical Audio Engineer, Audio Programmer, Technical Sound Designer, FMOD, Wwise, MetaSounds, Unreal Engine, C++, Enfusion, FLEDGE, Deck13, Bohemia Interactive, 技术音频工程师, 音频程序, 游戏音频, 音频中间件">
+<link rel="canonical" href="https://eloydecort.github.io/">
+
+<!-- social / link preview -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Eloy De Cort — Senior Technical Audio Engineer &amp; Audio Programmer">
+<meta property="og:description" content="Games shipped: Atlas Fallen: Reign of Sand (Deck13), Arma Reforger &amp; Enfusion Engine (Bohemia Interactive). 游戏音频技术方向，可赴中国工作。">
+<meta property="og:image" content="https://eloydecort.github.io/images/banner.jpg">
+<meta property="og:url" content="https://eloydecort.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#07090C">
+
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/prism.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Eloy De Cort",
+  "jobTitle": "Senior Technical Audio Engineer & Audio Programmer",
+  "email": "mailto:eloy.decort@gmail.com",
+  "url": "https://eloydecort.github.io/",
+  "image": "https://eloydecort.github.io/images/profile.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Wuppertal",
+    "addressCountry": "DE"
+  },
+  "worksFor": { "@type": "Organization", "name": "Deck13 Interactive" },
+  "founderOf": { "@type": "Organization", "name": "Dracortia", "url": "https://dracortia.com" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Howest — Digital Arts and Entertainment" },
+  "knowsLanguage": ["en", "nl", "fr"],
+  "knowsAbout": ["Game audio", "Audio programming", "FMOD", "Wwise", "C++", "Unreal Engine", "Audio engine architecture"],
+  "sameAs": [
+    "https://www.linkedin.com/in/eloydecort/",
+    "https://github.com/EloyDeCort",
+    "https://dracortia.com"
+  ]
+}
 </script>
-
-
-   <!--- basic page needs
-   ================================================== -->
-   <meta charset="utf-8">
-	<title>Eloy De Cort - Audio Programmer</title>
-	<meta name="description" content="Eloy De Cort - Audio Programmer">  
-	<meta name="author" content="Eloy De Cort">
-
-   <!-- mobile specific metas
-   ================================================== -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=4, user-scalable=yes">
-
- 	<!-- CSS
-   ================================================== -->
-   <link rel="stylesheet" href="css/base.css">  
-   <link rel="stylesheet" href="css/main.css">
-   <link rel="stylesheet" href="css/vendor.css">     
-   <link rel="stylesheet" href="css/prism.css">     
-   <link rel="stylesheet" href="css/Chart.min.css">     
-   <!-- script
-	================================================== -->   
-	<script src="js/modernizr.js"></script>
-	<script src="js/pace.min.js"></script>
-	<script src="js/Chart.min.js"></script>
-
-   <!-- favicons
-	================================================== -->
-	<link rel="icon" type="image/png" href="favicon.ico">
-
 </head>
 
 <body id="top">
 
-	<!-- header 
-   ================================================== -->
-   <header>   	
-   	<div class="row">
+<a class="skip-link" href="#main">
+  <span class="l-en">Skip to content</span><span class="l-zh">跳到主要内容</span>
+</a>
 
-   		<div class="top-bar">
-   			<a class="menu-toggle" href="#"><span>Menu</span></a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-	   		<div class="logo">
-				 <a href="index.html"><p>ELOY DE CORT</p></a>	
-			  </div>		   
-			
+<!-- ==================================================================
+     HEADER
+     ================================================================== -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
 
-		   	<nav id="main-nav-wrap">
-					<ul class="main-navigation">
-						<li class="current"><a class="smoothscroll"  href="#intro" title="">Home</a></li>
-						<li><a class="smoothscroll"  href="#about" title="">About</a></li>
-						<li><a class="smoothscroll"  href="#resume" title="">Experience</a></li>
-						<li><a class="smoothscroll"  href="#portfolio" title="">Portfolio</a></li>	
-						<li><a class="smoothscroll"  href="#contact" title="">Contact</a></li>
-					</ul>
-				</nav>    		
-   		</div> <!-- /top-bar --> 
-   		
-   	</div> <!-- /row --> 		
-   </header> <!-- /header -->
+    <a class="brand" href="#top" aria-label="Eloy De Cort — home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" role="presentation">
+          <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="9" stroke="currentColor" stroke-width="1.5" opacity=".45"/>
+          <rect x="9"  y="13" width="2.6" height="6"  rx="1.3" fill="currentColor"/>
+          <rect x="14.7" y="8" width="2.6" height="16" rx="1.3" fill="currentColor"/>
+          <rect x="20.4" y="11" width="2.6" height="10" rx="1.3" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">Eloy De Cort</span>
+        <span class="brand-role">
+          <span class="l-en">Technical Audio Engineer</span>
+          <span class="l-zh">技术音频工程师</span>
+        </span>
+      </span>
+    </a>
 
-	<!-- intro section
-   ================================================== -->
-   <section id="intro">   
+    <nav class="nav" id="primaryNav" aria-label="Main navigation">
+      <a href="#work"><span class="l-en">Work</span><span class="l-zh">作品</span></a>
+      <a href="#about"><span class="l-en">About</span><span class="l-zh">关于</span></a>
+      <a href="#experience"><span class="l-en">Experience</span><span class="l-zh">经历</span></a>
+      <a href="#skills"><span class="l-en">Skills</span><span class="l-zh">技能</span></a>
+      <a href="#contact"><span class="l-en">Contact</span><span class="l-zh">联系</span></a>
+      <a class="nav-cv" href="Resume%20-%20Eloy%20De%20Cort%20-%20Senior%20Audio%20Programmer.pdf" download>
+        <span class="l-en">CV</span><span class="l-zh">简历</span>
+      </a>
+    </nav>
 
-   	<div class="intro-overlay"></div>	
+    <div class="header-actions">
+      <button class="lang-switch" id="langSwitch" type="button" aria-label="Switch language between English and Chinese">
+        <span class="lang-opt" data-lang-opt="en">EN</span>
+        <span class="lang-opt" data-lang-opt="zh">中文</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
 
-   	<div class="intro-content">
-   		<div class="row">
-   			<div class="col-twelve">
+  </div>
+</header>
 
-	   			<h1>ELOY DE CORT</h1>
+<main id="main">
 
-	   			<p class="intro-position">
-					<span>Technical Sound Designer</span>
-					<span>Audio Programmer</span>
-	   			</p>
+<!-- ==================================================================
+     HERO
+     ================================================================== -->
+<section class="hero" id="hero">
 
-	   			<a class="button stroke smoothscroll" href="#about" title="">About Me</a>
-				<a class="button stroke smoothscroll" href="#portfolio" title="">Portfolio</a>
-				<a href="Resume - Eloy De Cort - Technical Audio Designer.pdf" title="Download Resume" class="button stroke"  target="_blank">Resume</a>
-			   </div>  
-			   
-   			
-   		</div>   		 		
-   	</div> <!-- /intro-content --> 
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" role="presentation">
+      <path d="M0 60 H140 L160 60 170 34 180 86 190 60 H340 L358 60 368 18 378 102 388 60 H540 L556 60 566 40 576 80 586 60 H760 L778 60 788 26 798 94 808 60 H980 L998 60 1008 44 1018 76 1028 60 H1200"
+            fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+  </div>
 
-   	<ul class="intro-social">        
-         <li><a href="https://www.linkedin.com/in/eloydecort/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-         <li><a href="mailto:eloy.decort@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
-         <li><a href="https://github.com/EloyDeCort" target="_blank"><i class="fa fa-github"></i></a></li>
-      </ul> <!-- /intro-social -->      	
+  <div class="wrap hero-inner">
 
-   </section> <!-- /intro -->
+    <p class="hero-badge">
+      <span class="pulse" aria-hidden="true"></span>
+      <span class="l-en">Wuppertal, Germany&nbsp;·&nbsp;open to relocation to China</span>
+      <span class="l-zh">德国 伍珀塔尔 · 可赴中国工作</span>
+    </p>
 
-	<!-- Portfolio Section
-   ================================================== -->
-   <section id="portfolio">
+    <h1 class="hero-title">
+      <span class="hero-title-line">Eloy</span>
+      <span class="hero-title-line">De Cort</span>
+    </h1>
 
- <!-- STILL IN DEVELOPMENT SECTION --> 
- <div class="row section-intro">
-	<div class="col-twelve">
-				<h5>Portfolio</h5>
-			   <h1>Professional Projects</h1>
-	
-			   <p class="lead">Released projects that I've contributed to.<br><span>Click on the images for more details.</span></p>
-	
-		   </div>   		
-	   </div> <!-- /section-intro--> 
-	
-	   <div class="row portfolio-content">
-		
-		   <div class="col-twelve tab-full">
-			
-	   <!-- portfolio-wrapper -->
-	   <div id="folio-wrapper" class="block-1-1 block-mob-1-1 stack">
+    <p class="hero-role">
+      <span class="l-en">Senior Technical Audio Engineer<span class="sep">/</span>Audio Programmer</span>
+      <span class="l-zh">资深技术音频工程师<span class="sep">/</span>音频程序开发</span>
+    </p>
 
-		<div class="bgrid folio-item">
-			<div class="item-wrap">
-				<img src="images/portfolio/AtlasFallen/AtlasFallen2.jpg" alt="Enfusion Engine">
-			   <a href="#modal-01" class="overlay">	                  	           
-				  <div class="folio-item-table">
-					  <div class="folio-item-cell">
-								 <h3 class="folio-title">Atlas Fallen</h3>	     					    
-								   <span class="folio-types">
-									   Technical Audio Design<br>
-									   Proprietary Engine<br>
-									   C++ & Node Editor
-								 </span>
-								 
-							 </div>	                      	
-				  </div>                    
-			   </a>
-			   <!-- <p class="folio-text">DEADBEAT is a fast paced, rhythm-based local multiplayer action game in which 2 to 4 players battle each other to be the last one standing. 
-				 Dodge traps, use abilities and become the victor of this rhythm trial!</p> -->
-			</div>	               
-			 </div> <!-- /folio-item -->
+    <p class="hero-lede">
+      <span class="l-en">I own all technical audio at <strong>Deck13</strong>, and previously built audio engine &amp; editor systems at <strong>Bohemia Interactive</strong> for <em>Arma Reforger</em> and the <em>Enfusion Engine</em>.</span>
+      <span class="l-zh">现于 <strong>Deck13</strong> 负责全部技术音频，此前在 <strong>波希米亚互动</strong> 参与《武装突袭 Reforger》与 Enfusion 引擎的音频引擎及编辑器开发。</span>
+    </p>
 
-	 </div> <!-- /portfolio-wrapper --> 
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#work">
+        <span class="l-en">View selected work</span><span class="l-zh">查看精选作品</span>
+        <svg class="btn-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="Resume%20-%20Eloy%20De%20Cort%20-%20Senior%20Audio%20Programmer.pdf" download>
+        <svg class="btn-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 7 8 10.5 11.5 7M2.5 13.5h11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="l-en">Download CV</span><span class="l-zh">下载简历</span>
+      </a>
+    </div>
 
-	
-			   <!-- portfolio-wrapper -->
-			 <div id="folio-wrapper" class="block-1-2 block-mob-1-3 stack">
+    <ul class="hero-social" aria-label="Elsewhere">
+      <li><a href="https://www.linkedin.com/in/eloydecort/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+      <li><a href="https://github.com/EloyDeCort" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+      <li><a href="https://dracortia.com" target="_blank" rel="noopener" aria-label="Dracortia"><i class="fa fa-volume-up" aria-hidden="true"></i></a></li>
+      <li><a href="mailto:eloy.decort@gmail.com" aria-label="Email"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+    </ul>
 
-				<div class="bgrid folio-item">
-					<div class="item-wrap">
-						<img src="images/portfolio/Enfusion/Enfusion1.jpg" alt="Enfusion Engine">
-					   <a href="#modal-20" class="overlay">	                  	           
-						  <div class="folio-item-table">
-							  <div class="folio-item-cell">
-										 <h3 class="folio-title">Enfusion Engine</h3>	     					    
-										   <span class="folio-types">
-											   C++<br>
-											   Audio Programming<br>
-											   Proprietary Engine
-										 </span>
-										 
-									 </div>	                      	
-						  </div>                    
-					   </a>
-					   <!-- <p class="folio-text">DEADBEAT is a fast paced, rhythm-based local multiplayer action game in which 2 to 4 players battle each other to be the last one standing. 
-						 Dodge traps, use abilities and become the victor of this rhythm trial!</p> -->
-					</div>	               
-					 </div> <!-- /folio-item -->
+  </div>
 
-					 <div class="bgrid folio-item">
-						<div class="item-wrap">
-							<img src="images/portfolio/ArmaReforger/Reforger0.jpg" alt="Arma Reforger">
-						   <a href="#modal-21" class="overlay">	                  	           
-							  <div class="folio-item-table">
-								  <div class="folio-item-cell">
-											 <h3 class="folio-title">Arma Reforger</h3>	     					    
-											   <span class="folio-types">
-												   C++<br>
-												   Audio Programming<br>
-												   Proprietary Engine
-											 </span>
-											 
-										 </div>	                      	
-							  </div>                    
-						   </a>
-						   <!-- <p class="folio-text">DEADBEAT is a fast paced, rhythm-based local multiplayer action game in which 2 to 4 players battle each other to be the last one standing. 
-							 Dodge traps, use abilities and become the victor of this rhythm trial!</p> -->
-						</div>	               
-						 </div> <!-- /folio-item -->
-	
-			 </div> <!-- /portfolio-wrapper --> 
-	
-		   </div>  <!-- /twelve -->   
-	
-	   </div> <!-- /portfolio-content --> 
-	   <br>
-	   <br>
+  <a class="hero-scroll" href="#work" aria-label="Scroll to work"><span></span></a>
+</section>
 
-			<div class="row section-intro">
-				<div class="col-twelve">
-		 
-					<h1>Dracortia</h1>
-					<p class="lead">Sound Design & Composing for Indie Studios.</span></p>
-					<a href="https://dracortia.com" target="_blank"><span>Go to company website</span></a>
-				</div>   		
-			</div> <!-- /section-intro--> 
+<!-- ==================================================================
+     STATS BAND
+     ================================================================== -->
+<section class="stats-band" aria-label="At a glance">
+  <div class="wrap stats-inner">
+    <div class="stat">
+      <span class="stat-num">5<span class="stat-plus">+</span></span>
+      <span class="stat-label"><span class="l-en">Years in game audio</span><span class="l-zh">年游戏音频经验</span></span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">2</span>
+      <span class="stat-label"><span class="l-en">Released titles</span><span class="l-zh">已发行作品</span></span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">2</span>
+      <span class="stat-label"><span class="l-en">Proprietary engines</span><span class="l-zh">深度参与自研引擎</span></span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">5</span>
+      <span class="stat-label"><span class="l-en">Indie titles via Dracortia</span><span class="l-zh">Dracortia 合作独立游戏</span></span>
+    </div>
+  </div>
+</section>
 
-	<div class="row section-intro">
-	   <div class="col-twelve">
+<!-- credits marquee -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-group">
+      <span>Atlas Fallen</span><span class="dot">◆</span>
+      <span>Arma Reforger</span><span class="dot">◆</span>
+      <span>Enfusion Engine</span><span class="dot">◆</span>
+      <span>FLEDGE Engine</span><span class="dot">◆</span>
+      <span>Dracortia</span><span class="dot">◆</span>
+    </div>
+    <div class="marquee-group">
+      <span>Atlas Fallen</span><span class="dot">◆</span>
+      <span>Arma Reforger</span><span class="dot">◆</span>
+      <span>Enfusion Engine</span><span class="dot">◆</span>
+      <span>FLEDGE Engine</span><span class="dot">◆</span>
+      <span>Dracortia</span><span class="dot">◆</span>
+    </div>
+  </div>
+</div>
 
-		   <h1>Other Projects</h1>
+<!-- ==================================================================
+     WORK
+     ================================================================== -->
+<section class="section" id="work">
+  <div class="wrap">
 
-		   <p class="lead">Personal (old) projects I've worked on.<br><span>Click on the images for details & code samples.</span></p>
+    <div class="sec-head reveal">
+      <p class="sec-kicker">
+        <span class="k-idx">01</span>
+        <span class="l-en">Selected work</span><span class="l-zh">精选作品</span>
+      </p>
+      <h2 class="sec-title">
+        <span class="l-en">Two released games.<br>Two proprietary engines.</span>
+        <span class="l-zh">两款发行作品，<br>两套自研引擎。</span>
+      </h2>
+      <p class="sec-lede">
+        <span class="l-en">Audio implementation, engine tooling and debugging on shipped commercial titles. Select a project for the full breakdown.</span>
+        <span class="l-zh">商业发行项目中的音频实现、引擎工具与调试工作。点击项目查看完整说明。</span>
+      </p>
+    </div>
 
-	   </div>   		
-   </div> <!-- /section-intro--> 
+    <div class="work-grid">
 
+      <!-- ATLAS FALLEN — feature card -->
+      <a class="card card-feature reveal" href="#modal-atlas" data-modal="modal-atlas">
+        <div class="card-media">
+          <img src="images/portfolio/AtlasFallen/AtlasFallen2.jpg" alt="Atlas Fallen: Reign of Sand key art — a warrior facing a colossal sand creature" loading="eager" decoding="async">
+        </div>
+        <div class="card-body">
+          <p class="card-meta">
+            <span class="card-studio">Deck13</span>
+            <span class="card-dot">·</span>
+            <span class="card-years">2023 — Present</span>
+          </p>
+          <h3 class="card-title">Atlas Fallen<span class="card-title-sub">Reign of Sand</span></h3>
+          <p class="card-summary">
+            <span class="l-en">Owned every technical audio task on the <em>Reign of Sand</em> release — FMOD integration, engine-side systems and debugging inside the FLEDGE engine.</span>
+            <span class="l-zh">在《尘封大陆》资料片《Reign of Sand》中负责全部技术音频：FMOD 集成、引擎侧系统与 FLEDGE 引擎内的音频调试。</span>
+          </p>
+          <div class="chips">
+            <span class="chip">FMOD</span><span class="chip">FLEDGE Engine</span><span class="chip">C++</span><span class="chip">Unreal Engine</span>
+          </div>
+          <span class="card-more"><span class="l-en">Open case study</span><span class="l-zh">查看详情</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
 
-   <div class="row portfolio-content">
-	
-	   <div class="col-twelve tab-full">
+      <!-- ARMA REFORGER -->
+      <a class="card reveal" href="#modal-reforger" data-modal="modal-reforger">
+        <div class="card-media">
+          <img src="images/portfolio/ArmaReforger/Reforger.jpg" alt="Arma Reforger key art — Soviet airborne troops and an armoured vehicle in the rain" loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <p class="card-meta">
+            <span class="card-studio">Bohemia Interactive</span>
+            <span class="card-dot">·</span>
+            <span class="card-years">2021 — 2023</span>
+          </p>
+          <h3 class="card-title">Arma Reforger</h3>
+          <p class="card-summary">
+            <span class="l-en">Most gameplay-to-sound connections in a large open world: weapons, vehicles, interior detection, music management and multiplayer radios.</span>
+            <span class="l-zh">在大型开放世界中承担大部分“玩法—声音”连接：武器、载具、室内检测、音乐管理与多人同步无线电。</span>
+          </p>
+          <div class="chips">
+            <span class="chip">C++</span><span class="chip">Enfusion Engine</span><span class="chip">Multiplayer</span><span class="chip">Microsoft GDK</span>
+          </div>
+          <span class="card-more"><span class="l-en">Open case study</span><span class="l-zh">查看详情</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
 
-		   <!-- portfolio-wrapper -->
-		 <div id="folio-wrapper" class="block-1-2 block-mob-full stack ">
+      <!-- ENFUSION ENGINE -->
+      <a class="card reveal" href="#modal-enfusion" data-modal="modal-enfusion">
+        <div class="card-media">
+          <img src="images/portfolio/Enfusion/Enfusion2.jpg" alt="The Enfusion Engine signals editor — a node graph driving audio parameters from in-game values" loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <p class="card-meta">
+            <span class="card-studio">Bohemia Interactive</span>
+            <span class="card-dot">·</span>
+            <span class="card-years">2021 — 2023</span>
+          </p>
+          <h3 class="card-title">Enfusion Engine<span class="card-title-sub">Audio editor &amp; audio engine</span></h3>
+          <p class="card-summary">
+            <span class="l-en">Owned the signals editor — a node-based system that evaluates in-game values and drives mathematical expressions directly on audio.</span>
+            <span class="l-zh">主导信号编辑器：以节点方式对游戏内实时数值求值，并在音频上完成数学运算的自研系统。</span>
+          </p>
+          <div class="chips">
+            <span class="chip">C++</span><span class="chip">Qt</span><span class="chip">Audio Engine</span><span class="chip">Tooling</span>
+          </div>
+          <span class="card-more"><span class="l-en">Open case study</span><span class="l-zh">查看详情</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
 
-			<div class="bgrid folio-item">
-				<div class="item-wrap">
-					<img src="images/portfolio/Mythifood/Mythifood1.jpg" alt="Mythifood">
-				   <a href="#modal-22" class="overlay">	                  	           
-					  <div class="folio-item-table">
-						  <div class="folio-item-cell">
-								<h3 class="folio-title">Mythifood Adventure</h3>	  				    
-								<span class="folio-types">
-									C++<br>
-									Unreal Engine<br>
-									Wwise
-							</span>	
-									 
-								 </div>	                      	
-					  </div>                    
-				   </a>
-			
-				</div>	               
-				 </div> <!-- /folio-item -->
+    </div>
 
+    <!-- DRACORTIA strip -->
+    <div class="dracortia reveal">
+      <div class="dracortia-main">
+        <p class="sec-kicker"><span class="k-idx">＋</span><span class="l-en">Independent studio</span><span class="l-zh">独立工作室</span></p>
+        <h3 class="dracortia-title">Dracortia</h3>
+        <p class="dracortia-sub">
+          <span class="l-en">Founded to support indie teams with music and audio — sound design, composition and audio implementation.</span>
+          <span class="l-zh">创办 Dracortia，为独立游戏团队提供音乐与音频支持：音效设计、配乐与音频实现。</span>
+        </p>
+      </div>
+      <div class="dracortia-side">
+        <ul class="title-chips" aria-label="Dracortia titles">
+          <li>Drova2</li><li>Bloodfell</li><li>Soul Spires: Initium</li><li>Rogue Slime</li><li>Carlbox</li>
+        </ul>
+        <a class="btn btn-ghost btn-sm" href="https://dracortia.com" target="_blank" rel="noopener">
+          <span class="l-en">dracortia.com</span><span class="l-zh">访问 dracortia.com</span>
+          <svg class="btn-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3h7v7M13 3 4 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
 
-			<div class="bgrid folio-item">
-				<div class="item-wrap">
-					<img src="images/portfolio/Eggers/Eggers_1.jpg" alt="Eggers">
-				   <a href="#modal-10" class="overlay">	                  	           
-					  <div class="folio-item-table">
-						  <div class="folio-item-cell">
-									 <h3 class="folio-title">Eggers</h3>	     					    
-									   <span class="folio-types">
-										   C++ & Blueprints<br>
-										   Unreal Engine<br>
-										   Twitch API
-									 </span>
-									 
-								 </div>	                      	
-					  </div>                    
-				   </a>
-				   <!-- <p class="folio-text">DEADBEAT is a fast paced, rhythm-based local multiplayer action game in which 2 to 4 players battle each other to be the last one standing. 
-					 Dodge traps, use abilities and become the victor of this rhythm trial!</p> -->
-				</div>	               
-				 </div> <!-- /folio-item -->
-			</div>				
-			<!-- portfolio-wrapper END -->
-			<br>
-			<br>
-				 
-			<!-- modal popups - begin
-			============================================================= -->
-			<div id="modal-01" class="popup-modal slider mfp-hide">	
-				<div class="owl-carousel owl-portfolio">
-					<!-- Video of Arma Reforger -->
-						<div class="fluid-video-wrapper">
-							<div class="fluid-width-video-wrapper" style="padding-top: 54.0%;">    
-								<iframe
-								style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
-								src="https://tube.rvere.com/embed?v=0DFm6TolJY4"
-								title="YouTube video player"
-								frameBorder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen>
-							</iframe></div> 
-						</div>
+    <!-- OTHER WORK -->
+    <div class="sub-head reveal">
+      <h3>
+        <span class="l-en">Also built</span><span class="l-zh">其他项目</span>
+      </h3>
+      <p>
+        <span class="l-en">Personal and group projects — with code samples.</span>
+        <span class="l-zh">个人与团队项目，附代码示例。</span>
+      </p>
+    </div>
 
-						<img src="images/portfolio/AtlasFallen/AtlasFallen0.jpg" alt="" />
-						<img src="images/portfolio/AtlasFallen/AtlasFallen1.jpg" alt="" />
-				</div>     	 
-			
-				   <div class="description-box">
-					  <h4>Atlas Fallen & FLEDGE Engine</h4>	
-					  <p>Release of the Atlas Fallen DLC / Free Update "Reign Of Sand".
-						<br>Tok care mostly of sound implementation using FMOD, and sound debugging in our proprietary engine "FLEDGE".
-						<br>First time in the project more than 1 audio team member, workflows were established.
-					</p>	      
-					  <lu>
-						<li>Enhancing of existing and creating new workflows to have a smooth audio workflow.</li>
-						<li>Implementation of sounds and designing placeholders.</li>
-						<li>Adapting to new audio tools in a new engine with unique tools and own 'blueprint' language.</li>
-					  </lu>
-					  <br>
-					  <div class="categories">
-							Technical Audio Design / Proprietary Engine / C++ & Node Editor
-					  </div>			               
-				   </div>
+    <div class="work-grid work-grid-2">
 
-				 <div class="link-box">
-					<a href="https://enfusionengine.com/" target="_blank">Website</a>
-					  <a href="#" class="popup-modal-dismiss">Close</a>
-				 </div>		      
-			   </div> <!-- /modal-01 -->
+      <a class="card reveal" href="#modal-mythifood" data-modal="modal-mythifood">
+        <div class="card-media">
+          <img src="images/portfolio/Mythifood/Mythifood1.jpg" alt="Mythifood Adventure — cartoon food creatures in a forest" loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <p class="card-meta">
+            <span class="card-studio">Group project</span>
+            <span class="card-dot">·</span>
+            <span class="card-years">Unreal Engine</span>
+          </p>
+          <h3 class="card-title">Mythifood Adventure</h3>
+          <p class="card-summary">
+            <span class="l-en">Wwise and Unreal Engine integration, material-driven sound selection and an original soundtrack written from scratch.</span>
+            <span class="l-zh">Wwise 与 Unreal Engine 集成，基于材质的音效选择，并从零创作完整原声配乐。</span>
+          </p>
+          <div class="chips"><span class="chip">Wwise</span><span class="chip">Unreal Engine</span><span class="chip">C++</span></div>
+          <span class="card-more"><span class="l-en">Open details</span><span class="l-zh">查看详情</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
 
-			<div id="modal-20" class="popup-modal slider mfp-hide">	
-				<div class="owl-carousel owl-portfolio">
-					<!-- Video of Arma Reforger -->
-						<div class="fluid-video-wrapper">
-							<div class="fluid-width-video-wrapper" style="padding-top: 54.0%;">    
-								<iframe
-								style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
-								src="https://tube.rvere.com/embed?v=6oeDRd_TQcQ"
-								title="YouTube video player"
-								frameBorder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen>
-							</iframe></div> 
-						</div>
+      <a class="card reveal" href="#modal-eggers" data-modal="modal-eggers">
+        <div class="card-media">
+          <img src="images/portfolio/Eggers/Eggers-card.jpg" alt="Eggers — a Twitch chat driven party game" loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <p class="card-meta">
+            <span class="card-studio">Personal project</span>
+            <span class="card-dot">·</span>
+            <span class="card-years">Twitch API</span>
+          </p>
+          <h3 class="card-title">Eggers<span class="card-title-sub">Twitch chat game</span></h3>
+          <p class="card-summary">
+            <span class="l-en">A fan game for streamer Mizkif driven entirely by chat commands — 500+ concurrent players over a raw IRC socket.</span>
+            <span class="l-zh">为主播 Mizkif 制作的聊天室驱动同人游戏：通过原生 IRC 连接同时承载 500+ 名观众玩家。</span>
+          </p>
+          <div class="chips"><span class="chip">C++ / Blueprints</span><span class="chip">Twitch IRC</span><span class="chip">UMG</span></div>
+          <span class="card-more"><span class="l-en">Open details &amp; code</span><span class="l-zh">查看详情与代码</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
 
-						<img src="images/portfolio/Enfusion/Enfusion2.jpg" alt="" />
-						<img src="images/portfolio/Enfusion/Enfusion3.jpg" alt="" />
-						<img src="images/portfolio/Enfusion/Enfusion4.jpg" alt="" />
+    </div>
 
-				</div>     	 
-			
-				   <div class="description-box">
-					  <h4>Enfusion Engine</h4>	
-					  <p>In the Enfusion Engine, I work mostly on Audio Editor & Audio Engine. 
-						<br>I have ownership over the signals editor, which works directly with audio to evaluate in-game values (such as material IDs) and do mathematical expression in node form on them.
-						<br>I also make a variety of debugging tools and improve the user experience for modders and audio designers on a daily basis.
-					</p>	      
-					  <lu>
-						<li>Enhancing of UI/UX using the QT framework.</li>
-						<li>Implementation and design of new debugging tools for audio.</li>
-						<li>Feedback-driven feature development.</li>
-					  </lu>
-					  <br>
-					  <div class="categories">
-						  C++ / Audio Programming / Proprietary Engine 
-					  </div>			               
-				   </div>
+  </div>
+</section>
 
-				 <div class="link-box">
-					<a href="https://enfusionengine.com/" target="_blank">Website</a>
-					  <a href="#" class="popup-modal-dismiss">Close</a>
-				 </div>		      
-			   </div> <!-- /modal-20 -->
+<!-- ==================================================================
+     ABOUT
+     ================================================================== -->
+<section class="section section-alt" id="about">
+  <div class="wrap">
 
-			   <div id="modal-21" class="popup-modal slider mfp-hide">	
-				<div class="owl-carousel owl-portfolio">
-					<!-- Video of Enfusion Engine -->
-						<div class="fluid-video-wrapper">
-							<div class="fluid-width-video-wrapper" style="padding-top: 54.0%;">  
-								<iframe
-								style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
-								src="https://tube.rvere.com/embed?v=AIervYhiEZ8"
-								title="YouTube video player"
-								frameBorder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen>
-							</iframe></div> 
-						</div>
+    <div class="sec-head reveal">
+      <p class="sec-kicker">
+        <span class="k-idx">02</span>
+        <span class="l-en">About</span><span class="l-zh">关于我</span>
+      </p>
+      <h2 class="sec-title">
+        <span class="l-en">I turn sound design into systems that run.</span>
+        <span class="l-zh">我把声音设计，变成真正跑得起来的系统。</span>
+      </h2>
+    </div>
 
-						<img src="images/portfolio/ArmaReforger/ReforgerScreen1.jpg" alt="" />
-						<img src="images/portfolio/ArmaReforger/ReforgerScreen2.jpg" alt="" />
-						<img src="images/portfolio/ArmaReforger/ReforgerScreen3.jpg" alt="" />
+    <div class="about-grid">
 
-				</div>     	 
-			
-				   <div class="description-box">
-					  <h4>Arma Reforger</h4>		   
-					    <p>My work on Arma Reforger consists of a variety of things. I was responsible for most of the sound to gameplay connections, such as weapon interactions, vehicles, etc...
-							<br>Amongst a lot of other things, My responsbilities include implementing music managing systems, new in-game debugging tools, a multiplayer synchronized radio system and working on interior detection.
-						</p>
-					  <lu>
-						<li>Releasing of an early-access game and continuously updating it for its release.</li> 
-						<li>Budgeting of audio in a large scale open-world environment.</li>
-						<li>Multiplayer audio implementations and debugging.</li>
-						<li>Deep understanding of connecting audio to gameplay.</li>
-						<li>Preparing a solid foundation for the future game 'Arma 4'.</li>
-						</lu>
-						  <br>
-					  <div class="categories">
-						C++ / Audio Programming / Proprietary Engine 
-					  </div>			               
-				   </div>
+      <aside class="about-card reveal">
+        <div class="about-photo">
+          <img src="images/profile-560.jpg" alt="Portrait of Eloy De Cort" loading="lazy" decoding="async" width="560" height="560">
+        </div>
+        <div class="about-card-body">
+          <p class="about-name">Eloy De Cort</p>
+          <p class="about-role"><span class="l-en">Senior Technical Audio Engineer · Audio Programmer</span><span class="l-zh">资深技术音频工程师 · 音频程序开发</span></p>
+          <ul class="fact-list">
+            <li>
+              <span class="fact-k"><span class="l-en">Based in</span><span class="l-zh">所在地</span></span>
+              <span class="fact-v">Wuppertal, Germany<span class="fact-note"><span class="l-en">North Rhine-Westphalia</span><span class="l-zh">北莱茵-威斯特法伦州</span></span></span>
+            </li>
+            <li>
+              <span class="fact-k"><span class="l-en">Timezone</span><span class="l-zh">时区</span></span>
+              <span class="fact-v">CET / UTC+1 <span class="fact-note"><span class="l-en">7h behind Beijing</span><span class="l-zh">比北京时间晚 7 小时</span></span></span>
+            </li>
+            <li>
+              <span class="fact-k"><span class="l-en">Languages</span><span class="l-zh">语言</span></span>
+              <span class="fact-v">
+                <span class="l-en">English (fluent), Dutch (native), French (elementary)</span>
+                <span class="l-zh">英语（精通）、荷兰语（母语）、法语（基础）</span>
+              </span>
+            </li>
+            <li>
+              <span class="fact-k"><span class="l-en">Now at</span><span class="l-zh">现任</span></span>
+              <span class="fact-v">Deck13 Interactive</span>
+            </li>
+            <li>
+              <span class="fact-k"><span class="l-en">Born</span><span class="l-zh">出生</span></span>
+              <span class="fact-v">29 Feb 2000<span class="fact-note"><span class="l-en">Belgium</span><span class="l-zh">比利时</span></span></span>
+            </li>
+          </ul>
+        </div>
+      </aside>
 
-				 <div class="link-box">
-					<a href="https://reforger.armaplatform.com/" target="_blank">Website</a>
-					  <a href="#" class="popup-modal-dismiss">Close</a>
-				 </div>		      
-	  
+      <div class="about-main reveal">
+        <div class="prose">
+          <p class="prose-lead">
+            <span class="l-en">Hello — I'm Eloy. I'm a technical audio engineer and audio programmer from Belgium, now living in Germany.</span>
+            <span class="l-zh">你好，我是 Eloy。我是一名来自比利时的技术音频工程师与音频程序，现居德国。</span>
+          </p>
+          <p>
+            <span class="l-en">I've been programming and making music since I was a kid, and game audio is where those two things became one job: writing the C++ and the tools that let sound actually react to what a player does. Today I own all technical audio at <strong>Deck13</strong>; before that I worked on the audio engine and editor of the <strong>Enfusion Engine</strong> and on <em>Arma Reforger</em> at <strong>Bohemia Interactive</strong>.</span>
+            <span class="l-zh">我从小同时学习编程与音乐，游戏音频正是这两件事交汇成职业的地方：用 C++ 写引擎侧代码与工具，让声音真正对玩家的行为做出反应。目前在 <strong>Deck13</strong> 负责全部技术音频；此前在 <strong>波希米亚互动</strong> 参与 Enfusion 引擎音频系统与编辑器，以及《武装突袭 Reforger》的开发。</span>
+          </p>
+          <p>
+            <span class="l-en">What I care about most is the experience on the other side of the speakers: audio that is immersive, readable in gameplay terms, and cheap enough to keep running when the world gets loud.</span>
+            <span class="l-zh">我最在意的是玩家最终听到的体验：声音既要沉浸，也要在玩法上清晰可读，还要在大世界最吵闹的时候依然稳定高效。</span>
+          </p>
+        </div>
 
-			   </div> <!-- /modal-21 -->
+        <div class="focus-grid">
+          <div class="focus">
+            <span class="focus-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 12h3l2-6 3 12 3-9 2 3h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h4><span class="l-en">Adaptive &amp; procedural audio</span><span class="l-zh">自适应与程序化音频</span></h4>
+            <p><span class="l-en">Real-time parameters, adaptive reverb, combat music that reacts to intensity.</span><span class="l-zh">实时参数、自适应混响，以及随战斗强度变化的动态音乐。</span></p>
+          </div>
+          <div class="focus">
+            <span class="focus-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18M7.5 13h5M7.5 16.5h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <h4><span class="l-en">Engine-level audio systems</span><span class="l-zh">引擎级音频系统</span></h4>
+            <p><span class="l-en">Interior detection, music management, synchronised multiplayer radio, oscillation &amp; signals.</span><span class="l-zh">室内外检测、音乐管理、多人同步无线电、振荡器与信号系统。</span></p>
+          </div>
+          <div class="focus">
+            <span class="focus-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M14.5 3.5a4.9 4.9 0 0 0-6.9 6L3 14.1V21h6.9l4.6-4.6a4.9 4.9 0 0 0 6-6.9L17 13l-3-3 3.5-3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h4><span class="l-en">Audio tooling &amp; debugging</span><span class="l-zh">音频工具与调试</span></h4>
+            <p><span class="l-en">In-house debug tools, editor UX in Qt, Slate and ImGui — so issues get found fast.</span><span class="l-zh">基于 Qt、Slate 与 ImGui 的引擎内调试工具与编辑器体验，让问题更快被定位。</span></p>
+          </div>
+          <div class="focus">
+            <span class="focus-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8.5" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="15.5" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M2.5 21c0-3 2.5-5.5 5.5-5.5M21.5 8c0 3-2.5 5.5-5.5 5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <h4><span class="l-en">Workflow &amp; cross-discipline</span><span class="l-zh">工作流与跨部门协作</span></h4>
+            <p><span class="l-en">Building the pipeline between audio, design and engineering — and keeping it fast.</span><span class="l-zh">在音频、设计与工程之间搭建并维护高效的制作流水线。</span></p>
+          </div>
+        </div>
+      </div>
 
-			   <div id="modal-22" class="popup-modal slider mfp-hide">	
-				<div class="owl-carousel owl-portfolio">
-					<!-- Video of Mythifood -->
-						<div class="fluid-video-wrapper">
-							<div class="fluid-width-video-wrapper" style="padding-top: 54.0%;">   
-								<iframe
-								style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
-								src="https://tube.rvere.com/embed?v=34f9UtjCJ8s"
-								title="YouTube video player"
-								frameBorder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen>
-							</iframe></div> 
-						</div>
+    </div>
+  </div>
+</section>
 
-						<div class="fluid-video-wrapper">
-							<div class="fluid-width-video-wrapper" style="padding-top: 54.0%;">
-								<iframe
-								style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
-								src="https://tube.rvere.com/embed?v=_7DqKuo1iQ4"
-								title="YouTube video player"
-								frameBorder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen>
-							</iframe></div> 
-						</div>
-						<img src="images/portfolio/Mythifood/Mythifood2.jpg" alt="" />
-						<img src="images/portfolio/Mythifood/Mythifood3.jpg" alt="" />
-						<img src="images/portfolio/Mythifood/Mythifood4.jpg" alt="" />
+<!-- ==================================================================
+     EXPERIENCE
+     ================================================================== -->
+<section class="section" id="experience">
+  <div class="wrap">
 
-				</div>     	 
-			
-				   <div class="description-box">
-					  <h4>Mythifood Adventure</h4>		   
-					     
-					  <p>Chef Pierre and his assistant Alain are cooks in a very sought-after tavern deep within a mythical forest. Together they are tasked with the difficult mission to provide your customers with the wildest and freshest meal you can procure. You must gather these ingredients from the mythically possessed food creatures that inhabit the areas around your tavern. 
+    <div class="sec-head reveal">
+      <p class="sec-kicker">
+        <span class="k-idx">03</span>
+        <span class="l-en">Experience</span><span class="l-zh">工作经历</span>
+      </p>
+      <h2 class="sec-title">
+        <span class="l-en">Five years, two countries, three teams.</span>
+        <span class="l-zh">五年，两个国家，三个团队。</span>
+      </h2>
+    </div>
 
-						The dynamic duo must venture out into the dangerous wilderness to chase, battle and search for the magical foodstuffs that have sprung to life due to a magical spell. But the fact that they are now alive, does not make them any less delicious. Brave chef Pierre and his assistant Alain are the only ones with the skill and knowledge to collect the ingredients to make the finest dishes on the continent. </p>
-				  <lu>
-					<li>Using Wwise with Unreal Engine integration.</li>
-					<li>Sound selection and using Wwise for implementation, material selection, etc.</li>
-					<li>Creating a fitting game sound track from scratch.</li>
-					<li>Creation of intricate gameplay mechanics and adding sounds to them.</li>
-					<li>Working in a group environment.</li> 
-					<li>Understanding the entire game pipeline.</li>
-					<li>Ability to work with tight deadlines.</li>
-					</lu>
-					  <br>
-					  <div class="categories">
-						C++ & Wwise / Unreal Engine / Group Project
-					  </div>			               
-				   </div>
+    <div class="timeline">
 
-				 <div class="link-box">
-					<a href="https://sebastien-vermeulen.itch.io/mythifood-adventure" target="_blank">Website</a>
-					  <a href="#" class="popup-modal-dismiss">Close</a>
-				 </div>		      
-	  
+      <article class="tl-item reveal">
+        <div class="tl-meta">
+          <span class="tl-years">2023 — <span class="l-en">Present</span><span class="l-zh">至今</span></span>
+          <span class="tl-place"><i class="fa fa-map-marker" aria-hidden="true"></i> <span class="l-en">Germany</span><span class="l-zh">德国</span></span>
+        </div>
+        <div class="tl-body">
+          <h3 class="tl-role">
+            <span class="l-en">Senior Technical Audio Engineer</span>
+            <span class="l-zh">资深技术音频工程师</span>
+          </h3>
+          <p class="tl-company">Deck13 Interactive <span class="tl-note"><span class="l-en">Technical Audio Engineer 2023–26</span><span class="l-zh">2023–26 任技术音频工程师</span></span></p>
+          <ul class="tl-list">
+            <li><span class="l-en">Ownership of all tech-related audio at the studio.</span><span class="l-zh">负责工作室全部技术音频方向。</span></li>
+            <li><span class="l-en">Integrating FMOD with C++ and Blueprints to achieve adaptive, scalable audio.</span><span class="l-zh">以 C++ 与蓝图集成 FMOD，实现自适应、可扩展的音频。</span></li>
+            <li><span class="l-en">Developing engine tools that improve audio debugging.</span><span class="l-zh">开发引擎内工具，提升音频调试效率。</span></li>
+            <li><span class="l-en">Establishing and optimising audio development workflows, and owning cross-departmental communication.</span><span class="l-zh">建立并优化音频开发工作流，主导跨部门沟通与流程。</span></li>
+            <li><span class="l-en">Adaptive reverb, bone-based foley, breathing system and more.</span><span class="l-zh">自适应混响、基于骨骼的 Foley、呼吸系统等系统设计。</span></li>
+            <li><span class="l-en">Working in a proprietary engine, subsequently in Unreal Engine.</span><span class="l-zh">先在自研引擎、随后在 Unreal Engine 中开发。</span></li>
+          </ul>
+          <div class="chips"><span class="chip">FMOD</span><span class="chip">C++</span><span class="chip">Blueprints</span><span class="chip">Unreal Engine</span></div>
+        </div>
+      </article>
 
-			   </div> <!-- /modal-22 -->
+      <article class="tl-item reveal">
+        <div class="tl-meta">
+          <span class="tl-years">2021 — 2023</span>
+          <span class="tl-place"><i class="fa fa-map-marker" aria-hidden="true"></i> <span class="l-en">Czech Republic</span><span class="l-zh">捷克</span></span>
+        </div>
+        <div class="tl-body">
+          <h3 class="tl-role">
+            <span class="l-en">Audio Programmer</span>
+            <span class="l-zh">音频程序开发工程师</span>
+          </h3>
+          <p class="tl-company">Bohemia Interactive <span class="tl-note"><span class="l-en">Junior 2021–2022</span><span class="l-zh">2021–2022 任初级</span></span></p>
+          <ul class="tl-list">
+            <li><span class="l-en">Interior detection, music management, multiplayer radios and similar engine systems.</span><span class="l-zh">室内外检测、音乐管理、多人同步无线电等引擎系统。</span></li>
+            <li><span class="l-en">Managing and fulfilling requests for the engine's audio editor.</span><span class="l-zh">承接并推进引擎音频编辑器的功能需求。</span></li>
+            <li><span class="l-en">Developed scripting capabilities through scalable code.</span><span class="l-zh">以可扩展的代码实现脚本能力。</span></li>
+            <li><span class="l-en">Worked with multi-threading and consoles (Microsoft GDK).</span><span class="l-zh">参与多线程与主机平台（Microsoft GDK）开发。</span></li>
+            <li><span class="l-en">Profiling and optimisation of code for optimal performance.</span><span class="l-zh">性能剖析与代码优化，保证运行效率。</span></li>
+          </ul>
+          <div class="chips"><span class="chip">C++</span><span class="chip">Enfusion Engine</span><span class="chip">Qt</span><span class="chip">Microsoft GDK</span></div>
+        </div>
+      </article>
 
-			    
-			 <!-- modal popups - begin
-			 ============================================================= -->
-			 <div id="modal-10" class="popup-modal slider  mfp-hide">	
- 
-			 
-				<div class="owl-carousel owl-portfolio media">
-					<!-- Video of Eggers -->
-						<div class="fluid-video-wrapper">
-							<div class="fluid-width-video-wrapper" style="padding-top: 54.0%;">
-								<iframe
-								style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
-								src="https://tube.rvere.com/embed?v=cYbG2K1YO1c"
-								title="YouTube video player"
-								frameBorder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen>
-							</iframe></div> 
-						</div>
+    </div>
 
-						<div class="fluid-video-wrapper">
-							<div class="fluid-width-video-wrapper" style="padding-top: 54.0%;">
-								<iframe
-								style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
-								src="https://tube.rvere.com/embed?v=cUiXJbjEd8U"
-								title="YouTube video player"
-								frameBorder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowFullScreen>
-							</iframe></div> 
-						</div>
+    <!-- achievements -->
+    <div class="ach-grid">
+      <div class="ach reveal">
+        <p class="ach-k"><span class="l-en">Founded</span><span class="l-zh">创办</span></p>
+        <h4>Dracortia</h4>
+        <p><span class="l-en">Independent audio company supporting indie teams with music and audio for five titles.</span><span class="l-zh">独立音频公司，已为五款独立游戏提供音乐与音频支持。</span></p>
+      </div>
+      <div class="ach reveal">
+        <p class="ach-k"><span class="l-en">Released</span><span class="l-zh">发行</span></p>
+        <h4>Arma Reforger &amp; Atlas Fallen</h4>
+        <p><span class="l-en">Shipped commercial titles on proprietary engines at two AAA studios.</span><span class="l-zh">在两间 AAA 工作室的自研引擎上完成商业项目发行。</span></p>
+      </div>
+      <div class="ach reveal">
+        <p class="ach-k"><span class="l-en">Engines</span><span class="l-zh">引擎</span></p>
+        <h4>Enfusion &amp; FLEDGE</h4>
+        <p><span class="l-en">Worked deeply inside two proprietary engines, plus Unreal Engine and Unity.</span><span class="l-zh">深度参与两套自研引擎，并熟悉 Unreal Engine 与 Unity。</span></p>
+      </div>
+    </div>
 
-						<img class="owl-item" src="images/portfolio/Eggers/Eggers_2.jpg" alt="" />
-						<img class="owl-item" src="images/portfolio/Eggers/Eggers_5.jpg" alt="" />
-						<img class="owl-item" src="images/portfolio/Eggers/Eggers_3.jpg" alt="" />
-						<img class="owl-item" src="images/portfolio/Eggers/Eggers_1.jpg" alt="" />
-						<img class="owl-item" src="images/portfolio/Eggers/Eggers_4.jpg" alt="" />
-				</div> 
-			
-			   <div class="description-box">
-				  <h4>Eggers</h4>		      
-				  <p>Eggers is made as a personal project and making use of the <span>Twitch IRC interface</span>. It was developed specifically as fan game for popular twitch streamer "Mizkif" and their audience.
-					  <br>Following topics are delved into with this project:
-				  </p>
-				  <!-- list of things done for EGGERS -->
-				  <ul>      
-					<li><p>Resolving interaction of a player base that is limited to <span>Chat Commands</span> and dealing with the <span>large quantity of players (500+)</span> by utilizing build-in physics and limited interactions.</p></li>
-					<li><p>Experiencing the fluent workflow between <span>C++ classes and Blueprints</span> and how to properly utilize their potential.</p></li>
-					<li><p>Using the Twitch API and Documentation to create <span>IRC</span> connections with the <span>Twitch IRC Network</span>.</p></li>
-					<li><p>Parsing received client messages and sending out properly formatted messages to the client.</p></li>
-					<li><p>Creating <span>interactive interfaces</span> with usage of UMG, Scrollboxes, resizeability,..</p></li>
-				</ul> 
-				<p>Check the progress on future & past updates here: <a href="https://trello.com/b/l3Dcf1YU/eggers-a-mizkif-twitch-game" target="_blank">Eggers - A Mizkif Twitch Game | Trello.</a></p>
-				<br>
-				<h3>CODE SAMPLES</h3>
-				<div class="owl-wrapper">
-				<div class="owl-carousel owl-code">
+    <!-- education -->
+    <div class="sub-head reveal">
+      <h3><span class="l-en">Education</span><span class="l-zh">教育经历</span></h3>
+    </div>
 
-					<div>
-						<h2>IRC Listener Socket & Login</h2>
-						<p>To start listening to the Twitch IRC chat and parse incoming messages, we need to connect first. We also set a timer to check for new chat messages every 0.1ms.
-					</p>
-					  <pre><code class="language-cpp">//Creating endpoint & listener socket
-FIPv4Endpoint endPoint{FIPv4Address(127,0,0,1), 6667};
+    <div class="edu-grid">
+      <article class="edu reveal">
+        <p class="edu-years">2018 — 2021</p>
+        <h4><span class="l-en">Bachelor, Game Development</span><span class="l-zh">游戏开发 学士学位</span></h4>
+        <p class="edu-school">Howest — Digital Arts and Entertainment</p>
+        <p class="edu-text"><span class="l-en">Studied every discipline that goes into a game, which gave me a working understanding of both the programming and the art pipeline.</span><span class="l-zh">系统学习了游戏开发的各个方向，对程序与美术两侧的工作流程都有实际理解。</span></p>
+      </article>
+      <article class="edu reveal">
+        <p class="edu-years">2014 — 2018</p>
+        <h4><span class="l-en">Degree in Multimedia</span><span class="l-zh">多媒体专业</span></h4>
+        <p class="edu-school">High School Stedelijk Lyceum Cadix</p>
+        <p class="edu-text"><span class="l-en">Adobe toolset, Cinema 4D, HTML, CSS and JavaScript.</span><span class="l-zh">Adobe 系列工具、Cinema 4D、HTML、CSS 与 JavaScript。</span></p>
+      </article>
+      <article class="edu reveal">
+        <p class="edu-years">2007 — 2018</p>
+        <h4><span class="l-en">Drums, Percussion &amp; Music Theory</span><span class="l-zh">架子鼓、打击乐与乐理</span></h4>
+        <p class="edu-school">Academy of Merksem</p>
+        <p class="edu-text"><span class="l-en">Eleven years of rhythm, melody and harmony. I started producing music around the age of twelve and never stopped.</span><span class="l-zh">十一年 rhythm、旋律与和声训练；十二岁左右开始音乐制作，至今未停。</span></p>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================================================================
+     SKILLS
+     ================================================================== -->
+<section class="section section-alt" id="skills">
+  <div class="wrap">
+
+    <div class="sec-head reveal">
+      <p class="sec-kicker">
+        <span class="k-idx">04</span>
+        <span class="l-en">Skills</span><span class="l-zh">技能</span>
+      </p>
+      <h2 class="sec-title">
+        <span class="l-en">The toolbox.</span>
+        <span class="l-zh">常用工具与技术栈。</span>
+      </h2>
+    </div>
+
+    <div class="skill-grid">
+      <div class="skill reveal">
+        <h4><span class="l-en">Technical audio</span><span class="l-zh">技术音频</span></h4>
+        <ul><li>FMOD</li><li>Wwise</li><li>MetaSounds</li><li>Adaptive music</li><li>Real-time DSP</li></ul>
+      </div>
+      <div class="skill reveal">
+        <h4><span class="l-en">Programming</span><span class="l-zh">编程语言</span></h4>
+        <ul><li>C++</li><li>C#</li><li>Python</li><li>JavaScript</li><li>HTML / CSS</li></ul>
+      </div>
+      <div class="skill reveal">
+        <h4><span class="l-en">Game engines</span><span class="l-zh">游戏引擎</span></h4>
+        <ul><li>Unreal Engine</li><li>Unity</li><li>Enfusion <span class="skill-tag">in-house</span></li><li>FLEDGE <span class="skill-tag">in-house</span></li></ul>
+      </div>
+      <div class="skill reveal">
+        <h4><span class="l-en">Audio production</span><span class="l-zh">音频制作</span></h4>
+        <ul><li>PreSonus Studio One</li><li>Reaper</li><li>FL Studio</li><li>Wavelab</li></ul>
+      </div>
+      <div class="skill reveal">
+        <h4><span class="l-en">GUI development</span><span class="l-zh">界面开发</span></h4>
+        <ul><li>UE Slate</li><li>Qt (C++)</li><li>ImGui</li></ul>
+      </div>
+      <div class="skill reveal">
+        <h4><span class="l-en">Tools &amp; pipeline</span><span class="l-zh">工具与流程</span></h4>
+        <ul><li>Perforce</li><li>Git</li><li>SVN</li><li>Tracy</li><li>Jenkins</li><li>TeamCity</li><li>Microsoft GDK</li><li>Adobe</li></ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================================================================
+     CONTACT
+     ================================================================== -->
+<section class="section contact" id="contact">
+  <div class="wrap">
+
+    <div class="sec-head reveal">
+      <p class="sec-kicker">
+        <span class="k-idx">05</span>
+        <span class="l-en">Contact</span><span class="l-zh">联系</span>
+      </p>
+      <h2 class="sec-title">
+        <span class="l-en">Hiring for audio technology?<br>Let's talk.</span>
+        <span class="l-zh">正在招聘音频技术方向？<br>欢迎随时联系。</span>
+      </h2>
+      <p class="sec-lede">
+        <span class="l-en">I'm open to relocation to China and to remote or hybrid collaboration. Email is the fastest way to reach me — I answer in English, Dutch or French.</span>
+        <span class="l-zh">我接受赴中国工作，也接受远程或混合协作。邮件是最快的方式，可用英语、荷兰语或法语沟通。</span>
+      </p>
+    </div>
+
+    <div class="contact-actions reveal">
+      <a class="btn btn-primary btn-lg" href="mailto:eloy.decort@gmail.com">
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+        <span>eloy.decort@gmail.com</span>
+      </a>
+      <button class="btn btn-ghost btn-lg" type="button" data-copy="eloy.decort@gmail.com">
+        <svg class="btn-ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.6" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M10.5 3.5v-.6a1.6 1.6 0 0 0-1.6-1.6H3.6A1.6 1.6 0 0 0 2 2.9v5.3a1.6 1.6 0 0 0 1.6 1.6h.6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        <span class="l-en">Copy address</span><span class="l-zh">复制邮箱</span>
+      </button>
+    </div>
+
+    <div class="contact-grid">
+      <a class="contact-item reveal" href="https://www.linkedin.com/in/eloydecort/" target="_blank" rel="noopener">
+        <span class="contact-ico"><i class="fa fa-linkedin" aria-hidden="true"></i></span>
+        <span class="contact-k">LinkedIn</span>
+        <span class="contact-v">in/eloydecort</span>
+      </a>
+      <a class="contact-item reveal" href="https://github.com/EloyDeCort" target="_blank" rel="noopener">
+        <span class="contact-ico"><i class="fa fa-github" aria-hidden="true"></i></span>
+        <span class="contact-k">GitHub</span>
+        <span class="contact-v">EloyDeCort</span>
+      </a>
+      <a class="contact-item reveal" href="https://dracortia.com" target="_blank" rel="noopener">
+        <span class="contact-ico"><i class="fa fa-volume-up" aria-hidden="true"></i></span>
+        <span class="contact-k">Dracortia</span>
+        <span class="contact-v">dracortia.com</span>
+      </a>
+      <div class="contact-item reveal">
+        <span class="contact-ico"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+        <span class="contact-k"><span class="l-en">Location</span><span class="l-zh">所在地</span></span>
+        <span class="contact-v">Wuppertal, DE · CET</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ==================================================================
+     FOOTER
+     ================================================================== -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-brand">Eloy De Cort</p>
+    <p class="footer-copy">
+      <span class="l-en">© <span data-year>2026</span> Eloy De Cort · Technical audio for games.</span>
+      <span class="l-zh">© <span data-year>2026</span> Eloy De Cort · 游戏技术音频。</span>
+    </p>
+    <a class="footer-top" href="#top" aria-label="Back to top"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></a>
+  </div>
+</footer>
+
+<!-- ==================================================================
+     MODALS
+     ================================================================== -->
+
+<!-- Atlas Fallen -->
+<div class="modal" id="modal-atlas" role="dialog" aria-modal="true" aria-labelledby="modal-atlas-title" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel">
+    <button class="modal-close" type="button" data-close aria-label="Close"><span></span><span></span></button>
+    <div class="modal-scroll">
+      <div class="modal-media-wrap">
+      <div class="modal-media">
+        <div class="media-frame">
+          <iframe data-src="https://tube.rvere.com/embed?v=0DFm6TolJY4" title="Atlas Fallen: Reign of Sand — video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="media-frame"><img src="images/portfolio/AtlasFallen/AtlasFallen0.jpg" alt="Atlas Fallen screenshot" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/AtlasFallen/AtlasFallen1.jpg" alt="Atlas Fallen screenshot" loading="lazy"></div>
+      </div>
+        <button class="media-nav" type="button" data-media-prev aria-label="Previous media">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="media-nav" type="button" data-media-next aria-label="Next media">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="media-count" data-media-count aria-hidden="true"></span>
+      </div>
+      <div class="modal-body">
+        <p class="modal-kicker">Deck13<span class="card-dot">·</span>2023 — <span class="l-en">Present</span><span class="l-zh">至今</span></p>
+        <h3 class="modal-title" id="modal-atlas-title">
+          <span class="l-en">Atlas Fallen — Reign of Sand</span>
+          <span class="l-zh">《尘封大陆》— Reign of Sand</span>
+        </h3>
+        <p class="modal-text">
+          <span class="l-en">Release of the <em>Atlas Fallen</em> DLC / free update "Reign of Sand". I took care of most of the sound implementation using FMOD, plus sound debugging in our proprietary engine, FLEDGE. It was the first time the project had more than one audio team member, so workflows had to be established from scratch.</span>
+          <span class="l-zh">《尘封大陆》资料片／免费更新《Reign of Sand》的发行工作。我主要负责使用 FMOD 完成音效实现，并在自研引擎 FLEDGE 中进行音频调试。这是项目首次拥有两名以上音频成员，因此音频工作流需要从头建立。</span>
+        </p>
+        <ul class="modal-list">
+          <li><span class="l-en">Enhanced existing workflows and created new ones to keep audio production smooth.</span><span class="l-zh">优化既有工作流并建立新流程，保证音频制作顺畅。</span></li>
+          <li><span class="l-en">Implemented sounds and designed placeholders for the team.</span><span class="l-zh">完成音效实现，并为团队设计占位音频。</span></li>
+          <li><span class="l-en">Adapted to new audio tools in a new engine, with its own tooling and node-based "blueprint" language.</span><span class="l-zh">快速适应新引擎中的音频工具，包括其自有工具链与节点式“蓝图”语言。</span></li>
+        </ul>
+        <div class="chips"><span class="chip">Technical Audio Design</span><span class="chip">FMOD</span><span class="chip">FLEDGE Engine</span><span class="chip">C++ &amp; Node Editor</span></div>
+        <div class="modal-links">
+          <a class="btn btn-ghost btn-sm" href="https://enfusionengine.com/" target="_blank" rel="noopener"><span class="l-en">Related engine site</span><span class="l-zh">相关引擎站点</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Arma Reforger -->
+<div class="modal" id="modal-reforger" role="dialog" aria-modal="true" aria-labelledby="modal-reforger-title" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel">
+    <button class="modal-close" type="button" data-close aria-label="Close"><span></span><span></span></button>
+    <div class="modal-scroll">
+      <div class="modal-media-wrap">
+      <div class="modal-media">
+        <div class="media-frame">
+          <iframe data-src="https://tube.rvere.com/embed?v=AIervYhiEZ8" title="Arma Reforger — video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="media-frame"><img src="images/portfolio/ArmaReforger/Reforger.jpg" alt="Arma Reforger key art" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/ArmaReforger/ReforgerScreen1.jpg" alt="Arma Reforger screenshot" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/ArmaReforger/ReforgerScreen2.jpg" alt="Arma Reforger screenshot" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/ArmaReforger/ReforgerScreen3.jpg" alt="Arma Reforger screenshot" loading="lazy"></div>
+      </div>
+        <button class="media-nav" type="button" data-media-prev aria-label="Previous media">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="media-nav" type="button" data-media-next aria-label="Next media">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="media-count" data-media-count aria-hidden="true"></span>
+      </div>
+      <div class="modal-body">
+        <p class="modal-kicker">Bohemia Interactive<span class="card-dot">·</span>2021 — 2023</p>
+        <h3 class="modal-title" id="modal-reforger-title">Arma Reforger</h3>
+        <p class="modal-text">
+          <span class="l-en">My work on Arma Reforger spans a wide range of systems. I was responsible for most of the sound-to-gameplay connections — weapon interactions, vehicles and more — including music management systems, new in-game debugging tools, a multiplayer synchronised radio system and interior detection.</span>
+          <span class="l-zh">我在《武装突袭 Reforger》中的工作覆盖多个系统，负责了大部分“声音到玩法”的连接，包括武器交互、载具等；此外还包括音乐管理系统、新的游戏内调试工具、多人同步无线电系统以及室内检测。</span>
+        </p>
+        <ul class="modal-list">
+          <li><span class="l-en">Released an early-access title and continuously updated it towards 1.0.</span><span class="l-zh">完成抢先体验版发行，并持续迭代至正式版本。</span></li>
+          <li><span class="l-en">Budgeted audio in a large-scale open-world environment.</span><span class="l-zh">在大型开放世界环境中进行音频预算与性能规划。</span></li>
+          <li><span class="l-en">Multiplayer audio implementation and debugging.</span><span class="l-zh">多人同步音频的实现与调试。</span></li>
+          <li><span class="l-en">Deep understanding of connecting audio to gameplay.</span><span class="l-zh">深入理解音频与玩法的连接方式。</span></li>
+          <li><span class="l-en">Prepared a solid foundation for the future game, Arma 4.</span><span class="l-zh">为后续作品《武装突袭 4》打下音频技术基础。</span></li>
+        </ul>
+        <div class="chips"><span class="chip">C++</span><span class="chip">Enfusion Engine</span><span class="chip">Multiplayer</span><span class="chip">Microsoft GDK</span></div>
+        <div class="modal-links">
+          <a class="btn btn-ghost btn-sm" href="https://reforger.armaplatform.com/" target="_blank" rel="noopener"><span class="l-en">Official site</span><span class="l-zh">官方网站</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Enfusion Engine -->
+<div class="modal" id="modal-enfusion" role="dialog" aria-modal="true" aria-labelledby="modal-enfusion-title" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel">
+    <button class="modal-close" type="button" data-close aria-label="Close"><span></span><span></span></button>
+    <div class="modal-scroll">
+      <div class="modal-media-wrap">
+      <div class="modal-media">
+        <div class="media-frame">
+          <iframe data-src="https://tube.rvere.com/embed?v=6oeDRd_TQcQ" title="Enfusion Engine — video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="media-frame"><img src="images/portfolio/Enfusion/Enfusion2.jpg" alt="Enfusion audio editor" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/Enfusion/Enfusion3.jpg" alt="Enfusion audio editor" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/Enfusion/Enfusion4.jpg" alt="Enfusion audio editor" loading="lazy"></div>
+      </div>
+        <button class="media-nav" type="button" data-media-prev aria-label="Previous media">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="media-nav" type="button" data-media-next aria-label="Next media">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="media-count" data-media-count aria-hidden="true"></span>
+      </div>
+      <div class="modal-body">
+        <p class="modal-kicker">Bohemia Interactive<span class="card-dot">·</span>2021 — 2023</p>
+        <h3 class="modal-title" id="modal-enfusion-title">
+          <span class="l-en">Enfusion Engine — audio editor &amp; audio engine</span>
+          <span class="l-zh">Enfusion 引擎 — 音频编辑器与音频引擎</span>
+        </h3>
+        <p class="modal-text">
+          <span class="l-en">In the Enfusion Engine I work mostly on the audio editor and the audio engine itself. I have ownership over the signals editor, which works directly with audio to evaluate in-game values (such as material IDs) and perform mathematical expressions on them in node form. I also build a variety of debugging tools and improve the experience for modders and audio designers daily.</span>
+          <span class="l-zh">在 Enfusion 引擎中，我主要负责音频编辑器与音频引擎。我主导信号编辑器（signals editor）：它直接作用于音频，对游戏内实时数值（如材质 ID）求值，并以节点形式在这些数值上完成数学表达式运算。同时我也开发多种调试工具，持续改善 Mod 作者与音频设计师的使用体验。</span>
+        </p>
+        <ul class="modal-list">
+          <li><span class="l-en">Enhancing UI/UX using the Qt framework.</span><span class="l-zh">使用 Qt 框架改进工具界面与交互体验。</span></li>
+          <li><span class="l-en">Implementation and design of new debugging tools for audio.</span><span class="l-zh">设计与实现新的音频调试工具。</span></li>
+          <li><span class="l-en">Feedback-driven feature development.</span><span class="l-zh">以用户反馈驱动功能开发。</span></li>
+        </ul>
+        <div class="chips"><span class="chip">C++</span><span class="chip">Qt</span><span class="chip">Audio Engine</span><span class="chip">Tooling</span></div>
+        <div class="modal-links">
+          <a class="btn btn-ghost btn-sm" href="https://enfusionengine.com/" target="_blank" rel="noopener"><span class="l-en">Official site</span><span class="l-zh">官方网站</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mythifood -->
+<div class="modal" id="modal-mythifood" role="dialog" aria-modal="true" aria-labelledby="modal-mythifood-title" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel">
+    <button class="modal-close" type="button" data-close aria-label="Close"><span></span><span></span></button>
+    <div class="modal-scroll">
+      <div class="modal-media-wrap">
+      <div class="modal-media">
+        <div class="media-frame">
+          <iframe data-src="https://tube.rvere.com/embed?v=34f9UtjCJ8s" title="Mythifood Adventure — video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="media-frame">
+          <iframe data-src="https://tube.rvere.com/embed?v=_7DqKuo1iQ4" title="Mythifood Adventure — music" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="media-frame"><img src="images/portfolio/Mythifood/Mythifood2.jpg" alt="Mythifood Adventure screenshot" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/Mythifood/Mythifood3.jpg" alt="Mythifood Adventure screenshot" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/Mythifood/Mythifood4.jpg" alt="Mythifood Adventure screenshot" loading="lazy"></div>
+      </div>
+        <button class="media-nav" type="button" data-media-prev aria-label="Previous media">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="media-nav" type="button" data-media-next aria-label="Next media">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="media-count" data-media-count aria-hidden="true"></span>
+      </div>
+      <div class="modal-body">
+        <p class="modal-kicker"><span class="l-en">Group project</span><span class="l-zh">团队项目</span><span class="card-dot">·</span>Unreal Engine</p>
+        <h3 class="modal-title" id="modal-mythifood-title">Mythifood Adventure</h3>
+        <p class="modal-text">
+          <span class="l-en">Chef Pierre and his assistant Alain are cooks in a sought-after tavern deep within a mythical forest. Together they hunt the magically animated food creatures around their tavern to serve the finest dishes on the continent.</span>
+          <span class="l-zh">大厨 Pierre 与助手 Alain 在一座神话森林深处的酒馆工作。他们需要追捕因魔法而获得生命的食物生物，为客人端上整片大陆最顶级的料理。</span>
+        </p>
+        <ul class="modal-list">
+          <li><span class="l-en">Using Wwise with Unreal Engine integration.</span><span class="l-zh">在 Unreal Engine 集成环境下使用 Wwise。</span></li>
+          <li><span class="l-en">Sound selection and Wwise implementation, including material selection.</span><span class="l-zh">音效选择与 Wwise 实现，包括基于材质的选择逻辑。</span></li>
+          <li><span class="l-en">Creating a fitting game soundtrack from scratch.</span><span class="l-zh">从零创作与作品风格契合的游戏原声。</span></li>
+          <li><span class="l-en">Designing intricate gameplay mechanics and adding sound to them.</span><span class="l-zh">参与设计细致的玩法机制，并为其添加声音。</span></li>
+          <li><span class="l-en">Working in a group environment, understanding the whole game pipeline, and hitting tight deadlines.</span><span class="l-zh">在团队环境中协作，理解完整的游戏管线，并在紧张周期内按时交付。</span></li>
+        </ul>
+        <div class="chips"><span class="chip">C++ &amp; Wwise</span><span class="chip">Unreal Engine</span><span class="chip">Sound design</span><span class="chip">Composition</span></div>
+        <div class="modal-links">
+          <a class="btn btn-ghost btn-sm" href="https://sebastien-vermeulen.itch.io/mythifood-adventure" target="_blank" rel="noopener">itch.io</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Eggers -->
+<div class="modal" id="modal-eggers" role="dialog" aria-modal="true" aria-labelledby="modal-eggers-title" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel">
+    <button class="modal-close" type="button" data-close aria-label="Close"><span></span><span></span></button>
+    <div class="modal-scroll">
+      <div class="modal-media-wrap">
+      <div class="modal-media">
+        <div class="media-frame">
+          <iframe data-src="https://tube.rvere.com/embed?v=cYbG2K1YO1c" title="Eggers — video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="media-frame">
+          <iframe data-src="https://tube.rvere.com/embed?v=cUiXJbjEd8U" title="Eggers — video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="media-frame"><img src="images/portfolio/Eggers/Eggers_2.jpg" alt="Eggers screenshot" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/Eggers/Eggers_5.jpg" alt="Eggers screenshot" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/Eggers/Eggers_3.jpg" alt="Eggers screenshot" loading="lazy"></div>
+        <div class="media-frame"><img src="images/portfolio/Eggers/Eggers_4.jpg" alt="Eggers screenshot" loading="lazy"></div>
+      </div>
+        <button class="media-nav" type="button" data-media-prev aria-label="Previous media">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="media-nav" type="button" data-media-next aria-label="Next media">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="media-count" data-media-count aria-hidden="true"></span>
+      </div>
+      <div class="modal-body">
+        <p class="modal-kicker"><span class="l-en">Personal project</span><span class="l-zh">个人项目</span><span class="card-dot">·</span>Twitch</p>
+        <h3 class="modal-title" id="modal-eggers-title">Eggers</h3>
+        <p class="modal-text">
+          <span class="l-en">Eggers is a personal project built on the <strong>Twitch IRC interface</strong>, made as a fan game for streamer "Mizkif" and his audience.</span>
+          <span class="l-zh">Eggers 是基于 <strong>Twitch IRC 接口</strong>的个人项目，为主播 “Mizkif” 及其观众制作的同人游戏。</span>
+        </p>
+        <ul class="modal-list">
+          <li><span class="l-en">Resolving interaction for a player base limited to <strong>chat commands</strong>, and handling <strong>500+ concurrent players</strong> by leaning on built-in physics and limited interactions.</span><span class="l-zh">为只能用 <strong>聊天指令</strong>交互的玩家人群设计交互方式，并借助内置物理与受限交互承载 <strong>500+ 同时在线玩家</strong>。</span></li>
+          <li><span class="l-en">Experiencing the fluent workflow between <strong>C++ classes and Blueprints</strong> and how to use their potential properly.</span><span class="l-zh">实践 <strong>C++ 类与蓝图</strong>之间的顺畅协作，理解如何正确发挥各自优势。</span></li>
+          <li><span class="l-en">Using the Twitch API and documentation to create <strong>IRC</strong> connections with the <strong>Twitch IRC network</strong>.</span><span class="l-zh">根据 Twitch API 与文档，与 <strong>Twitch IRC 网络</strong>建立 <strong>IRC</strong> 连接。</span></li>
+          <li><span class="l-en">Parsing received client messages and sending properly formatted messages back.</span><span class="l-zh">解析客户端消息，并返回格式正确的消息。</span></li>
+          <li><span class="l-en">Creating <strong>interactive interfaces</strong> with UMG — scrollboxes, resizability and more.</span><span class="l-zh">使用 UMG 构建<strong>交互界面</strong>：滚动列表、可缩放布局等。</span></li>
+        </ul>
+
+        <h4 class="modal-subtitle"><span class="l-en">Code samples</span><span class="l-zh">代码示例</span></h4>
+
+        <div class="code-block">
+          <p class="code-title"><span class="l-en">IRC listener socket &amp; login</span><span class="l-zh">IRC 监听套接字与登录</span></p>
+          <p class="code-desc">
+            <span class="l-en">To start listening to the Twitch IRC chat and parse incoming messages, we connect first, then poll for new chat messages every 0.01s.</span>
+            <span class="l-zh">要开始监听 Twitch IRC 聊天并解析消息，首先建立连接，然后每 0.01 秒轮询一次新消息。</span>
+          </p>
+<pre><code class="language-cpp">// Creating endpoint &amp; listener socket
+FIPv4Endpoint endPoint{ FIPv4Address(127, 0, 0, 1), 6667 };
 m_pListenerSocket = FTcpSocketBuilder(TEXT("TwitchListener")).AsReusable().BoundToEndpoint(endPoint).Listening(8);
 
-//Set Buffer size
+// Set buffer size
 int32 newSize = 0;
-m_pListenerSocket->SetReceiveBufferSize(2 * 1024 * 1024, newSize);
+m_pListenerSocket-&gt;SetReceiveBufferSize(2 * 1024 * 1024, newSize);
 
-GetWorldTimerManager().SetTimer(m_TimerHandle, this, &APlayerRegisterer::SocketListener, 0.01f, true);
+GetWorldTimerManager().SetTimer(m_TimerHandle, this, &amp;APlayerRegisterer::SocketListener, 0.01f, true);
 
 SendLogin();
 
 void APlayerRegisterer::SendLogin()
 {
-//Create resolve info
-const FResolveInfo* pResolveInfo{ISocketSubsystem::Get()->GetHostByName("irc.chat.twitch.tv")};
+    // Create resolve info
+    const FResolveInfo* pResolveInfo{ ISocketSubsystem::Get()-&gt;GetHostByName("irc.chat.twitch.tv") };
 
-//Check if we got a resolving issue
-if(pResolveInfo->GetErrorCode() != 0)
+    // Check if we got a resolving issue
+    if (pResolveInfo-&gt;GetErrorCode() != 0)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("ERROR: Couldn't resolve hostname."));
+        return;
+    }
+
+    const FInternetAddr* address{ &amp;pResolveInfo-&gt;GetResolvedAddress() };
+
+    uint32 outIP{};
+    address-&gt;GetIp(outIP);
+
+    int32 port{ 6667 };
+
+    TSharedRef&lt;FInternetAddr&gt; addr{ ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)-&gt;CreateInternetAddr() };
+    addr-&gt;SetIp(outIP);
+    addr-&gt;SetPort(port);
+
+    m_pListenerSocket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)-&gt;CreateSocket(NAME_Stream, TEXT("default"), false);
+
+    bool connected = m_pListenerSocket-&gt;Connect(*addr);
+    // Check if we are connected with the socket
+    if (!connected)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("ERROR: Failed to connect with socket."));
+        // Close socket if it would be open
+        if (m_pListenerSocket)
+        {
+            m_pListenerSocket-&gt;Close();
+        }
+
+        return;
+    }
+
+    SendString(TEXT("PASS oauth:" + m_AuthKey));
+    SendString(TEXT("NICK " + m_UserName));
+    SendString(TEXT("JOIN #" + m_StreamerName));
+
+    if (m_TagsEnabled)
+    {
+        // Enable tags
+        SendString(TEXT("CAP REQ :twitch.tv/tags"));
+    }
+}</code></pre>
+        </div>
+
+        <div class="code-block">
+          <p class="code-title"><span class="l-en">Player focus in spectator mode</span><span class="l-zh">观战模式下的视角切换</span></p>
+          <p class="code-desc">
+            <span class="l-en">In spectator mode we set a view target with a blend to swap which player is focused, by giving each player a small camera that the controller takes over. The HUD then aligns with the array of players and validates the current focus.</span>
+            <span class="l-zh">在观战模式下，通过为每个玩家创建小型相机并由控制器接管，以混合方式切换当前聚焦的玩家；HUD 与玩家数组同步，并校验当前聚焦是否有效。</span>
+          </p>
+<pre><code class="language-cpp">void AStreamerSpectatePawn::FocusNext()
 {
-	UE_LOG(LogTemp, Warning, TEXT("ERROR: Couldn't resolve hostname."));
-	return;
-}
+    if (!m_Spawner-&gt;IsValidLowLevel())
+        return;
 
-const FInternetAddr* address{&pResolveInfo->GetResolvedAddress()};
+    TMap&lt;FString, ATwitchChatPlayer*&gt; players = m_Spawner-&gt;GetPlayers();
+    TArray&lt;ATwitchChatPlayer*&gt; twitchPlayers;
+    players.GenerateValueArray(twitchPlayers);
 
-uint32 outIP{};
-address->GetIp(outIP);
+    if (twitchPlayers.Num() &lt;= 0)
+        return;
 
-int32 port{6667};
+    m_CurrentFocus++;
+    if (m_CurrentFocus &gt; twitchPlayers.Num() - 1 || m_CurrentFocus &lt; 0)
+    {
+        m_CurrentFocus = 0;
+    }
 
-TSharedRef<FInternetAddr> addr{ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr()};
-addr->SetIp(outIP);
-addr->SetPort(port);
+    m_Controller-&gt;SetViewTargetWithBlend(twitchPlayers[m_CurrentFocus], m_BlendTime);
+    m_pInGameHud-&gt;SetSpectatePlayer(twitchPlayers[m_CurrentFocus]-&gt;GetUserName(), twitchPlayers[m_CurrentFocus]-&gt;GetChatColor());
+    m_FocusedPlayer = twitchPlayers[m_CurrentFocus];
+}</code></pre>
+        </div>
 
-m_pListenerSocket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, TEXT("default"), false);
-
-bool connected = m_pListenerSocket->Connect(*addr);
-//Check if we are connected with the socket.
-if(!connected)
-{works that I've mostly
-	UE_LOG(LogTemp, Warning, TEXT("ERROR: Failed to connect with socket."));
-	//Close socket if it would be open.
-	if(m_pListenerSocket)
-	{
-		m_pListenerSocket->Close();
-	}
-
-	return;
-}
-
-FString test = "PASS oauth:" + m_AuthKey;
-SendString(TEXT("PASS oauth:" + m_AuthKey));
-SendString(TEXT("NICK " + m_UserName));
-SendString(TEXT("JOIN #" + m_StreamerName));
-
-if(m_TagsEnabled)
+        <div class="code-block">
+          <p class="code-title"><span class="l-en">Swapping modes</span><span class="l-zh">模式切换</span></p>
+          <p class="code-desc">
+            <span class="l-en">To let the player swap modes we change state, moving between a normal pawn and a spectator pawn.</span>
+            <span class="l-zh">通过切换状态，在普通 Pawn 与观战 Pawn 之间切换模式。</span>
+          </p>
+<pre><code class="language-cpp">void AStreamerController::SwapMode()
 {
-	//Enable tags
-	SendString(TEXT("CAP REQ :twitch.tv/tags"));
-}
-}
-					</code></pre>
-					</div>
+    // Check if it's in game mode or spectator mode
+    if (m_SpectateMode)
+    {
+        PlayerState-&gt;SetIsSpectator(false);
+        Possess(m_Pawn);
+        ChangeState(NAME_Playing);
+        ClientGotoState(NAME_Playing);
 
-					<div>
-						<h2>Player Focus in Spectator Mode</h2>
-						<p>In spectator mode, we can set a view target (with blend) to swap which player is focused. We do this by creating a small camera for each player that is then taken over by the controller.
-							We can then align this with text in the hud and ensure the current focus is a valid entry in the array of players.
-					</p>
-					  <pre><code class="language-cpp">void AStreamerSpectatePawn::FocusNext()
+        m_SpectateMode = false;
+    }
+    else
+    {
+        PlayerState-&gt;SetIsSpectator(true);
+        ChangeState(NAME_Spectating);
+        ClientGotoState(NAME_Spectating);
+        m_SpectateMode = true;
+    }
+
+    m_pInGameHud-&gt;SetSpectatorMode(m_SpectateMode);
+}</code></pre>
+        </div>
+
+        <div class="code-block">
+          <p class="code-title"><span class="l-en">Boosting chat players</span><span class="l-zh">为聊天室玩家施加推力</span></p>
+          <p class="code-desc">
+            <span class="l-en">Boosting players through chat commands: the command is parsed first, then applied to the player.</span>
+            <span class="l-zh">通过聊天指令施加推力：先解析指令，再作用于对应玩家。</span>
+          </p>
+<pre><code class="language-cpp">void ATwitchChatPlayer::Boost(int strength, const FVector&amp; direction)
 {
-if(!m_Spawner->IsValidLowLevel())
-	return;
-
-TMap<FString, ATwitchChatPlayer*> players = m_Spawner->GetPlayers();
-TArray<ATwitchChatPlayer*> twitchPlayers;
-players.GenerateValueArray(twitchPlayers);
-
-if(twitchPlayers.Num() <= 0)
-	return;
-
-m_CurrentFocus++;
-if(m_CurrentFocus > twitchplayers.Num() - 1 || m_CurrentFocus < 0)
-{
-	m_CurrentFocus = 0
-}
-
-m_Controller->SetViewTargetWithBlend(twitchPlayers[m_CurrentFocus], m_BlendTime);
-m_pInGameHud->SetSpectatePlayer(twitchPlayers[m_CurrentFocus]->GetUserName(),twitchPlayers[m_CurrentFocus]->GetChatColor());
-m_FocusedPlayer = twitchPlayers[m_CurrentFocus];
-}
-					</code></pre>
-					</div>
-
-					<div>
-						<h2>Swapping Modes</h2>
-						<p>To allow the player to swap modes, we need to change states. This way we can swap between a normal pawn and a spectator pawn.
-						</p>
-					
-					  <pre><code class="language-cpp">void AStreamerController::SwapMode()
-{
-//Checking if it's in game mode or spectator mode.
-if(m_SpectateMode)
-{
-	PlayerState->SetIsSpectator(false);
-	Possess(m_Pawn);
-	ChangeState(NAME_Playing);
-	ClientGotoState(NAME_Playing);
-
-	m_SpectateMode = false;
-}
-else
-{
-	PlayerState->SetIsSpectator(true);
-	ChangeState(NAME_Spectating);
-	ClientGotoState(NAME_Spectating);
-	m_SpectateMode = true;
-}
-
-m_pInGameHud->SetSpectatorMode(m_SpectateMode);
-}
-					</code></pre>
-			
-					</div>
-
-					<div>
-						<h2>Boosting Chat Players</h2>
-						<p>Boosting the players through chat commands is something that's first parsed, then send to the player.
-						</p>
-					
-					  <pre><code class="language-cpp">void ATwitchChatPlayer::Boost(int strength, const FVector& direction)
-{
-//Checking that the strenght can not be activated too high
-if(strength > m_MaxBoostStrength)
-{
-	strength = m_MaxBoostStrength;
-}
-//Making sure that the strength does not go under 1
-else if(strength <= 1)
-{
-	strength = 1;
-}
-
-//Getting the direction the egg is laying
-FVector dir = m_pStaticMeshComp->GetUpVector();
-if(direction != FVector::ZeroVector)
-{
-	dir = direction;
-}
-
-//Creating a force to use as impulse.
-//Normalize Direction
-dir.Normalize();
-FVector force{dir * m_BaseBoostStrength * strength};
-
-m_pCollisionComp->AddImpulse(force,NAME_None, true);
-}
-					</code></pre>
-			
-					</div>
-
-				</div>
-			</div>
-				  <div class="categories">
-					  C++ / Unreal Engine / Group Project
-				  </div>			               
-			   </div>
-
-			 <div class="link-box">
-				<a href="https://eloydecort.itch.io/eggers" target="_blank">Watch on itch.io</a>
-				  <a href="#" class="popup-modal-dismiss">Close</a>
-			 </div>		      
-
-		   </div> <!-- /modal-01 -->
-
-		 </div> <!-- /portfolio-wrapper --> 
-
-	   </div>  <!-- /twelve -->   
-
-   </div> <!-- /portfolio-content --> 
-	
-</section> <!-- /portfolio --> 
-
-   <!-- about section
-   ================================================== -->
-   <section id="about">  
-
-   	<div class="row section-intro">
-   		<div class="col-twelve">
-
-			   <h5>About Me</h5>
-   			<h1>A short introduction.</h1>
-
-   			<div class="intro-info">
-
-   				<img src="images/profile.jpg" alt="Profile Picture">
-
-   				<p class="lead">Hello! My name is Eloy De Cort. I'm a Technical Sound Designer and Audio Programmer originating from Belgium.
-						I'm currently working as Technical Sound Designer at Deck13.
-						Starting at young age I had a passion for programming and music.<br><br>
-						Blooming from these 2 passions, I've chosen to fully focus on <br><span>Technical Sound Design and Audio Programming</span>. I have a broad oversight over all aspects of game development and have basic skills in other aspects than sound.
-						What's most important to me is creating an experience through immersive audio and giving players the best possible experience.<br>
-   			</div>   			
-
-   		</div>   		
-   	</div> <!-- /section-intro -->
-
-   	<div class="row about-content">
-
-   		<div class="col-six tab-full">
-
-   			<h3>Profile</h3>
-   			<p>Experienced Technical Audio Designer and Audio Programmer. Responsible for all technical audio at Deck13 and previously involved in audio engine development at Bohemia. Contributed to the Arma series and Atlas Fallen, supporting audio designers and cross-departmental teams.</p>
-
-   			<ul class="info-list">
-   				<li>
-   					<strong>Full Name:</strong>
-   					<span>Eloy De Cort</span>
-   				</li>
-   				<li>
-   					<strong>Birth Date:</strong>
-   					<span>February 29, 2000</span>
-   				</li>
-   				<li>
-   					<strong>Current Job:</strong>
-   					<span>Technical Sound Designer at Deck13</span>
-				   </li>
-				<li>
-					<strong>Languages:</strong>
-					<ul class="languages info-list">
-						<li><span>English - Proficient</span></li>
-						<li><span>Dutch - Native</span></li>
-						<li><span>French - Conversational</span></li>
-					</ul>
-
-				</li>
-   				<li>
-   					<strong>Website:</strong>
-   					<a href="https://eloydecort.github.io/" target="_blank"><span>eloydecort.github.io</span></a>
-   				</li>
-   				<li>
-   					<strong>Email:</strong>
-   					<a href="mailto:eloy.decort@gmail.com" target="_blank"><span>eloy.decort@gmail.com</span></a>
-				   </li>
-				   
-				   <li>
-					<strong>Audio Company:</strong>
-					<a href="https://dracortia.com/" target="_blank"><span>https://dracortia.com</span></a>
-				</li>
-
-			</ul> <!-- /info-list -->
-
-   		</div>
-
-   		<div class="col-six tab-full">
-
-   			<h3>Skills</h3>
-				<h3 class="sub-title">Technical Audio:</h3>
-				<ul class="disc">
-					<li><strong>FMOD</strong></li>
-					<li><strong>WWise</strong></li>	
-					<li><strong>MetaSounds</strong></li>	
-				</ul>	
-
-			   <h3 class="sub-title">Programming:</h3>
-			   <ul class="disc">
-				<li><strong>C++ / C#</strong></li>
-				<li><strong>JS / HTML / CSS</strong></li>	
-				</ul>	
-
-				<h3 class="sub-title">Game Engines:</h3>
-				<ul class="disc">
-					<li><strong>Unreal Engine</strong></li>
-					<li><strong>Unity</strong></li>
-					<li><strong>Enfusion (Proprietary)</strong></li>
-					<li><strong>FLEDGE (Proprietary)</strong></li>
-				</ul>	
-
-
-				<h3 class="sub-title">Audio Production:</h3>
-				<ul class="disc">
-					<li><strong>PreSonus Studio One</strong></li>
-					<li><strong>FL Studio</strong></li>	
-					<li><strong>Wavelab</strong></li>	
-				</ul>	
-
-				<h3 class="sub-title">GUI Development:</h3>
-				<ul class="disc">
-					<li><strong>UE Slate</strong></li>
-					<li><strong>QT (C++)</strong></li>
-					<li><strong>ImGui</strong></li>	
-				</ul>	
-
-				<h3 class="sub-title">Misc. Tools:</h3>
-				<ul class="disc">
-					<li><strong>Perforce</strong></li>
-					<li><strong>Git</strong></li>
-					<li><strong>SVN</strong></li>
-					<li><strong>Tracy</strong></li>
-					<li><strong>Jenkins</strong></li>
-					<li><strong>TeamCity</strong></li>
-					<li><strong>Microsoft GDK</strong></li>
-				</ul>	
-			
-   		</div>
-
-	   </div>
-	   
-	   <!-- Chart -->    
-	   <!-- <div class="row">
-	   <div class="col-full chart-container">
-		<canvas id="myChart"></canvas>
-		</div>
-		</div> -->
-	
-
-   	<div class="row button-section">
-   		<div class="col-twelve">
-   			<a href="#contact" title="Contact Me" class="button stroke smoothscroll">Contact Me</a>
-   			<a href="Resume - Eloy De Cort - Technical Audio Designer.pdf" title="Download Resume" class="button button-primary" target="_blank">Download Resume</a>
-   		</div>   		
-   	</div>
-
-   </section> <!-- /process-->    
-
-
-   <!-- resume Section
-   ================================================== -->
-	<section id="resume" class="grey-section">
-
-		<div class="row section-intro">
-   		<div class="col-twelve">
-
-   			<h5>Experience</h5>
-   			<h1>My Professional Experience</h1>
-
-   		</div>   		
-	   </div> <!-- /section-intro--> 
-	   
-	   <div class="row resume-timeline">
-
-		<div class="col-twelve resume-header">
-
-			<h2>Work Experience</h2>
-
-		</div> 
-		<div class="col-twelve">
-
-			<div class="timeline-wrap">
-
-				<div class="timeline-block">
-
-					<div class="timeline-ico">
-						<i class="fa fa-briefcase"></i>
-					</div>
-   
-					<div class="timeline-header">
-						<h3>Technical Sound Designer</h3>
-						<p>2023 - Present</p>
-					</div>
-   
-					<div class="timeline-content">
-						<h4>Deck13</h4>
-						<lu>
-							<li>Cross-departmental communication and processes.</li>
-							<li>Ownership of all tech-related audio.</li>
-							<li>Integrating FMOD with C++ and Blueprints to achieve adaptive, scalable audio.</li>
-							<li>Developing engine tools to improve audio debugging.</li>
-							<li>Establishing and optimizing audio development workflows.</li>
-							<li>Adaptive Reverb, Bone-based Foley, Breathing System, ...</li>
-							<li>Working in Proprietary and subsequently Unreal Engine.</li>		
-						</lu>
-					</div>
-   
-					</div>
-
-					<br>
-				
-				<div class="timeline-block">
-
-				 <div class="timeline-ico">
-					 <i class="fa fa-briefcase"></i>
-				 </div>
-
-				 <div class="timeline-header">
-					 <h3>Audio Programmer</h3>
-					<h5>Junior: 2021-2022</h5>
-					 <p>2021 - 2023</p>
-				 </div>
-
-				 <div class="timeline-content">
-					 <h4>Bohemia Interactive</h4>
-					 <lu>
-						<li>Interior detection, music management, multiplayer radios, etc..</li>
-						<li>Managing and fulfilling requests for the engine's audio editor.</li>
-						<li>Developed scripting capabilities through scalable code.</li>
-						<li>Worked with multi threading and consoles (Microsoft GDK).</li>
-						<li>Profiling & optimization of code for optimal performance.</li>
-					 </lu>
-				 </div>
-
-			 	</div>
-
-
-			</div> 		
-
-		</div> 
-		
-
-	<div class="row resume-timeline">
-
-		<div class="col-twelve resume-header">
-
-			<h2>Education</h2>
-
-		</div> <!-- /resume-header -->
-
-		<div class="col-twelve">
-
-			<div class="timeline-wrap">
-
-				<div class="timeline-block">
-
-					<div class="timeline-ico">
-						<i class="fa fa-graduation-cap"></i>
-					</div>
-
-					<div class="timeline-header">
-						<h3>Game Development<br>Bachelor Degree</h3>
-						<p>September 2018 - 2021</p>
-					</div>
-
-					<div class="timeline-content">
-						<h4>Digital Arts And Entertainment</h4>
-						<p>During my time at Digital Arts And Entertainment, I've learned more about the different fields in the Gaming Industry.
-							This gave me a thorough understanding in the workflow of not only the programming side of games, but also the artist side. 
-						</p>
-					</div>
-
-				</div> <!-- /timeline-block -->
-
-				<div class="timeline-block">
-
-				 <div class="timeline-ico">
-					 <i class="fa fa-graduation-cap"></i>
-				 </div>
-
-				 <div class="timeline-header">
-					 <h3>Degree in Multimedia</h3>
-					 <p>2014 - 2018</p>
-				 </div>
-
-				 <div class="timeline-content">
-					 <h4>High School Stedelijk Lyceum Cadix</h4>
-					 <p>Adobe Toolset, Cinema 4D, HTML, CSS and Javascript.
-					 </p>
-				 </div>
-
-			 </div> <!-- /timeline-block -->
-
-			 <div class="timeline-block">
-
-				 <div class="timeline-ico">
-					 <i class="fa fa-graduation-cap"></i>
-				 </div>
-
-				 <div class="timeline-header">
-					 <h3>Certificate in Drums, Percussion and Music Theory</h3>
-					 <p>2007 - 2018</p>
-				 </div>
-
-				 <div class="timeline-content">
-					 <h4>Academy of Merksem</h4>
-					 <p>Music Theory and Drums have taught me basics about the ins and outs of Rhythm, Melody, Harmonics and many more things. It started as hobby but I pursued it for such long time that music became part of me. I've also started producing at around 12 years old and have not stopped since.
-					 </p>
-				 </div>
-
-			 </div> <!-- /timeline-block -->
-				
-			</div> <!-- /timeline-wrap -->   			
-
-		</div> <!-- /col-twelve -->
-		
-	</div> <!-- /resume-timeline -->
-  	
-   
-		
-	</section> <!-- /features -->
-
-
-   <!-- contact
-   ================================================== -->
-	<section id="contact">
-<!-- 
-		<div class="row section-intro">
-   		<div class="col-twelve">
-
-   			<h5>Contact</h5>
-   			<h1>The easiest way to reach out to me!</h1>
-
-   			<p class="lead">Filling in this form or emailing me is the easy and quick way to get a message directly to me! I'm happy to answer any questions.</p>
-
-   		</div> 
-   	</div>  -->
-
-   	<!-- <div class="row contact-form">
-
-   		<div class="col-twelve">
-
-			<form action="https://formspree.io/f/xgenpzvj" method="POST">
-				<div class="form-field">
-					<input type="text" id="contactName" placeholder="Name" value="" minlength="2" required="" name="name">
-				  </div>
-				  <div class="form-field">
-					<input type="text" id="contactSubject" placeholder="Subject" value="" required="" name="_subject" />
-				  </div>
-				  <div>
-					<input type="email" id="contactEmail" placeholder="Email" value="" name="_replyto" required>
-				</div>
-				<div>
-					<textarea name="message" id="contactMessage" placeholder="Message" rows="10" cols="50" required=""></textarea>
-				</div>
-					<button type="submit" class="submitform">Submit</button>
-			  </form>
-
-          
-            <div id="message-warning">            	
-            </div>            
-           
-      		<div id="message-success">
-               <i class="fa fa-check"></i>Your message was sent, thank you!<br>
-      		</div>
-
-         </div> 
-   		
-   	</div> -->
-
-   	<div class="row contact-info">
-
-   		<div class="col-six">
-
-   			<div class="icon">
-   				<i class="icon-pin"></i>
-   			</div>
-
-   			<h5>Current Country Of Residence</h5>
-
-   			<p>
-            Germany
-            </p>
-
-   		</div>
-
-
-   		<div class="col-six">
-
-   			<div class="icon">
-   				<i class="icon-mail"></i>
-   			</div>
-
-   			<h5>Email Me At</h5>
-
-   			<p>
-				eloy.decort@gmail.com
-			</p>
-
-   		</div>
-
-   		
-   	</div> <!-- /contact-info -->
-		
-	</section> <!-- /contact -->
-
-
-   <!-- footer
-   ================================================== -->
-
-   <footer>
-     	<div class="row">
-
-     		<div class="col-six tab-full pull-right social">
-
-     			<ul class="footer-social">        
-					<li><a href="https://www.linkedin.com/in/eloydecort/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-					<li><a href="mailto:eloy.decort@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
-					<li><a href="https://github.com/EloyDeCort" target="_blank"><i class="fa fa-github"></i></a></li>
-			   </ul> 
-	      		
-	      </div>
-
-      	<div class="col-six tab-full">
-	      	<div class="copyright">
-					<span>© Works by Eloy De Cort</span> 
-		        	<span>Design by <a href="http://www.styleshout.com/">styleshout</a></span>	         	
-		         </div>		                  
-	      	</div>
-
-	      	<div id="go-top">
-		         <a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-long-arrow-up"></i></a>
-		      </div>
-
-      	</div> <!-- /row -->     	
-   </footer>  
-
-   <div id="preloader"> 
-    	<div id="loader"></div>
-   </div> 
-
-   <!-- Java Script
-   ================================================== --> 
-   <script src="js/jquery-2.1.3.min.js"></script>
-   <script src="js/plugins.js"></script>
-   <script src="js/main.js"></script>
-   <script src="js/prism.js"></script>
-
+    // Checking that the strength can not be activated too high
+    if (strength &gt; m_MaxBoostStrength)
+    {
+        strength = m_MaxBoostStrength;
+    }
+    // Making sure that the strength does not go under 1
+    else if (strength &lt;= 1)
+    {
+        strength = 1;
+    }
+
+    // Getting the direction the egg is laying
+    FVector dir = m_pStaticMeshComp-&gt;GetUpVector();
+    if (direction != FVector::ZeroVector)
+    {
+        dir = direction;
+    }
+
+    // Creating a force to use as impulse
+    // Normalize direction
+    dir.Normalize();
+    FVector force{ dir * m_BaseBoostStrength * strength };
+
+    m_pCollisionComp-&gt;AddImpulse(force, NAME_None, true);
+}</code></pre>
+        </div>
+
+        <div class="chips"><span class="chip">C++ &amp; Blueprints</span><span class="chip">Unreal Engine</span><span class="chip">Twitch IRC</span><span class="chip">UMG</span></div>
+        <div class="modal-links">
+          <a class="btn btn-ghost btn-sm" href="https://eloydecort.itch.io/eggers" target="_blank" rel="noopener"><span class="l-en">Play on itch.io</span><span class="l-zh">在 itch.io 试玩</span></a>
+          <a class="btn btn-ghost btn-sm" href="https://trello.com/b/l3Dcf1YU/eggers-a-mizkif-twitch-game" target="_blank" rel="noopener">Trello</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js" defer></script>
+<script src="js/prism.js" defer></script>
 </body>
-
 </html>
