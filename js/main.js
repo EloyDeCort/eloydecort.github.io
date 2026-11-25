@@ -469,6 +469,245 @@
   })();
 
   /* ----------------------------------------------------------------------
+     Floating audio player (YouTube, audio only)
+     ---------------------------------------------------------------------- */
+  (function audioPlayer() {
+    var root_el = document.getElementById("player");
+    if (!root_el) return;
+
+    var tracks = [
+      { id: "0ExXmmjxRBg", title: "Soul Spires: Initium", sub: "Reveal trailer" },
+      { id: "03TC8wSO9PU", title: "Rogue Slime", sub: "Trailer · Quest Seeker Games" },
+      { id: "9V5tDmusu08", title: "Don't Lose Aggro", sub: "Trailer" },
+      { id: "ux2sh79JPpc", title: "Don't Lose Aggro", sub: "In-game" }
+    ];
+
+    var index = 0;
+    var yt = null;
+    var apiReady = false;
+    var wantsPlay = false;
+    var ticker = null;
+    /* YouTube refuses to play without a referrer, which a file:// page cannot send */
+    var isFile = location.protocol === "file:";
+
+    function localMsg() {
+      return document.documentElement.getAttribute("data-lang") === "zh"
+        ? "本地预览：请运行 serve.cmd"
+        : "Local preview — run serve.cmd";
+    }
+
+    var btn = document.getElementById("plPlay");
+    var prev = document.getElementById("plPrev");
+    var next = document.getElementById("plNext");
+    var titleEl = document.getElementById("plTitle");
+    var subEl = document.getElementById("plSub");
+    var timeEl = document.getElementById("plTime");
+    var fillEl = document.getElementById("plFill");
+    var mount = document.getElementById("plMount");
+    var volEl = document.getElementById("plVolume");
+    var muteEl = document.getElementById("plMute");
+
+    function fmt(sec) {
+      sec = Math.max(0, Math.floor(sec || 0));
+      var m = Math.floor(sec / 60);
+      var s = sec % 60;
+      return m + ":" + (s < 10 ? "0" : "") + s;
+    }
+
+    function setPlaying(on) {
+      root_el.classList.toggle("is-playing", on);
+      if (on) root_el.classList.remove("is-error");
+      if (btn) btn.setAttribute("aria-label", on ? "Pause" : "Play");
+      if (on) {
+        if (!ticker) ticker = setInterval(update, 500);
+      } else {
+        clearInterval(ticker);
+        ticker = null;
+      }
+    }
+
+    /* if YouTube never actually starts (e.g. opened from disk, no referrer),
+       say so instead of showing a fake playing state */
+    var watchdog = null;
+    function watch() {
+      if (isFile) return;
+      clearTimeout(watchdog);
+      watchdog = setTimeout(function () {
+        var state = yt && yt.getPlayerState ? yt.getPlayerState() : -1;
+        var t = yt && yt.getCurrentTime ? yt.getCurrentTime() : 0;
+        if (state === 1 || t > 0.5) return;
+        wantsPlay = false;
+        setPlaying(false);
+        root_el.classList.add("is-error");
+        if (btn) btn.setAttribute("aria-label", "Open on YouTube");
+        if (subEl) {
+          var zh = document.documentElement.getAttribute("data-lang") === "zh";
+          subEl.textContent = zh ? "本地无法播放 — 点击在 YouTube 打开" : "Unavailable here — open on YouTube";
+        }
+      }, 7000);
+    }
+
+    function update() {
+      if (!yt || !yt.getCurrentTime) return;
+      var t = yt.getCurrentTime() || 0;
+      var d = yt.getDuration() || 0;
+      if (timeEl) timeEl.textContent = fmt(t);
+      if (fillEl) fillEl.style.width = d > 0 ? ((t / d) * 100).toFixed(2) + "%" : "0%";
+    }
+
+    function paintTrack() {
+      var t = tracks[index];
+      if (titleEl) titleEl.textContent = t.title;
+      if (subEl) subEl.textContent = isFile ? localMsg() : t.sub;
+      if (timeEl) timeEl.textContent = "0:00";
+      if (fillEl) fillEl.style.width = "0%";
+    }
+
+    function loadApi(cb) {
+      if (apiReady) return cb();
+      if (window.YT && window.YT.Player) { apiReady = true; return cb(); }
+      var pending = window.__ytQueue || (window.__ytQueue = []);
+      pending.push(cb);
+      if (!document.getElementById("yt-iframe-api")) {
+        var s = document.createElement("script");
+        s.id = "yt-iframe-api";
+        s.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(s);
+        var prevReady = window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady = function () {
+          if (typeof prevReady === "function") prevReady();
+          apiReady = true;
+          var q = window.__ytQueue || [];
+          window.__ytQueue = [];
+          q.forEach(function (fn) { fn(); });
+        };
+      }
+    }
+
+    function createPlayer() {
+      loadApi(function () {
+        if (yt) return;
+        yt = new window.YT.Player(mount, {
+          width: 320,
+          height: 180,
+          videoId: tracks[index].id,
+          playerVars: {
+            autoplay: 1,
+            controls: 0,
+            disablekb: 1,
+            modestbranding: 1,
+            rel: 0,
+            playsinline: 1
+          },
+          events: {
+            onReady: function (e) {
+              applyVolume();
+              if (wantsPlay) e.target.playVideo();
+            },
+            onStateChange: function (e) {
+              clearTimeout(watchdog);
+              root_el.classList.remove("is-error");
+              if (e.data === 1) { wantsPlay = true; setPlaying(true); }
+              else if (e.data === 2) { setPlaying(false); }
+              else if (e.data === 0) { go(1); }
+            }
+          }
+        });
+      });
+    }
+
+    function go(step) {
+      index = (index + step + tracks.length) % tracks.length;
+      paintTrack();
+      if (!yt) { createPlayer(); return; }
+      yt.loadVideoById(tracks[index].id);
+      if (wantsPlay) yt.playVideo();
+    }
+
+    if (btn) {
+      btn.addEventListener("click", function () {
+        if (root_el.classList.contains("is-error")) {
+          window.open("https://www.youtube.com/watch?v=" + tracks[index].id, "_blank", "noopener");
+          return;
+        }
+        if (!yt) {
+          wantsPlay = true;
+          root_el.classList.add("is-playing");
+          if (btn) btn.setAttribute("aria-label", "Pause");
+          createPlayer();
+          watch();
+          return;
+        }
+        if (yt.getPlayerState && yt.getPlayerState() === 1) {
+          wantsPlay = false;
+          yt.pauseVideo();
+        } else {
+          wantsPlay = true;
+          yt.playVideo();
+          watch();
+        }
+      });
+    }
+    if (next) next.addEventListener("click", function () { go(1); });
+    if (prev) prev.addEventListener("click", function () { go(-1); });
+
+    /* volume, remembered between visits */
+    var VOL_KEY = "edc-vol";
+    var volume = 70;
+    var lastVolume = 70;
+    try {
+      var saved = parseInt(window.localStorage.getItem(VOL_KEY), 10);
+      if (!isNaN(saved)) {
+        volume = Math.max(0, Math.min(100, saved));
+        lastVolume = volume || 70;
+      }
+    } catch (e) {}
+
+    function paintVolume() {
+      if (volEl) {
+        volEl.value = String(volume);
+        volEl.style.background =
+          "linear-gradient(to right, var(--accent) 0%, var(--accent) " + volume +
+          "%, rgba(255,255,255,0.15) " + volume + "%, rgba(255,255,255,0.15) 100%)";
+      }
+      root_el.classList.toggle("is-muted", volume === 0);
+      if (muteEl) muteEl.setAttribute("aria-label", volume === 0 ? "Unmute" : "Mute");
+    }
+
+    function applyVolume() {
+      if (yt && yt.setVolume) yt.setVolume(volume);
+    }
+
+    if (volEl) {
+      volEl.addEventListener("input", function () {
+        volume = parseInt(volEl.value, 10) || 0;
+        if (volume > 0) lastVolume = volume;
+        applyVolume();
+        paintVolume();
+        try { window.localStorage.setItem(VOL_KEY, String(volume)); } catch (e) {}
+      });
+    }
+
+    if (muteEl) {
+      muteEl.addEventListener("click", function () {
+        if (volume > 0) { lastVolume = volume; volume = 0; }
+        else { volume = lastVolume || 70; }
+        applyVolume();
+        paintVolume();
+        try { window.localStorage.setItem(VOL_KEY, String(volume)); } catch (e) {}
+      });
+    }
+
+    paintTrack();
+    paintVolume();
+
+    if (isFile) {
+      root_el.classList.add("is-error");
+      if (btn) btn.setAttribute("aria-label", "Open on YouTube");
+    }
+  })();
+
+  /* ----------------------------------------------------------------------
      Footer year
      ---------------------------------------------------------------------- */
   Array.prototype.forEach.call(document.querySelectorAll("[data-year]"), function (el) {

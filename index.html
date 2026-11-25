@@ -1310,6 +1310,48 @@ void APlayerRegisterer::SendLogin()
   </div>
 </div>
 
+<!-- floating audio player (YouTube, audio only) -->
+<div class="pl-mount" id="plMount" aria-hidden="true"></div>
+
+<div class="player" id="player" role="region" aria-label="Music player">
+  <button class="pl-btn" id="plPlay" type="button" aria-label="Play">
+    <svg class="pl-ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="pl-ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+  </button>
+
+  <div class="pl-info">
+    <span class="pl-title" id="plTitle">Soul Spires: Initium</span>
+    <span class="pl-sub" id="plSub">Reveal trailer</span>
+  </div>
+
+  <div class="pl-ctrl">
+    <button type="button" id="plPrev" aria-label="Previous track">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5v14l-9-7z"/></svg>
+    </button>
+    <button type="button" id="plNext" aria-label="Next track">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14l9-7z"/></svg>
+    </button>
+  </div>
+
+  <span class="pl-time" id="plTime">0:00</span>
+
+  <div class="pl-vol">
+    <button type="button" class="pl-mute" id="plMute" aria-label="Mute">
+      <svg class="pl-vol-on" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 9v6h4l5 4V5L8 9H4z"/>
+        <path d="M16.5 8.6a4.8 4.8 0 0 1 0 6.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <svg class="pl-vol-off" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 9v6h4l5 4V5L8 9H4z"/>
+        <path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <input class="pl-range" id="plVolume" type="range" min="0" max="100" step="1" value="70" aria-label="Volume">
+  </div>
+
+  <div class="pl-progress" aria-hidden="true"><i id="plFill"></i></div>
+</div>
+
 <script src="js/main.js" defer></script>
 <script src="js/prism.js" defer></script>
 </body>

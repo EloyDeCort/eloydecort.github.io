@@ -2240,3 +2240,217 @@ html[data-lang="zh"] .modal-subtitle { letter-spacing: 0.1em; }
 @media (prefers-reduced-motion: reduce) {
   .disc svg { animation: none; }
 }
+
+/* --------------------------------------------------------------------------
+   23. Floating audio player
+   -------------------------------------------------------------------------- */
+.player {
+  position: fixed;
+  left: clamp(1.2rem, 2.4vw, 2.4rem);
+  bottom: clamp(1.2rem, 2.4vw, 2.4rem);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  width: 6.2rem;
+  padding: 0.8rem 1.4rem 0.8rem 0.8rem;
+  border: 1px solid var(--line-mid);
+  border-radius: 1.2rem;
+  background: rgba(8, 11, 16, 0.84);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 1.4rem 3.6rem rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  transition: width .5s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+}
+
+/* collapsed to a single button, opens on hover or keyboard focus */
+.player:hover,
+.player:focus-within {
+  width: min(44rem, calc(100vw - 2.4rem));
+  border-color: rgba(242, 204, 120, 0.35);
+  box-shadow: 0 1.8rem 4.2rem rgba(0, 0, 0, 0.6);
+}
+
+.pl-info,
+.pl-ctrl,
+.pl-time,
+.pl-vol {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s var(--ease);
+}
+.player:hover .pl-info,
+.player:hover .pl-ctrl,
+.player:hover .pl-time,
+.player:hover .pl-vol,
+.player:focus-within .pl-info,
+.player:focus-within .pl-ctrl,
+.player:focus-within .pl-time,
+.player:focus-within .pl-vol {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pl-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #1A1206;
+  transition: background .3s var(--ease), transform .3s var(--ease);
+}
+.pl-btn:hover { background: var(--accent-bright); transform: scale(1.05); }
+.pl-btn svg { width: 1.7rem; height: 1.7rem; fill: currentColor; }
+.pl-ico-pause { display: none; }
+.player.is-playing .pl-ico-play { display: none; }
+.player.is-playing .pl-ico-pause { display: block; }
+
+.pl-info { display: flex; flex-direction: column; gap: .25rem; min-width: 0; flex: 1; }
+.pl-title {
+  font-size: 1.24rem;
+  font-weight: 500;
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pl-sub {
+  font-family: var(--f-mono);
+  font-size: .95rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pl-ctrl { display: flex; gap: .2rem; flex: none; }
+.pl-ctrl button {
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  color: var(--fg-3);
+  transition: color .25s var(--ease), background .25s var(--ease);
+}
+.pl-ctrl button:hover { color: var(--accent); background: var(--accent-glow); }
+.pl-ctrl svg { width: 1.4rem; height: 1.4rem; fill: currentColor; }
+
+.pl-time {
+  flex: none;
+  font-family: var(--f-mono);
+  font-size: 1rem;
+  color: var(--fg-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.pl-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.07);
+}
+.pl-progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  transition: width .35s linear;
+}
+
+/* the YouTube frame stays in the corner, invisible but still rendered */
+.pl-mount {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 320px;
+  height: 180px;
+  opacity: 0.001;
+  pointer-events: none;
+  border: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .player { width: calc(100vw - 2.4rem); }
+  .pl-ctrl { display: none; }
+  .pl-title { font-size: 1.18rem; }
+}
+
+.player.is-error .pl-btn { background: rgba(255, 255, 255, 0.10); color: var(--fg-2); }
+.player.is-error .pl-sub { color: var(--accent); }
+
+/* playing while collapsed: a quiet pulse so you know audio is running */
+.player.is-playing:not(:hover):not(:focus-within) .pl-btn::after {
+  content: "";
+  position: absolute;
+  inset: -0.3rem;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  animation: plPulse 2.4s var(--ease) infinite;
+}
+@keyframes plPulse {
+  0% { transform: scale(0.92); opacity: 0.85; }
+  70%, 100% { transform: scale(1.38); opacity: 0; }
+}
+
+/* no hover on touch: keep it open */
+@media (hover: none) {
+  .player { width: min(44rem, calc(100vw - 2.4rem)); }
+  .pl-info, .pl-ctrl, .pl-time, .pl-vol { opacity: 1; pointer-events: auto; }
+}
+
+/* volume */
+.pl-vol { display: flex; align-items: center; gap: 0.2rem; flex: none; }
+.pl-mute {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  color: var(--fg-3);
+  transition: color .25s var(--ease), background .25s var(--ease);
+}
+.pl-mute:hover { color: var(--accent); background: var(--accent-glow); }
+.pl-mute svg { width: 1.5rem; height: 1.5rem; fill: currentColor; }
+.pl-vol-off { display: none; }
+.player.is-muted .pl-vol-on { display: none; }
+.player.is-muted .pl-vol-off { display: block; }
+
+.pl-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 6.4rem;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+.pl-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(242, 204, 120, 0.18);
+}
+.pl-range::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.pl-range:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
