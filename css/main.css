@@ -2454,3 +2454,13 @@ html[data-lang="zh"] .modal-subtitle { letter-spacing: 0.1em; }
   background: var(--accent);
 }
 .pl-range:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
+
+/* links inside prose */
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: color .25s var(--ease);
+}
+.prose a:hover { color: var(--accent-bright); }
